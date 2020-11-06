@@ -18,9 +18,9 @@ export default class Hello360 extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this._changeBackgroundColor();
-  }
+  // componentDidMount() {
+  //   this._changeBackgroundColor();
+  // }
 
   _changeBackgroundColor() {
     this.state.backgroundColor.setValue(0);
@@ -54,6 +54,7 @@ export default class Hello360 extends React.Component {
     return (
       <View>
         <Animated.View style={[styles.container, { backgroundColor: color }]}>
+          <Text style={styles.greeting}>Hello World!!</Text>
           {/* {/* <VrButton
             style={styles.greetingBox}
             onClick={() =>
@@ -83,6 +84,16 @@ export default class Hello360 extends React.Component {
   }
 }
 
+class App extends React.Component {
+  render() {
+    return (
+      <View style={styles.panel2}>
+        <Text style={styles.greeting}>this is test</Text>
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   panel: {
     // Fill the entire surface
@@ -90,15 +101,24 @@ const styles = StyleSheet.create({
     height: 600,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "white"
   },
   panel2: {
     // Fill the entire surface
-    width: 1200,
+    width: 1000,
     height: 600,
-    flexDirection: "row",
-    backgroundColor: "#000000",
-    transform: [{ translateX: 300 }, { translateY: 0 }]
+    // flexDirection: "row",
+    backgroundColor: "black",
+    transform: [
+      { translateX: -500 },
+      { translateY: 400 },
+      { translateZ: -600 },
+      { rotateX: -20 }
+    ],
+    opacity: 0.4,
+    alignItems: "center",
+    justifyContent: "center"
   },
 
   greetingBox: {
@@ -142,10 +162,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: 500,
-    height: 500
+    width: 1000,
+    height: 400,
+    transform: [
+      { translateX: -500 },
+      { translateY: 400 },
+      { translateZ: -500 },
+      { rotateX: -20 }
+    ]
   }
 });
 
 AppRegistry.registerComponent("Hello360", () => Hello360);
-AppRegistry.registerComponent("Test", () => Test);
+AppRegistry.registerComponent("App", () => App);
