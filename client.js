@@ -2,39 +2,31 @@
 // If you want to modify your application's content, start in "index.js"
 
 import { ReactInstance, Surface } from "react-360-web";
+import { Environment, compositor, asset, getAssetURL } from "react-360";
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
-    // Add custom options here
     fullScreen: true,
     ...options
   });
 
-  testPanel2 = new Surface(2000, 2000, Surface.SurfaceShape.Cylinder);
-  testPanel2.setAngle(0, 0);
-
-  testPanel1 = new Surface(1500, 1500, Surface.SurfaceShape.Flat);
-  testPanel1.setAngle(0, 0);
-
-  r360.renderToLocation(
-    r360.createRoot("Test", {
-      /* initial props */
-    }),
-    // testPanel1
-    r360.getDefaultLocation()
-  );
-
   // Render your app content to the default cylinder surface
   r360.renderToSurface(
-    r360.createRoot("Hello360", {
+    r360.createRoot("react_360_hello", {
       /* initial props */
     }),
-    // r360.getDefaultSurface()
-    testPanel2
+    r360.getDefaultSurface()
   );
 
-  // Load the initial environment
-  r360.compositor.setBackground(r360.getAssetURL("test.jpg"));
+  r360.compositor.setBackground(r360.getAssetURL("chess-world.jpg"));
+
+  // const player = r360.compositor.createVideoPlayer("myplayer");
+
+  // player.setSource("/static_assets/R0010004.mp4", "2D");
+
+  // r360.compositor.setBackgroundVideo("myplayer");
+  // player.setLoop(true);
+  // player.play();
 }
 
 window.React360 = { init };
