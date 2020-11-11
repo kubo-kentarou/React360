@@ -1,18 +1,24 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
-
 import { ReactInstance, Surface } from "react-360-web";
+// import { Module } from "react-360-web";
 import SetOverlay from "./Native";
 
+// export default class MyModule extends Module {
+//   constructor(ctx) {
+//     super("MyModule");
+//     this._ctx = ctx;
+//   }
+// }
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
     // Add custom options here
     fullScreen: true,
-    // nativeModules: [ctx => new SetOverlay(ctx)],
+    nativeModules: [ctx => new SetOverlay(ctx)],
     ...options
   });
 
-  r360._cameraPosition = [0, 500, 100]; //[x, y, z], default ist [0, 0, 0]
+  r360._cameraPosition = [0, 500, 100]; //[x, y, z], default list [0, 0, 0]
   console.log("bundle:", bundle);
   console.log("parent", parent);
   console.log("options", options);

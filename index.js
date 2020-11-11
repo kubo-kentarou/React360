@@ -18,9 +18,9 @@ export default class Hello360 extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this._changeBackgroundColor();
-  // }
+  componentDidMount() {
+    this._changeBackgroundColor();
+  }
 
   _changeBackgroundColor() {
     this.state.backgroundColor.setValue(0);
@@ -41,7 +41,6 @@ export default class Hello360 extends React.Component {
   // state = {
   //   imageUrl: ""
   // };
-
   render() {
     let color = this.state.backgroundColor.interpolate({
       inputRange: [0, 150, 300],

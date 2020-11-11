@@ -1,8 +1,7 @@
 import React from "react";
-
 const OverlayScreen = () => (
   <div className="inner">
-    <p className="text">Ç±Ç±ÇÕÇQDÉåÉCÉÑÅ[Ç≈Ç∑ÅB</p>
+    <p className="text">This is 2D </p>
   </div>
 );
 
