@@ -8,9 +8,12 @@ import {
   Image,
   VrButton,
   Animated,
-  Environment
+  Environment,
+  NativeModules
 } from "react-360";
 import Arrow from "./Arrow";
+
+let aaa;
 
 export default class Hello360 extends React.Component {
   constructor(props) {
@@ -52,6 +55,8 @@ export default class Hello360 extends React.Component {
         "rgba(38, 50, 56, 1.0)"
       ]
     });
+
+    const { VideoModule } = NativeModules;
     return (
       <View>
         <Animated.View style={[styles.container, { backgroundColor: color }]}>
@@ -80,6 +85,28 @@ export default class Hello360 extends React.Component {
 
           <Text>aaaaaaa</Text> */}
         </Animated.View>
+        <VrButton
+          style={styles.test_box}
+          onClick={() => {
+            VideoModule.createPlayer("Myplayer");
+            VideoModule.play("Myplayer", {
+              source: { url: "/static_assets/R0010004.mp4" },
+              loop: true,
+              muted: true
+            });
+            Environment.setBackgroundVideo("Myplayer");
+
+            setTimeout(() => {
+              VideoModule.destroyPlayer("Myplayer");
+              Environment.setBackgroundImage(asset("img/R0010008.JPG"));
+              console.log("ƒvƒŒƒCƒ„[”jŠü");
+            }, 19000);
+            // await wait(5);
+            // VideoModule.destroyPlayer("Myplayer");
+          }}
+        >
+          <Text style={styles.text_sheet}>Play!</Text>
+        </VrButton>
       </View>
     );
   }
@@ -171,6 +198,27 @@ const styles = StyleSheet.create({
       { translateZ: -500 },
       { rotateX: -20 }
     ]
+  },
+  text_sheet: {
+    fontSize: 20,
+    color: "#ffffff",
+    textAlign: "right"
+    // fontfamily: "‚¯‚¢‚Ó‚§‚ñ‚Æ"
+  },
+  test_box: {
+    width: 60,
+    height: 30,
+    // justifyContent: "right",
+    alignItems: "center",
+    // padding: 20,
+    // backgroundColor: "red",
+    transform: [
+      { translateX: -40 },
+      { translateY: 915 },
+      { translateZ: -20 },
+      { rotateX: -20 }
+    ],
+    backgroundColor: "red"
   }
 });
 
