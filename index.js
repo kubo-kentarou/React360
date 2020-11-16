@@ -7,8 +7,10 @@ import {
   View,
   Image,
   VrButton,
-  Animated
+  Animated,
+  Environment
 } from "react-360";
+import Arrow from "./Arrow";
 
 export default class Hello360 extends React.Component {
   constructor(props) {
@@ -18,9 +20,9 @@ export default class Hello360 extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this._changeBackgroundColor();
-  }
+  // componentDidMount() {
+  //   this._changeBackgroundColor();
+  // }
 
   _changeBackgroundColor() {
     this.state.backgroundColor.setValue(0);
@@ -174,3 +176,4 @@ const styles = StyleSheet.create({
 
 AppRegistry.registerComponent("Hello360", () => Hello360);
 AppRegistry.registerComponent("App", () => App);
+AppRegistry.registerComponent("Arrow", () => Arrow);

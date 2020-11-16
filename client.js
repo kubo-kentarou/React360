@@ -10,24 +10,26 @@ import SetOverlay from "./Native";
 //     this._ctx = ctx;
 //   }
 // }
+
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
     // Add custom options here
     fullScreen: true,
-    nativeModules: [ctx => new SetOverlay(ctx)],
+    // nativeModules: [ctx => new SetOverlay(ctx)],
+    nativeModules: [new SetOverlay()],
     ...options
   });
 
-  r360._cameraPosition = [0, 500, 100]; //[x, y, z], default list [0, 0, 0]
+  r360._cameraPosition = [0, 0, 0]; //[x, y, z], default list [0, 0, 0]
   console.log("bundle:", bundle);
   console.log("parent", parent);
   console.log("options", options);
 
-  testPanel2 = new Surface(2000, 2000, Surface.SurfaceShape.Surface);
-  testPanel2.setAngle(0, 0);
+  testPanel1 = new Surface(100, 100, Surface.SurfaceShape.Surface);
+  testPanel1.setAngle(-Math.PI / 2, 0); // 左に90度
 
-  testPanel1 = new Surface(1500, 1500, Surface.SurfaceShape.Flat);
-  testPanel1.setAngle(0, 0);
+  testPanel2 = new Surface(100, 100, Surface.SurfaceShape.Surface);
+  testPanel2.setAngle(Math.PI / 2, 0); // 右に90度
 
   // r360.renderToLocation(
   //   r360.createRoot("Test", {
@@ -52,8 +54,36 @@ function init(bundle, parent, options = {}) {
     r360.getDefaultLocation()
   );
 
+  r360.renderToLocation(
+    r360.createRoot("Arrow", {
+      back: "blue",
+      position: [
+        { translateX: 800 },
+        { translateY: -100 },
+        { translateZ: -300 },
+        { rotateY: -30 }
+      ]
+    }),
+    r360.getDefaultLocation()
+    // testPanel1
+  );
+
+  r360.renderToLocation(
+    r360.createRoot("Arrow", {
+      back: "green",
+      position: [
+        { translateX: -800 },
+        { translateY: 0 },
+        { translateZ: -100 },
+        { rotateY: 90 }
+      ]
+    }),
+    r360.getDefaultLocation()
+    // testPanel2
+  );
+
   // Load the initial environment
-  r360.compositor.setBackground(r360.getAssetURL("img/R0010008.JPG"));
+  r360.compositor.setBackground("./static_assets/img/R0010008.JPG");
 }
 
 window.React360 = { init };
