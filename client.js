@@ -22,12 +22,6 @@ function init(bundle, parent, options = {}) {
   // testPanel2 = new Surface(100, 100, Surface.SurfaceShape.Surface);
   // testPanel2.setAngle(Math.PI / 2, 0); // 右に90度
 
-  //矢印の表示
-  r360.renderToLocation(
-    r360.createRoot("Arrow", {}),
-    r360.getDefaultLocation()
-  );
-
   // Render your app content to the default cylinder surface
   r360.renderToLocation(
     r360.createRoot("Hello360", {
@@ -45,6 +39,12 @@ function init(bundle, parent, options = {}) {
 
   // Load the initial environment
   r360.compositor.setBackground("./static_assets/img/R0010008.JPG");
+
+  //矢印の表示
+  r360.renderToLocation(
+    r360.createRoot("Arrow", {}),
+    r360.getDefaultLocation()
+  );
 }
 
 window.React360 = { init };

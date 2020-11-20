@@ -24,10 +24,8 @@ export default class Arrow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // pageType: imgUrl.Signboard,
-      pageType: imgUrl.Entrance,
+      pageType: imgUrl.Signboard,
     };
-    Environment.setBackgroundImage(asset(imgUrl.Entrance));
   }
 
   //矢印クリック時の処理
