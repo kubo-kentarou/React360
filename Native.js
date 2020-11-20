@@ -12,6 +12,5 @@ export default class SetOverlay extends Module {
   constructor() {
     super("SetOverlay");
     renderOverlay();
-    // this._ctx = ctx;
   }
 }
