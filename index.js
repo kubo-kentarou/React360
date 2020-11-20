@@ -13,18 +13,25 @@ import {
 } from "react-360";
 import Arrow from "./Arrow";
 
-let aaa;
+let num = 1;
 
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundColor: new Animated.Value(0)
+      backgroundColor: new Animated.Value(0),
+      Transparency: 1
     };
+    console.log(this.state.Transparency);
   }
 
   // componentDidMount() {
   //   this._changeBackgroundColor();
+  // }
+  // componentWillReceiveProps(nextProps){
+  //   this.setState({
+
+  //   })
   // }
 
   _changeBackgroundColor() {
@@ -59,7 +66,13 @@ export default class Hello360 extends React.Component {
     const { VideoModule } = NativeModules;
     return (
       <View>
-        <Animated.View style={[styles.container, { backgroundColor: color }]}>
+        <Animated.View
+          style={[
+            styles.container,
+            { backgroundColor: color },
+            { opacity: this.state.Transparency }
+          ]}
+        >
           <Text style={styles.greeting}>Hello World!!</Text>
           {/* {/* <VrButton
             style={styles.greetingBox}
@@ -87,22 +100,27 @@ export default class Hello360 extends React.Component {
         </Animated.View>
         <VrButton
           style={styles.test_box}
-          onClick={() => {
-            VideoModule.createPlayer("Myplayer");
+          onClick={async () => {
+            VideoModule.createPlayer("Myplayer"); //ビデオプレイヤーを作る
             VideoModule.play("Myplayer", {
               source: { url: "/static_assets/R0010004.mp4" },
               loop: true,
               muted: true
             });
-            Environment.setBackgroundVideo("Myplayer");
+            Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
+            await this.setState({ Transparency: 0 });
+            // num = this.state.Transparency;
+            test(this.state.Transparency);
 
             setTimeout(() => {
-              VideoModule.destroyPlayer("Myplayer");
-              Environment.setBackgroundImage(asset("img/R0010008.JPG"));
+              VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
+              Environment.setBackgroundImage(asset("img/R0010008.JPG")); //背景を任意の画像に戻す
+              this.setState({ Transparency: 1 });
+              num = this.state.Transparency; //透明度を戻す
+              console.log(num);
+
               console.log("プレイヤー破棄");
             }, 19000);
-            // await wait(5);
-            // VideoModule.destroyPlayer("Myplayer");
           }}
         >
           <Text style={styles.text_sheet}>Play!</Text>
@@ -113,9 +131,23 @@ export default class Hello360 extends React.Component {
 }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Trans: num
+    };
+  }
+
+  test(prop) {
+    console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+    this.setState({ Trans: prop });
+  }
   render() {
     return (
-      <View style={styles.panel2}>
+      <View
+        style={[styles.panel2, { opacity: this.state.Trans }]}
+        // setTimeout={(this.setState({ Transparency: 1 }), 1900)}
+      >
         <Text style={styles.greeting}>this is test</Text>
       </View>
     );
