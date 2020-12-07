@@ -64,14 +64,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "#ffffff",
         textAlign: "right",
-        opacity : Trans,
+        // opacity : Trans,
         // fontfamily : 'メイリオ',
       },
       test_box: {
         width: 60,
         height: 30,
         alignItems: "center",
-        opacity: Trans,
+        // opacity: Trans,
 
         transform: [
           { translateX: -40 },
