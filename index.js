@@ -13,16 +13,14 @@ import {
 } from "react-360";
 import Arrow from "./Arrow";
 
-let num = 1;
-
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       backgroundColor: new Animated.Value(0),
-      Transparency: 1
+      // Transparency: 1
     };
-    console.log(this.state.Transparency);
+    // console.log(this.state.Transparency);
   }
 
   // componentDidMount() {
@@ -70,7 +68,7 @@ export default class Hello360 extends React.Component {
           style={[
             styles.container,
             { backgroundColor: color },
-            { opacity: this.state.Transparency }
+            // { opacity: this.state.Transparency }
           ]}
         >
           <Text style={styles.greeting}>Hello World!!</Text>
@@ -98,33 +96,35 @@ export default class Hello360 extends React.Component {
 
           <Text>aaaaaaa</Text> */}
         </Animated.View>
-        <VrButton
+        {/* <VrButton
           style={styles.test_box}
           onClick={async () => {
-            VideoModule.createPlayer("Myplayer"); //ƒrƒfƒIƒvƒŒƒCƒ„[‚ðì‚é
+            VideoModule.createPlayer("Myplayer"); //ãƒ“ãƒ‡ã‚ªãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ä½œã‚‹
             VideoModule.play("Myplayer", {
               source: { url: "/static_assets/R0010004.mp4" },
               loop: true,
               muted: true
             });
-            Environment.setBackgroundVideo("Myplayer"); //”wŒi‚ðƒrƒfƒI‚É•Ï‚¦‚é
+            Environment.setBackgroundVideo("Myplayer"); //èƒŒæ™¯ã‚’ãƒ“ãƒ‡ã‚ªã«å¤‰ãˆã‚‹
             await this.setState({ Transparency: 0 });
             // num = this.state.Transparency;
-            test(this.state.Transparency);
+            // test(this.state.Transparency);
+            this.setState({Trans: 0});
 
             setTimeout(() => {
-              VideoModule.destroyPlayer("Myplayer"); //ƒrƒfƒIƒvƒŒƒCƒ„[‚ðíœ‚·‚é
-              Environment.setBackgroundImage(asset("img/R0010008.JPG")); //”wŒi‚ð”CˆÓ‚Ì‰æ‘œ‚É–ß‚·
+              VideoModule.destroyPlayer("Myplayer"); //ãƒ“ãƒ‡ã‚ªãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å‰Šé™¤ã™ã‚‹
+              Environment.setBackgroundImage(asset("img/R0010008.JPG")); //èƒŒæ™¯ã‚’ä»»æ„ã®ç”»åƒã«æˆ»ã™
               this.setState({ Transparency: 1 });
-              num = this.state.Transparency; //“§–¾“x‚ð–ß‚·
+              num = this.state.Transparency; //é€æ˜Žåº¦ã‚’æˆ»ã™
+            // test(this.setState({Trans : 1}));
               console.log(num);
 
-              console.log("ƒvƒŒƒCƒ„[”jŠü");
+              console.log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç ´æ£„");
             }, 19000);
           }}
         >
           <Text style={styles.text_sheet}>Play!</Text>
-        </VrButton>
+        </VrButton> */} 
       </View>
     );
   }
@@ -134,7 +134,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Trans: num
+      Trans: 1
     };
   }
 
@@ -143,14 +143,14 @@ class App extends React.Component {
     this.setState({ Trans: prop });
   }
   render() {
-    return (
-      <View
-        style={[styles.panel2, { opacity: this.state.Trans }]}
-        // setTimeout={(this.setState({ Transparency: 1 }), 1900)}
-      >
-        <Text style={styles.greeting}>this is test</Text>
-      </View>
-    );
+    return  null;
+    // return (
+    //   <View
+    //     style={[styles.panel2, { opacity: this.state.Trans }]}
+    //   >
+    //     <Text style={styles.greeting}>this is test</Text>
+    //   </View>
+    // );
   }
 }
 
@@ -235,7 +235,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#ffffff",
     textAlign: "right"
-    // fontfamily: "‚¯‚¢‚Ó‚§‚ñ‚Æ"
   },
   test_box: {
     width: 60,
@@ -246,8 +245,8 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
     transform: [
       { translateX: -40 },
-      { translateY: 915 },
-      { translateZ: -20 },
+      { translateY: 400 },
+      { translateZ: -170 },
       { rotateX: -20 }
     ],
     backgroundColor: "red"
