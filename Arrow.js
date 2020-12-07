@@ -10,6 +10,7 @@ import {
   Animated,
   Environment,
 } from "react-360";
+import Signboard from "./Signboard";
 
 // 矢印のコンポーネント
 
@@ -26,6 +27,7 @@ export default class Arrow extends React.Component {
     this.state = {
       // pageType: imgUrl.Signboard,
       pageType: imgUrl.Entrance,
+      // Transparency: 1
     };
     Environment.setBackgroundImage(asset(imgUrl.Entrance));
   }
@@ -50,14 +52,22 @@ export default class Arrow extends React.Component {
     this.setState({ pageType: imgUrl.Signboard });
   };
 
+  // AAA=(value)=>{
+  //   this.setState({Transparency: value});
+  // }
+
   render() {
+    // console.log("value is", this.state.Transparency)
+
     if (this.state.pageType === imgUrl.Signboard) {
       //ページの種類があまじょう看板前の時
       console.log("This is Signboard!!");
       return (
         <View>
+          <Signboard />
           <View style={[styles.arrowPanel, styles.signboard1]}>
             <VrButton
+            style={styles.opacity_Box}
               onClick={() => {
                 this.goToParking();
               }}
@@ -240,3 +250,4 @@ const styles = StyleSheet.create({
     ],
   },
 });
+
