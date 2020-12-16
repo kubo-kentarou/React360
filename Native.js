@@ -9,8 +9,13 @@ const renderOverlay = () => {
 };
 
 export default class SetOverlay extends Module {
-  constructor() {
+  constructor(ctx) {
     super("SetOverlay");
     renderOverlay();
+    this._ctx = ctx;
+  }
+
+  testcallback(id) {
+    this._ctx.invokeCallback(id, 1);
   }
 }

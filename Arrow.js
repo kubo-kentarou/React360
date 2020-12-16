@@ -9,8 +9,8 @@ import {
   VrButton,
   Animated,
   Environment,
+  NativeModules,
 } from "react-360";
-import Entrance from "./Entrance";
 
 // 矢印のコンポーネント
 
@@ -31,38 +31,37 @@ const arrowImg = {
   _2fUrl: "./static_assets/img/2f.png",
 };
 
-export default class Arrow extends React.Component {
+export class Arrow extends React.Component {
   constructor(props) {
     super(props);
+    window.arrowComponent = this;
     this.state = {
-      // pageType: imgUrl.Signboard,
-      pageType: imgUrl.Parkingplace,
+      pageType: imgUrl.Signboard,
+      // pageType: imgUrl.Parkingplace,
       // pageType: imgUrl.Entrance,
       opacityName: new Animated.Value(1000), //1000は透明を示している
       translateName: new Animated.Value(0),
       hoverStatus: true,
       identifi: 1000, //1000は透明を示している
     };
-    this.goToParking();
+    // this.goToParking();
+    console.log(arrowComponent);
   }
 
   //矢印クリック時の処理
   goToParking = () => {
     //駐車場へ
     Environment.setBackgroundImage(asset(imgUrl.Parkingplace));
-    // pageType = await imgUrl.Parkingplace;
     this.setState({ pageType: imgUrl.Parkingplace });
   };
   goToEntrance = () => {
     //玄関へ
     Environment.setBackgroundImage(asset(imgUrl.Entrance));
-    // pageType = await imgUrl.Entrance;
     this.setState({ pageType: imgUrl.Entrance });
   };
   goToSignboard = () => {
     //あまじょう看板前へ
     Environment.setBackgroundImage(asset(imgUrl.Signboard));
-    // pageType = await imgUrl.Signboard;
     this.setState({ pageType: imgUrl.Signboard });
   };
 
@@ -482,6 +481,10 @@ export default class Arrow extends React.Component {
     }
   }
 }
+
+export const arrowTest = () => {
+  window.arrowComponent.goToEntrance();
+};
 
 const styles = StyleSheet.create({
   arrowPanel: {
