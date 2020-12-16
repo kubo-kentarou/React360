@@ -1,7 +1,7 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
 import { ReactInstance, Surface } from "react-360-web";
-import SimpleRaycaster from "simple-raycaster";
+// import SimpleRaycaster from "simple-raycaster";
 import SetOverlay from "./Native";
 
 function init(bundle, parent, options = {}) {
@@ -9,8 +9,8 @@ function init(bundle, parent, options = {}) {
     // Add custom options here
     fullScreen: true,
     nativeModules: [new SetOverlay()],
-    raycasters: [SimpleRaycaster],
-    cursorVisibility: "visible", 
+    // raycasters: [SimpleRaycaster],
+    // cursorVisibility: "visible", 
     ...options,
   });
 
@@ -40,17 +40,17 @@ function init(bundle, parent, options = {}) {
     r360.getDefaultLocation()
   );
   // Render your app content to the default cylinder surface
-  r360.renderToSurface(
-    r360.createRoot("custom360", {
-      /* initial props */
-    }),
-    r360.getDefaultSurface()
-  );
+  // r360.renderToSurface(
+  //   r360.createRoot("custom360", {
+  //     /* initial props */
+  //   }),
+  //   r360.getDefaultSurface()
+  // );
   
   // Load the initial environment
   r360.compositor.setBackground("./static_assets/img/R0010008.JPG");
-  r360.controls.clearRaycasters();
-  r360.controls.addRaycaster(SimpleRaycaster);
+  // r360.controls.clearRaycasters();
+  // r360.controls.addRaycaster(SimpleRaycaster);
 
   //矢印の表示
   r360.renderToLocation(

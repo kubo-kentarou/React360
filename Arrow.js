@@ -10,7 +10,6 @@ import {
   Animated,
   Environment,
 } from "react-360";
-import Entrance from "./Entrance";
 
 // 矢印のコンポーネント
 

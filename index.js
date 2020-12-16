@@ -12,7 +12,7 @@ import {
   NativeModules,
 } from "react-360";
 import Arrow from "./Arrow";
-import GazeButton from "react-360-gaze-button";
+// import GazeButton from "react-360-gaze-button";
 
 
 export default class Hello360 extends React.Component {
@@ -48,9 +48,9 @@ export default class Hello360 extends React.Component {
   //   imageUrl: ""
   // };
 
-  setGazed = () => {
-    this.setState({ gazed: true });
-  };
+  // setGazed = () => {
+  //   this.setState({ gazed: true });
+  // };
 
   render() {
     let color = this.state.backgroundColor.interpolate({
@@ -63,12 +63,12 @@ export default class Hello360 extends React.Component {
     });
 
     const { VideoModule } = NativeModules;
-    const { gazed } = this.state;
+    // const { gazed } = this.state;
     return (
       <View>
         <Animated.View style={[styles.container, { backgroundColor: color }]}>
         <View style={styles.panel}>
-        <GazeButton
+        {/* <GazeButton
           duration={3000}
           onClick={this.setGazed}
           render={(remainingTime, isGazed) => (
@@ -82,7 +82,7 @@ export default class Hello360 extends React.Component {
           </Text>
           </View>
           )}
-          />
+          /> */}
           </View>
           {/* {/* <VrButton
             style={styles.greetingBox}
@@ -261,5 +261,5 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent("Hello360", () => Hello360);
 AppRegistry.registerComponent("App", () => App);
 AppRegistry.registerComponent("Arrow", () => Arrow);
-AppRegistry.registerComponent("custom360", () => custom360);
-AppRegistry.registerComponent("Raycaster", () => Raycaster);
+// AppRegistry.registerComponent("custom360", () => custom360);
+// AppRegistry.registerComponent("Raycaster", () => Raycaster);
