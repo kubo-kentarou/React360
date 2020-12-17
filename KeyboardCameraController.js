@@ -19,9 +19,8 @@ class ObjectNotation {
 
   translateOnAxis = (axis, distance) => {
     const v1 = new Vector3();
-
-    v1.copy(axis).applyQuaternion(this.quaternion);
-
+    v1.copy(axis).applyQuaternion(this.quaternion); //axisは直訳で「軸」 applyQuaternionって何？
+    // v1.copy(axis).applyQuaternion(0.1);
     this.position.add(v1.multiplyScalar(distance));
   };
 
@@ -40,7 +39,6 @@ export default class KeyboardCameraController {
   _movingZ = 0;
   _movingX = 0;
   _movingY = 0;
-  //   _rotateX = 0;
 
   constructor() {
     document.addEventListener("keydown", (event) => this._onKeyDown(event));
@@ -60,11 +58,9 @@ export default class KeyboardCameraController {
             this._moveRight();
           } else if (event.data.direction === "SPACE") {
             this._jump();
+          } else if (event.data.direction === "ENTER") {
+            this._rotate();
           }
-
-          //   else if (event.data.direction === "ENTER") {
-          //     this._rotate();
-          //   }
         }
       },
       false
@@ -91,11 +87,6 @@ export default class KeyboardCameraController {
     this._movingY = SPEED;
   };
 
-  //   _rotate = () => {
-  //     this._rotateX = SPEED;
-  //     console.log("clicked!!");
-  //   };
-
   // _onKeyDown = (event) => {
   // }w
 
@@ -110,11 +101,9 @@ export default class KeyboardCameraController {
       this._moveRight();
     } else if (event.keyCode === 32) {
       this._jump();
+    } else if (event.keyCode === 13) {
+      // this._rotate();
     }
-
-    // else if (event.keyCode === 13) {
-    //   this._rotate();
-    // }
   };
 
   fillCameraProperties(positionArray, rotationArray) {
@@ -181,23 +170,17 @@ export default class KeyboardCameraController {
       }
     }
 
-    // if (this._rotateX !== 0) {
-    //   cameraObjectNotation.rotateX(this._rotateX);
+    //ここからテスト
+    // cameraObjectNotation.rotateX(this._rotateX);
 
-    //   this._rotateX += this._rotateX;
-    //   if (Math.abs(this._rotateX) >= JUMP_HEIGHT) {
-    //     this._rotateX = -SPEED;
-    //   }
-
-    //   rotationArray[0] = cameraObjectNotation.quaternion.x; // i just want to fly
-
-    //   if (rotationArray[0] < 0) {
-    //     // i don't want go to hell
-
-    //     this._rotateX = 0;
-    //     rotationArray[0] = 0;
-    //   }
+    // this._rotateX += this._rotateX;
+    // if (Math.abs(this._rotateX) >= MOVING_DISTANCE) {
+    //   this._rotateX = 0;
     // }
+
+    // rotationArray[0] = cameraObjectNotation.quaternion.x;
+    // positionArray[1] = cameraObjectNotation.position.y; // i don't want to fly
+    // rotationArray[0] = cameraObjectNotation.position.z;
 
     return true;
   }
