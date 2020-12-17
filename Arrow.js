@@ -10,7 +10,8 @@ import {
   Animated,
   Environment,
 } from "react-360";
-import Signboard from "./Signboard";
+import {Signboard} from "./Signboard";
+// import { AAAA } from "./Signboard";
 // import Entrance from "./Entrance";
 
 // 矢印のコンポーネント
@@ -32,19 +33,20 @@ const arrowImg = {
   _2fUrl: "./static_assets/img/2f.png",
 };
 
+
 export default class Arrow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // pageType: imgUrl.Signboard,
-      pageType: imgUrl.Parkingplace,
+      pageType: imgUrl.Signboard,
+      // pageType: imgUrl.Parkingplace,
       // pageType: imgUrl.Entrance,
       opacityName: new Animated.Value(1000), //1000は透明を示している
       translateName: new Animated.Value(0),
       hoverStatus: true,
       identifi: 1000, //1000は透明を示している
     };
-    this.goToParking();
+    // this.goToParking();
   }
 
   //矢印クリック時の処理
@@ -113,7 +115,6 @@ export default class Arrow extends React.Component {
     await this.setState({ hoverStatus: false });
     this._hoverName(); //アニメーション(ifによる透明化)呼び出し
   }
-
   render() {
     let opacityValue = this.state.opacityName.interpolate({
       inputRange: [0, 50, 100, 1000], //1000は透明を示している
@@ -124,11 +125,23 @@ export default class Arrow extends React.Component {
       outputRange: [150, 200], //translateYを150から200まで動かす
     });
 
+
+
     if (this.state.pageType === imgUrl.Signboard) {
       //ページの種類があまじょう看板前の時
+      // aaa = aaaa();/* false */
+      aaa = this.AAAA();
+      // if(aaa){
+      //   return null;
+      // }else{
       return (
         <View>
           <Signboard />
+         { !function(){
+            if(aaa){
+              return null;
+            }else{
+              return(
           <VrButton
             style={[styles.signboard1, { width: 100 }]}
             onClick={() => {
@@ -169,7 +182,7 @@ export default class Arrow extends React.Component {
               source={{ uri: arrowImg.parkingUrl }}
             />
           )}
-
+          
           <View style={{ transform: [{ translateY: 190 }] }}>
             <VrButton
               style={[styles.signboard2, { width: 100 }]}
@@ -214,7 +227,7 @@ export default class Arrow extends React.Component {
             )}
           </View>
         </View>
-      );
+      );}
     } else if (this.state.pageType === imgUrl.Parkingplace) {
       //ページの種類が駐車場の時
       return (

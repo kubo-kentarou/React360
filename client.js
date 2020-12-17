@@ -15,6 +15,7 @@ function init(bundle, parent, options = {}) {
   console.log("bundle:", bundle);
   console.log("parent", parent);
   console.log("options", options);
+  console.log("r360", r360);
 
   // testPanel1 = new Surface(100, 100, Surface.SurfaceShape.Surface);
   // testPanel1.setAngle(-Math.PI / 2, 0); // 左に90度

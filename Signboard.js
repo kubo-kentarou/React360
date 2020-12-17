@@ -11,26 +11,34 @@ import {
   Environment,
   NativeModules
 } from "react-360";
-import Arrow from "./Arrow";
+import { Arrow } from "./Arrow";
+
+//こちら側から値を渡してあげないとArrowのifで使えない
 
 //奄情看板前
+  export function AAAA(){
+    return false;
+  }
 
-export default class Signboard extends React.Component{
+
+export class Signboard extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
           Trans: 1
         };
     }
-
+    
     render(){
         console.log("TTTTTTTESTTTTTTTTT")
         const { VideoModule } = NativeModules;
         return (
             <View>
             <VrButton
-            style={styles.test_box}
+            style={[styles.test_box, {opacity: this.state.Trans}]}
             onClick={async () => {
+              this.setState({Trans : 0});
+
               VideoModule.createPlayer("Myplayer"); //ビデオプレイヤーを作る
               VideoModule.play("Myplayer", {
                 source: { url: "/static_assets/R0010004.mp4" },
@@ -38,13 +46,17 @@ export default class Signboard extends React.Component{
                 muted: true
               });
               Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
-              ({Trans : 0});
-            //   Arrow.AAA(0);
+
+              //ここでなんとかする
+              // this.aaaa();
+              // Arrow.AAAA();
+              this.AAAA();
   
               setTimeout(() => {
                 VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
                 Environment.setBackgroundImage(asset("img/R0010008.JPG")); //背景を任意の画像に戻す
-                ({ Trans: 1 });//透明度を戻す
+                this.setState({ Trans: 1 });//透明度を戻す
+                // ({aaa : 0});
                 
                 // console.log(num);
   
@@ -84,3 +96,4 @@ const styles = StyleSheet.create({
 })
 
 // module.exports = Signboard;
+// export {aaa};
