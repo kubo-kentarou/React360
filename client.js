@@ -3,21 +3,35 @@
 import { ReactInstance, Surface } from "react-360-web";
 // import SimpleRaycaster from "simple-raycaster";
 import SetOverlay from "./Native";
+import KeyboardCameraController from "./KeyboardCameraController";
+import MouseLockCameraController from "./MouseLockCameraController";
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
     // Add custom options here
     fullScreen: true,
-    nativeModules: [new SetOverlay()],
-    // raycasters: [SimpleRaycaster],
-    // cursorVisibility: "visible", 
+    nativeModules: [(ctx) => new SetOverlay(ctx)],
     ...options,
   });
 
   r360._cameraPosition = [0, 0, 0]; //[x, y, z], default list [0, 0, 0]
+  r360._cameraQuat = [0, 0, 0, 1];
+
+  r360.controls.addCameraController(new KeyboardCameraController());
+  // r360.controls.addCameraController(
+  //   new MouseLockCameraController(r360._eventLayer)
+  // );
+
+  console.dir(r360.scene.rotation);
+  console.log("position", r360._cameraPosition);
+
   console.log("bundle:", bundle);
   console.log("parent", parent);
   console.log("options", options);
+  console.log("r360", r360);
+
+  console.log("最後のマウス位置", r360.controls.raycasters[1]);
+  // console.log("rotation", r360.compositor_environment.panoMeshQuat);
 
   // testPanel1 = new Surface(100, 100, Surface.SurfaceShape.Surface);
   // testPanel1.setAngle(-Math.PI / 2, 0); // 左に90度

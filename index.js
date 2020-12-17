@@ -11,9 +11,7 @@ import {
   Environment,
   NativeModules,
 } from "react-360";
-import Arrow from "./Arrow";
-// import GazeButton from "react-360-gaze-button";
-
+import { Arrow } from "./Arrow";
 
 export default class Hello360 extends React.Component {
   constructor(props) {
@@ -63,7 +61,12 @@ export default class Hello360 extends React.Component {
     });
 
     const { VideoModule } = NativeModules;
-    // const { gazed } = this.state;
+    const { SetOverlay } = NativeModules;
+
+    SetOverlay.testcallback((a) => {
+      console.log(a);
+    });
+
     return (
       <View>
         <Animated.View style={[styles.container, { backgroundColor: color }]}>
