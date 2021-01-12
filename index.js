@@ -55,40 +55,12 @@ export default class Hello360 extends React.Component {
     });
 
     const { VideoModule } = NativeModules;
-    const { SetOverlay } = NativeModules;
-
-    SetOverlay.testcallback((a) => {
-      console.log(a);
-    });
 
     return (
       <View>
-        <Animated.View style={[styles.container, { backgroundColor: color }]}>
+        {/* <Animated.View style={[styles.container, { backgroundColor: color }]}>
           <Text style={styles.greeting}>Hello World!!</Text>
-          {/* {/* <VrButton
-            style={styles.greetingBox}
-            onClick={() =>
-              this.setState({
-                imageUrl: ""
-              })
-            }
-          >
-            <Text style={styles.greeting}>Hide</Text>
-          </VrButton>
-          <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
-          <VrButton
-            style={styles.greetingBox}
-            onClick={() =>
-              this.setState({
-                imageUrl: "test.jpg"
-              })
-            }
-          >
-            <Text style={styles.greeting}>Show</Text>
-          </VrButton>
-
-          <Text>aaaaaaa</Text> */}
-        </Animated.View>
+        </Animated.View> */}
         <VrButton
           style={styles.test_box}
           onClick={() => {
@@ -105,8 +77,6 @@ export default class Hello360 extends React.Component {
               Environment.setBackgroundImage(asset("img/R0010008.JPG"));
               console.log("�v���C���[�j��");
             }, 19000);
-            // await wait(5);
-            // VideoModule.destroyPlayer("Myplayer");
           }}
         >
           <Text style={styles.text_sheet}>Play!</Text>
@@ -116,15 +86,15 @@ export default class Hello360 extends React.Component {
   }
 }
 
-class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.panel2}>
-        <Text style={styles.greeting}>This is test</Text>
-      </View>
-    );
-  }
-}
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <View style={styles.panel2}>
+//         <Text style={styles.greeting}>This is test</Text>
+//       </View>
+//     );
+//   }
+// }
 
 const styles = StyleSheet.create({
   panel: {
@@ -231,5 +201,5 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent("Hello360", () => Hello360);
-AppRegistry.registerComponent("App", () => App);
+// AppRegistry.registerComponent("App", () => App);
 AppRegistry.registerComponent("Arrow", () => Arrow);
