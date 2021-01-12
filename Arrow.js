@@ -29,6 +29,8 @@ const imgUrl = {
   Secondfloor: "img/R0010012.JPG", //2階
   Firstgrade: "img/R0010010.JPG", //1年教室
   Secondgrade: "img/R0010015.JPG", //2年教室
+
+  Videoplay: "ビデオ再生中",
 };
 
 const arrowImg = {
