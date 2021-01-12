@@ -17,6 +17,7 @@
     <!-- Attachment point for your app -->
     <div id="container"></div>
     <div id="overlay"></div>
+    <div id="commentary"></div>
       <div id="controller" style="z-index: 999;position: absolute;bottom: 0px;right:0px;">
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'LEFT'})">◄</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'UP'})">▲</button>
@@ -26,6 +27,12 @@
 
         <!-- <button onClick="window.postMessage({ type: 'MOUSE_LOCK_CAMERA_CONTROLLER_MESSAGE', lock: true})">M</button> -->
       </div>
+      <!-- <div id="stalker"></div> -->
+      <!-- <svg id="stalker" width="1000" height="1000">
+        <polygon points="100,10 40,198 190,78 10,78 160,198" fill="lime" stroke="purple" stroke-width="3" fill-rule="nonzero" style="transform: scale(.5);" />
+      </svg> -->
+      <script type="text/javascript" src="./stalker.js"></script>
+
     <script src="./client.bundle?platform=vr"></script>
 
     <script>

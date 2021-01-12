@@ -4,7 +4,7 @@
 
 import { Vector3, Quaternion } from "three";
 
-const SPEED = 0.2;
+const SPEED = 0.2; //defaultは0.2
 const MOVING_DISTANCE = 100;
 const JUMP_HEIGHT = 30;
 
@@ -18,9 +18,9 @@ class ObjectNotation {
   }
 
   translateOnAxis = (axis, distance) => {
+    console.log("quaternion is", this.quaternion);
     const v1 = new Vector3();
     v1.copy(axis).applyQuaternion(this.quaternion); //axisは直訳で「軸」 applyQuaternionって何？
-    // v1.copy(axis).applyQuaternion(0.1);
     this.position.add(v1.multiplyScalar(distance));
   };
 
@@ -28,6 +28,8 @@ class ObjectNotation {
     this.translateOnAxis(new Vector3(1, 0, 0), distance);
   };
   translateY = (distance) => {
+    window.key.xxx();
+    window.key._moveLeft();
     this.translateOnAxis(new Vector3(0, 1, 0), distance);
   };
   translateZ = (distance) => {
@@ -35,12 +37,18 @@ class ObjectNotation {
   };
 }
 
-export default class KeyboardCameraController {
+// let global = [];
+
+export let impVariable = false;
+
+export class KeyboardCameraController {
   _movingZ = 0;
   _movingX = 0;
   _movingY = 0;
+  rotateX = 0;
 
   constructor() {
+    window.key = this;
     document.addEventListener("keydown", (event) => this._onKeyDown(event));
     // document.addEventListener('up', (event) => this._onKeyUp(event));
 
@@ -87,6 +95,18 @@ export default class KeyboardCameraController {
     this._movingY = SPEED;
   };
 
+  rotate = () => {
+    this.rotateX = SPEED;
+  };
+
+  static hello = () => {
+    console.log("HELLO!!");
+  };
+
+  xxx = () => {
+    console.log("window test!!!!!!!!!!!!!!!!!");
+  };
+
   // _onKeyDown = (event) => {
   // }w
 
@@ -102,12 +122,24 @@ export default class KeyboardCameraController {
     } else if (event.keyCode === 32) {
       this._jump();
     } else if (event.keyCode === 13) {
-      // this._rotate();
+      this.rotate();
     }
   };
 
+  // static key = (value) => {
+  //   console.log("value is", value);
+  //   global = value;
+  //   console.log("global is", global);
+  //   KeyboardCameraController.hello();
+  // };
+
   fillCameraProperties(positionArray, rotationArray) {
-    if (this._movingZ === 0 && this._movingX === 0 && this._movingY === 0) {
+    if (
+      this._movingZ === 0 &&
+      this._movingX === 0 &&
+      this._movingY === 0 &&
+      this.rotateX === 0
+    ) {
       return false;
     }
 
@@ -117,6 +149,7 @@ export default class KeyboardCameraController {
       rotationArray[2],
       rotationArray[3]
     );
+
     const position = new Vector3(
       positionArray[0],
       positionArray[1],
@@ -124,6 +157,7 @@ export default class KeyboardCameraController {
     );
 
     const cameraObjectNotation = new ObjectNotation(position, quaternion);
+
     console.log(cameraObjectNotation);
 
     if (this._movingZ !== 0) {
@@ -171,17 +205,39 @@ export default class KeyboardCameraController {
     }
 
     //ここからテスト
-    // cameraObjectNotation.rotateX(this._rotateX);
+    if (this.rotateX !== 0) {
+      console.log(impVariable);
+      // cameraObjectNotation.rotateX(this.rotateX);
 
-    // this._rotateX += this._rotateX;
-    // if (Math.abs(this._rotateX) >= MOVING_DISTANCE) {
-    //   this._rotateX = 0;
-    // }
+      this.rotateX += this.rotateX;
+      if (Math.abs(this.rotateX) >= MOVING_DISTANCE) {
+        this.rotateX = 0;
+      }
+      // console.log("this is x", cameraObjectNotation.quaternion.x);
 
-    // rotationArray[0] = cameraObjectNotation.quaternion.x;
-    // positionArray[1] = cameraObjectNotation.position.y; // i don't want to fly
-    // rotationArray[0] = cameraObjectNotation.position.z;
+      // rotationArray[0] = -0.042966148030426546;
+      // rotationArray[1] = 0.6145552205386361;
+      // rotationArray[2] = 0.03355206420278277;
+      // rotationArray[3] = 0.7869879605304428;
+
+      rotationArray[0] = -0.04537065406775056;
+      rotationArray[1] = -0.12987968791050647;
+      rotationArray[2] = -0.005949404531739549;
+      rotationArray[3] = 0.990473308576988;
+    }
 
     return true;
   }
 }
+
+// export class impTest extends KeyboardCameraController {
+//   constructor() {
+//     console.log("This is extends");
+//   }
+// }
+
+export const impTest = (value) => {
+  console.log("This is value", value);
+  impVariable = value;
+  console.log("impVariable!!!(もとはfalse)", impVariable);
+};

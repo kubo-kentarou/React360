@@ -65,47 +65,14 @@ export default class Hello360 extends React.Component {
       ]
     });
 
-    // Arrow.HideFunction();
-
     const { VideoModule } = NativeModules;
-    // console.log(Signboard());
 
     return (
       <View>
-        <Animated.View
-          style={[
-            styles.container,
-            { backgroundColor: color },
-            // { opacity: this.state.Transparency }
-          ]}
-        >
-          <Text style={[styles.greeting, {opacity: this.state.Trans}]}>Hello World!!</Text>
-          
-          {/* {/* <VrButton
-            style={styles.greetingBox}
-            onClick={() =>
-              this.setState({
-                imageUrl: ""
-              })
-            }
-          >
-            <Text style={styles.greeting}>Hide</Text>
-          </VrButton>
-          <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
-          <VrButton
-            style={styles.greetingBox}
-            onClick={() =>
-              this.setState({
-                imageUrl: "test.jpg"
-              })
-            }
-          >
-            <Text style={styles.greeting}>Show</Text>
-          </VrButton>
-
-          <Text>aaaaaaa</Text> */}
-        </Animated.View>
-        {/* <VrButton
+        {/* <Animated.View style={[styles.container, { backgroundColor: color }]}>
+          <Text style={styles.greeting}>Hello World!!</Text>
+        </Animated.View> */}
+        <VrButton
           style={styles.test_box}
           onClick={async () => {
             VideoModule.createPlayer("Myplayer"); //ビデオプレイヤーを作る
@@ -133,35 +100,21 @@ export default class Hello360 extends React.Component {
           }}
         >
           <Text style={styles.text_sheet}>Play!</Text>
-        </VrButton> */} 
+        </VrButton> 
       </View>
     );
   }
 }
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      Trans: 1
-    };
-  }
-
-  test(prop) {
-    console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
-    this.setState({ Trans: prop });
-  }
-  render() {
-    return  null;
-    // return (
-    //   <View
-    //     style={[styles.panel2, { opacity: this.state.Trans }]}
-    //   >
-    //     <Text style={styles.greeting}>this is test</Text>
-    //   </View>
-    // );
-  }
-}
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <View style={styles.panel2}>
+//         <Text style={styles.greeting}>This is test</Text>
+//       </View>
+//     );
+//   }
+// }
 
 const styles = StyleSheet.create({
   panel: {
@@ -263,5 +216,5 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent("Hello360", () => Hello360);
-AppRegistry.registerComponent("App", () => App);
+// AppRegistry.registerComponent("App", () => App);
 AppRegistry.registerComponent("Arrow", () => Arrow);
