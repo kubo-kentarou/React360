@@ -9,8 +9,9 @@ import {
   VrButton,
   Animated,
   Environment,
+  NativeModules,
 } from "react-360";
-import {Signboard} from "./Signboard";
+// import {Signboard} from "./Signboard";
 // import { AAAA } from "./Signboard";
 // import Entrance from "./Entrance";
 
@@ -34,9 +35,10 @@ const arrowImg = {
 };
 
 
-export default class Arrow extends React.Component {
+export class Arrow extends React.Component {
   constructor(props) {
     super(props);
+    window.arrowComponent = this;
     this.state = {
       pageType: imgUrl.Signboard,
       // pageType: imgUrl.Parkingplace,
@@ -45,6 +47,7 @@ export default class Arrow extends React.Component {
       translateName: new Animated.Value(0),
       hoverStatus: true,
       identifi: 1000, //1000は透明を示している
+      Trans: 1
     };
     // this.goToParking();
   }
@@ -53,21 +56,44 @@ export default class Arrow extends React.Component {
   goToParking = () => {
     //駐車場へ
     Environment.setBackgroundImage(asset(imgUrl.Parkingplace));
-    // pageType = await imgUrl.Parkingplace;
     this.setState({ pageType: imgUrl.Parkingplace });
   };
   goToEntrance = () => {
     //玄関へ
     Environment.setBackgroundImage(asset(imgUrl.Entrance));
-    // pageType = await imgUrl.Entrance;
     this.setState({ pageType: imgUrl.Entrance });
   };
   goToSignboard = () => {
     //あまじょう看板前へ
     Environment.setBackgroundImage(asset(imgUrl.Signboard));
-    // pageType = await imgUrl.Signboard;
     this.setState({ pageType: imgUrl.Signboard });
   };
+  //Video
+  VideoFunction = () =>{
+    const { VideoModule } = NativeModules;
+    VideoModule.createPlayer("Myplayer"); //ビデオプレイヤーを作る
+    VideoModule.play("Myplayer", {
+      source: { url: "/static_assets/R0010004.mp4" },
+        loop: true,
+        muted: true
+      });
+      Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
+
+      setTimeout(() => {
+        VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
+        Environment.setBackgroundImage(asset("img/R0010008.JPG")); //背景を任意の画像に戻す
+          this.setState({ Trans: 1 });//透明度を戻す
+          console.log("プレイヤー破棄");
+      }, 19000);
+  }
+  // //Hide
+  // static HideFunction = () =>{
+  //   this.setState({Trans : 0});
+  //   setTimeout(() => {
+  //     this.setState({ Trans: 1 });
+  //   }, 19000);
+  //   console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+  // }
 
   //矢印の名前表示のアニメーション
   _hoverName() {
@@ -125,25 +151,27 @@ export default class Arrow extends React.Component {
       outputRange: [150, 200], //translateYを150から200まで動かす
     });
 
-
-
     if (this.state.pageType === imgUrl.Signboard) {
       //ページの種類があまじょう看板前の時
-      // aaa = aaaa();/* false */
-      aaa = this.AAAA();
-      // if(aaa){
-      //   return null;
-      // }else{
       return (
         <View>
-          <Signboard />
-         { !function(){
-            if(aaa){
-              return null;
-            }else{
-              return(
+          <VrButton 
+            style={[styles.test_box, {opacity: this.state.Trans}]}
+            onClick={() => {
+              this.setState({Trans : 0});
+              this.VideoFunction();
+              exports.HideFunction = () =>{
+                this.setState({Trans: 0});
+                setTimeout(() => {
+                  this.setState({Trans:1});
+                },19000);
+              }
+            }}
+          >
+            <Text style={styles.text_sheet}>Play!</Text>
+          </VrButton>
           <VrButton
-            style={[styles.signboard1, { width: 100 }]}
+            style={[styles.signboard1, { width: 100 , opacity: this.state.Trans}]}
             onClick={() => {
               this.setState({ identifi: 1000 });
               this.goToParking();
@@ -178,14 +206,14 @@ export default class Arrow extends React.Component {
             />
           ) : (
             <Image
-              style={styles.arrowName}
+              style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.parkingUrl }}
             />
           )}
           
           <View style={{ transform: [{ translateY: 190 }] }}>
             <VrButton
-              style={[styles.signboard2, { width: 100 }]}
+              style={[styles.signboard2, { width: 100 , opacity: this.state.Trans}]}
               onClick={() => {
                 this.setState({ identifi: 1000 });
                 this.goToEntrance();
@@ -221,13 +249,13 @@ export default class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg.entranceUrl }}
               />
             )}
           </View>
         </View>
-      );}
+      );
     } else if (this.state.pageType === imgUrl.Parkingplace) {
       //ページの種類が駐車場の時
       return (
@@ -268,7 +296,7 @@ export default class Arrow extends React.Component {
             />
           ) : (
             <Image
-              style={styles.arrowName}
+              style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.entranceUrl }}
             />
           )}
@@ -310,7 +338,7 @@ export default class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg.signboardUrl }}
               />
             )}
@@ -357,7 +385,7 @@ export default class Arrow extends React.Component {
             />
           ) : (
             <Image
-              style={styles.arrowName}
+              style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.signboardUrl }}
             />
           )}
@@ -399,7 +427,7 @@ export default class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg.parkingUrl }}
               />
             )}
@@ -443,7 +471,7 @@ export default class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg._1f_roukaUrl }}
               />
             )}
@@ -487,7 +515,7 @@ export default class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg._2fUrl }}
               />
             )}
@@ -497,6 +525,10 @@ export default class Arrow extends React.Component {
     }
   }
 }
+
+export const arrowTest = () => {
+  window.arrowComponent.goToEntrance();
+};
 
 const styles = StyleSheet.create({
   arrowPanel: {
@@ -596,5 +628,26 @@ const styles = StyleSheet.create({
       { rotateZ: -15 },
     ],
   },
+  text_sheet: {
+    fontSize: 20,
+    color: "#ffffff",
+    textAlign: "right",
+    // opacity : Trans,
+    // fontfamily : 'メイリオ',
+  },
+  test_box: {
+    width: 60,
+    height: 30,
+    alignItems: "center",
+    // opacity: Trans,
+
+    transform: [
+      { translateX: -40 },
+      { translateY: -20 },
+      { translateZ: -170 },
+      { rotateX: -20 }
+    ],
+    backgroundColor: "black"
+  }
 });
 

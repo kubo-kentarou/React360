@@ -2,16 +2,23 @@
 // If you want to modify your application's content, start in "index.js"
 import { ReactInstance, Surface } from "react-360-web";
 import SetOverlay from "./Native";
+import KeyboardCameraController from "./KeyboardCameraController";
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
     // Add custom options here
     fullScreen: true,
-    nativeModules: [new SetOverlay()],
+    nativeModules: [(ctx) => new SetOverlay(ctx)],
     ...options,
   });
 
   r360._cameraPosition = [0, 0, 0]; //[x, y, z], default list [0, 0, 0]
+  // r360._cameraQuat = [0.5, 0, 0, 1];
+
+  r360.controls.addCameraController(new KeyboardCameraController());
+
+  console.log("position", r360._cameraPosition);
+
   console.log("bundle:", bundle);
   console.log("parent", parent);
   console.log("options", options);
