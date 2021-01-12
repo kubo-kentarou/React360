@@ -94,7 +94,7 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <Animated.View
+          <View
             style={[
               { backgroundColor: "white" },
               //   { opacity: SelectedOpacityValue },

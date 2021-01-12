@@ -54,7 +54,7 @@
 
 /* マウスストーカ― */
 
-/* #stalker {
+#stalker {
   pointer-events: none;
   z-index: 999;
   width: 100;
@@ -62,7 +62,7 @@
   position: fixed;
   top: -8px;
   left: -8px;
-} */
+}
 
 /* body {
   cursor: none;
