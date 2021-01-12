@@ -13,12 +13,16 @@ import {
 } from "react-360";
 import { Arrow } from "./Arrow";
 
+const Hide = require('./Arrow');
+
+
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       backgroundColor: new Animated.Value(0),
       // Transparency: 1
+      Trans:1
     };
     // console.log(this.state.Transparency);
   }
@@ -61,12 +65,10 @@ export default class Hello360 extends React.Component {
       ]
     });
 
-    const { VideoModule } = NativeModules;
-    const { SetOverlay } = NativeModules;
+    // Arrow.HideFunction();
 
-    SetOverlay.testcallback((a) => {
-      console.log(a);
-    });
+    const { VideoModule } = NativeModules;
+    // console.log(Signboard());
 
     return (
       <View>
@@ -77,7 +79,8 @@ export default class Hello360 extends React.Component {
             // { opacity: this.state.Transparency }
           ]}
         >
-          <Text style={styles.greeting}>Hello World!!</Text>
+          <Text style={[styles.greeting, {opacity: this.state.Trans}]}>Hello World!!</Text>
+          
           {/* {/* <VrButton
             style={styles.greetingBox}
             onClick={() =>
