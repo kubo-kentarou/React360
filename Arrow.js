@@ -162,7 +162,7 @@ export class Arrow extends React.Component {
             />
           ) : (
             <Image
-              style={styles.arrowName}
+              style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.parkingUrl }}
             />
           )}
@@ -205,7 +205,7 @@ export class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg.entranceUrl }}
               />
             )}
@@ -252,7 +252,7 @@ export class Arrow extends React.Component {
             />
           ) : (
             <Image
-              style={styles.arrowName}
+              style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.entranceUrl }}
             />
           )}
@@ -294,7 +294,7 @@ export class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg.signboardUrl }}
               />
             )}
@@ -341,7 +341,7 @@ export class Arrow extends React.Component {
             />
           ) : (
             <Image
-              style={styles.arrowName}
+              style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.signboardUrl }}
             />
           )}
@@ -383,7 +383,7 @@ export class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg.parkingUrl }}
               />
             )}
@@ -427,7 +427,7 @@ export class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg._1f_roukaUrl }}
               />
             )}
@@ -471,7 +471,7 @@ export class Arrow extends React.Component {
               />
             ) : (
               <Image
-                style={styles.arrowName}
+                style={[styles.arrowName, { opacity: 0 }]}
                 source={{ uri: arrowImg._2fUrl }}
               />
             )}

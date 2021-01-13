@@ -4,7 +4,6 @@ import { ReactInstance, Surface } from "react-360-web";
 // import SimpleRaycaster from "simple-raycaster";
 import SetOverlay from "./Native";
 import KeyboardCameraController from "./KeyboardCameraController";
-import MouseLockCameraController from "./MouseLockCameraController";
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
@@ -15,14 +14,10 @@ function init(bundle, parent, options = {}) {
   });
 
   r360._cameraPosition = [0, 0, 0]; //[x, y, z], default list [0, 0, 0]
-  r360._cameraQuat = [0, 0, 0, 1];
+  // r360._cameraQuat = [0.5, 0, 0, 1];
 
   r360.controls.addCameraController(new KeyboardCameraController());
-  // r360.controls.addCameraController(
-  //   new MouseLockCameraController(r360._eventLayer)
-  // );
 
-  console.dir(r360.scene.rotation);
   console.log("position", r360._cameraPosition);
 
   console.log("bundle:", bundle);
