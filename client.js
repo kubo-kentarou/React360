@@ -3,18 +3,38 @@
 import { ReactInstance, Surface } from "react-360-web";
 // import SimpleRaycaster from "simple-raycaster";
 import SetOverlay from "./Native";
-import KeyboardCameraController from "./KeyboardCameraController";
+import Hovercontents from "./Hovercontents";
+import { KeyboardCameraController } from "./KeyboardCameraController";
+
+// export const impTest = (value) => { //clientとArrowの橋渡し
+//   console.log("hello360");
+//   console.log("value is", value);
+//   impValue = value;
+//   console.log("impValue is", impValue);
+// };
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
     // Add custom options here
     fullScreen: true,
-    nativeModules: [(ctx) => new SetOverlay(ctx)],
+    nativeModules: [
+      (ctx) => new SetOverlay(ctx),
+      (ctx) => new Hovercontents(ctx),
+    ],
     ...options,
   });
 
-  r360._cameraPosition = [0, 0, 0]; //[x, y, z], default list [0, 0, 0]
-  // r360._cameraQuat = [0.5, 0, 0, 1];
+  const test = 1;
+
+  // r360._cameraPosition = [0, 0, 0]; //[x, y, z], default list [0, 0, 0]
+  // if (impValue === 3) {
+  //   r360._cameraQuat = [
+  //     -0.04537065406775056,
+  //     -0.12987968791050647,
+  //     -0.005949404531739549,
+  //     0.990473308576988,
+  //   ];
+  // }
 
   r360.controls.addCameraController(new KeyboardCameraController());
 
@@ -25,7 +45,7 @@ function init(bundle, parent, options = {}) {
   console.log("options", options);
   console.log("r360", r360);
 
-  console.log("最後のマウス位置", r360.controls.raycasters[1]);
+  // console.log("最後のマウス位置", r360.controls.raycasters[1]);
   // console.log("rotation", r360.compositor_environment.panoMeshQuat);
 
   // testPanel1 = new Surface(100, 100, Surface.SurfaceShape.Surface);
@@ -42,20 +62,13 @@ function init(bundle, parent, options = {}) {
     r360.getDefaultLocation()
     // testPanel2
   );
-  r360.renderToLocation(
-    r360.createRoot("App", {
-      /* initial props */
-    }),
-    r360.getDefaultLocation()
-  );
-  // Render your app content to the default cylinder surface
-  // r360.renderToSurface(
-  //   r360.createRoot("custom360", {
+  // r360.renderToLocation(
+  //   r360.createRoot("App", {
   //     /* initial props */
   //   }),
-  //   r360.getDefaultSurface()
+  //   r360.getDefaultLocation()
   // );
-  
+
   // Load the initial environment
   r360.compositor.setBackground("./static_assets/img/R0010008.JPG");
   // r360.controls.clearRaycasters();

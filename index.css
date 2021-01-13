@@ -13,3 +13,67 @@
   color: white;
   font-size: 1rem;
 }
+
+/* 各場所の解説 commentary */
+
+#commentary > div {
+  position: fixed;
+  z-index: 999;
+  color: white;
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border: solid white 1px;
+  box-shadow: 3px 10px 10px black;
+}
+#commentary .clickToClose {
+  line-height: 0.7;
+  right: 7%;
+  font-size: 5px;
+  position: absolute;
+  z-index: 1000;
+  font-family: "游明朝";
+}
+
+#commentary .dialogCursor {
+  position: absolute;
+  z-index: 1000;
+  background: white;
+  width: 10px;
+  height: 10px;
+  bottom: 8px;
+  right: 15px;
+  animation: dialogAnim 1s alternate-reverse infinite linear;
+}
+
+#commentary h1 {
+  font-family: "游ゴシック";
+}
+
+/* マウスストーカ― */
+
+/* #stalker {
+  pointer-events: none;
+  z-index: 999;
+  width: 100;
+  height: 100;
+  position: fixed;
+  top: -8px;
+  left: -8px;
+} */
+
+/* body {
+  cursor: none;
+} */
+
+/* keyframes */
+@keyframes dialogAnim {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
