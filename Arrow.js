@@ -11,12 +11,8 @@ import {
   Environment,
   NativeModules,
 } from "react-360";
-// import { impTest } from "./client";
-// import { impTest } from "./KeyboardCameraController";
-// import { impVariable } from "./KeyboardCameraController";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
-// import { testFunc, goToParking } from "./GoToProcess";
 
 // 矢印のコンポーネント
 
@@ -35,7 +31,7 @@ const imgUrl = {
 
 const arrowImg = {
   //矢印の画像、行先の名前画像のURL
-  url: "./static_assets/img/yazirushi_up1.png",
+  url: "./static_assets/img/yazirushi_up1.png", //↑の画像
   parkingUrl: "./static_assets/img/parking.png",
   entranceUrl: "./static_assets/img/genkan.png",
   signboardUrl: "./static_assets/img/kanban.png",
@@ -43,6 +39,7 @@ const arrowImg = {
   _2fUrl: "./static_assets/img/2f.png",
   firstUrl: "./static_assets/img/kyousitu1.png",
   secondUrl: "./static_assets/img/kyousitu2.png",
+  multiUrl: "./static_assets/img/tamokuteki.png",
 };
 
 export class Arrow extends React.Component {
@@ -50,9 +47,14 @@ export class Arrow extends React.Component {
     super(props);
 
     this.state = {
-      pageType: imgUrl.Signboard,
+      // pageType: imgUrl.Signboard,
       // pageType: imgUrl.Parkingplace,
       // pageType: imgUrl.Entrance,
+      // pageType: imgUrl.Secondfloor,
+      // pageType: imgUrl.Firstgrade,
+      // pageType: imgUrl.Secondgrade,
+      pageType: imgUrl.Multipurpose,
+
       opacityName: new Animated.Value(1000), //1000は透明を示している
       translateName: new Animated.Value(0),
       hoverStatus: true,
@@ -60,6 +62,7 @@ export class Arrow extends React.Component {
       dropShift: false, //ドロップダウンリストの表示非表示
       time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
     };
+    this.goToMultipurpose();
   }
 
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -188,6 +191,7 @@ export class Arrow extends React.Component {
         <View>
           <SelectableAnim name="signboard" />
           <SelectableAnim name="narrowRoad" />
+          <SelectableAnim name="parkingPath" />
           <View style={{ transform: [{ translateY: 190 }] }}>
             <VrButton
               style={[styles.signboard1, { width: 100 }]}
@@ -279,6 +283,8 @@ export class Arrow extends React.Component {
       //ページの種類が駐車場の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
+          <SelectableAnim name="parkingPlace" />
+
           <VrButton
             style={[styles.parkingplace1, { width: 100 }]}
             onClick={() => {
@@ -485,12 +491,12 @@ export class Arrow extends React.Component {
                     ],
                   },
                 ]}
-                source={{ uri: arrowImg._1f_roukaUrl }}
+                source={{ uri: arrowImg.multiUrl }}
               />
             ) : (
               <Image
                 style={[styles.arrowName, { opacity: 0 }]}
-                source={{ uri: arrowImg._1f_roukaUrl }}
+                source={{ uri: arrowImg.multiUrl }}
               />
             )}
           </View>
@@ -536,6 +542,9 @@ export class Arrow extends React.Component {
                 source={{ uri: arrowImg._2fUrl }}
               />
             )}
+            <SelectableAnim name="vendingMachine" />
+            <SelectableAnim name="shoeBox" />
+            <SelectableAnim name="handWashFacilities" />
           </View>
         </View>
       );
@@ -723,24 +732,26 @@ export class Arrow extends React.Component {
       // ページの種類が1年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          <VrButton
-            style={[styles.parkingplace1, { width: 100 }]}
-            onClick={() => {
-              this.setState({ identifi: 1000 });
-              this.goToEntrance();
-            }}
-            onEnter={async () => {
-              await this.setState({ identifi: 1 });
-              console.log(this.state.identifi);
-              this._enterArrow();
-            }}
-            onExit={() => {
-              this.setState({ identifi: 1000 });
-              this._exitArrow();
-            }}
-          >
-            <Image style={styles.arrowPanel} source={{ uri: arrowImg.url }} />
-          </VrButton>
+          <View style={{ transform: [{ translateY: 20 }] }}>
+            <VrButton
+              style={[styles.firstgrade1, { width: 100 }]}
+              onClick={() => {
+                this.setState({ identifi: 1000 });
+                this.goToSecondfloor();
+              }}
+              onEnter={async () => {
+                await this.setState({ identifi: 1 });
+                console.log(this.state.identifi);
+                this._enterArrow();
+              }}
+              onExit={() => {
+                this.setState({ identifi: 1000 });
+                this._exitArrow();
+              }}
+            >
+              <Image style={styles.arrowPanel} source={{ uri: arrowImg.url }} />
+            </VrButton>
+          </View>
           {this.state.identifi == 1 ? (
             <Animated.Image
               style={[
@@ -748,19 +759,19 @@ export class Arrow extends React.Component {
                 { opacity: opacityValue },
                 {
                   transform: [
-                    { translateX: 400 },
+                    { translateX: -500 },
                     { translateY: translateValue },
-                    { translateZ: 320 },
-                    { rotateY: -120 },
+                    { translateZ: 0 },
+                    { rotateY: 90 },
                   ],
                 },
               ]}
-              source={{ uri: arrowImg.entranceUrl }}
+              source={{ uri: arrowImg._2fUrl }}
             />
           ) : (
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
-              source={{ uri: arrowImg.entranceUrl }}
+              source={{ uri: arrowImg._2fUrl }}
             />
           )}
         </View>
@@ -770,10 +781,10 @@ export class Arrow extends React.Component {
       return (
         <View>
           <VrButton
-            style={[styles.parkingplace1, { width: 100 }]}
+            style={[styles.secondgrade1, { width: 100 }]}
             onClick={() => {
               this.setState({ identifi: 1000 });
-              this.goToEntrance();
+              this.goToSecondfloor();
             }}
             onEnter={async () => {
               await this.setState({ identifi: 1 });
@@ -794,19 +805,19 @@ export class Arrow extends React.Component {
                 { opacity: opacityValue },
                 {
                   transform: [
-                    { translateX: 400 },
+                    { translateX: 350 },
                     { translateY: translateValue },
-                    { translateZ: 320 },
-                    { rotateY: -120 },
+                    { translateZ: 15 },
+                    { rotateY: -90 },
                   ],
                 },
               ]}
-              source={{ uri: arrowImg.entranceUrl }}
+              source={{ uri: arrowImg._2fUrl }}
             />
           ) : (
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
-              source={{ uri: arrowImg.entranceUrl }}
+              source={{ uri: arrowImg._2fUrl }}
             />
           )}
         </View>
@@ -816,7 +827,7 @@ export class Arrow extends React.Component {
       return (
         <View>
           <VrButton
-            style={[styles.parkingplace1, { width: 100 }]}
+            style={[styles.multipurpose1, { width: 100 }]}
             onClick={() => {
               this.setState({ identifi: 1000 });
               this.goToEntrance();
@@ -840,10 +851,10 @@ export class Arrow extends React.Component {
                 { opacity: opacityValue },
                 {
                   transform: [
-                    { translateX: 400 },
+                    { translateX: -400 },
                     { translateY: translateValue },
-                    { translateZ: 320 },
-                    { rotateY: -120 },
+                    { translateZ: 180 },
+                    { rotateY: 142 },
                   ],
                 },
               ]}
@@ -855,15 +866,12 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg.entranceUrl }}
             />
           )}
+          <SelectableAnim name="xmas" />
         </View>
       );
     }
   }
 }
-
-// export const arrowTest = () => {
-//   window.arrowComponent.goToEntrance();
-// };
 
 const styles = StyleSheet.create({
   arrowPanel: {
@@ -993,6 +1001,34 @@ const styles = StyleSheet.create({
       { translateZ: -500 },
       { rotateY: 60 },
       { rotateZ: -90 },
+    ],
+  },
+  firstgrade1: {
+    transform: [
+      { translateX: -400 },
+      { translateY: -130 },
+      { translateZ: 0 },
+      { rotateY: 90 },
+      { rotateX: -70 },
+      { rotateZ: 5 },
+    ],
+  },
+  secondgrade1: {
+    transform: [
+      { translateX: 350 },
+      { translateY: -100 },
+      { rotateY: -90 },
+      { rotateX: -70 },
+      { rotateZ: -5 },
+    ],
+  },
+  multipurpose1: {
+    transform: [
+      { translateX: -200 },
+      { translateY: -60 },
+      { translateZ: 80 },
+      { rotateY: 142 },
+      { rotateZ: 92 },
     ],
   },
 });

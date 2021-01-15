@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 import { Module } from "react-360-web";
 
 const OverlayScreen = () => (
-  <div className="inner">
-    <p className="text">あまじょう看板前へ</p>
-  </div>
+  // <div className="inner">
+  //   <p className="text">あまじょう看板前へ</p>
+  // </div>
+  <div id="Test">テストテキスト</div>
 );
 
 const renderOverlay = () => {
