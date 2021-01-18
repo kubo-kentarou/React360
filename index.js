@@ -9,31 +9,20 @@ import {
   VrButton,
   Animated,
   Environment,
-  NativeModules
+  NativeModules,
 } from "react-360";
 import { Arrow } from "./Arrow";
-
-const Hide = require('./Arrow');
-
 
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       backgroundColor: new Animated.Value(0),
-      // Transparency: 1
-      Trans:1
     };
-    // console.log(this.state.Transparency);
   }
 
   // componentDidMount() {
   //   this._changeBackgroundColor();
-  // }
-  // componentWillReceiveProps(nextProps){
-  //   this.setState({
-
-  //   })
   // }
 
   _changeBackgroundColor() {
@@ -42,13 +31,13 @@ export default class Hello360 extends React.Component {
     Animated.sequence([
       Animated.timing(this.state.backgroundColor, {
         toValue: 300,
-        duration: 2000
+        duration: 2000,
       }),
 
       Animated.timing(this.state.backgroundColor, {
         toValue: 0,
-        duration: 2000
-      })
+        duration: 2000,
+      }),
     ]).start(this._changeBackgroundColor.bind(this));
   }
 
@@ -61,8 +50,8 @@ export default class Hello360 extends React.Component {
       outputRange: [
         "rgba(1, 87, 155, 1.0)",
         "rgba(26, 35, 255, 1.0)",
-        "rgba(38, 50, 56, 1.0)"
-      ]
+        "rgba(38, 50, 56, 1.0)",
+      ],
     });
 
     const { VideoModule } = NativeModules;
@@ -72,35 +61,26 @@ export default class Hello360 extends React.Component {
         {/* <Animated.View style={[styles.container, { backgroundColor: color }]}>
           <Text style={styles.greeting}>Hello World!!</Text>
         </Animated.View> */}
-        <VrButton
+        {/* <VrButton
           style={styles.test_box}
-          onClick={async () => {
-            VideoModule.createPlayer("Myplayer"); //ビデオプレイヤーを作る
+          onClick={() => {
+            VideoModule.createPlayer("Myplayer");
             VideoModule.play("Myplayer", {
               source: { url: "/static_assets/R0010004.mp4" },
               loop: true,
-              muted: true
+              muted: true,
             });
-            Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
-            await this.setState({ Transparency: 0 });
-            // num = this.state.Transparency;
-            // test(this.state.Transparency);
-            this.setState({Trans: 0});
+            Environment.setBackgroundVideo("Myplayer");
 
             setTimeout(() => {
-              VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
-              Environment.setBackgroundImage(asset("img/R0010008.JPG")); //背景を任意の画像に戻す
-              this.setState({ Transparency: 1 });
-              num = this.state.Transparency; //透明度を戻す
-            // test(this.setState({Trans : 1}));
-              console.log(num);
-
-              console.log("プレイヤー破棄");
+              VideoModule.destroyPlayer("Myplayer");
+              Environment.setBackgroundImage(asset("img/R0010008.JPG"));
+              console.log("�v���C���[�j��");
             }, 19000);
           }}
         >
           <Text style={styles.text_sheet}>Play!</Text>
-        </VrButton> 
+        </VrButton> */}
       </View>
     );
   }
@@ -124,7 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   panel2: {
     // Fill the entire surface
@@ -136,21 +116,21 @@ const styles = StyleSheet.create({
       { translateX: -500 },
       { translateY: 400 },
       { translateZ: -600 },
-      { rotateX: -20 }
+      { rotateX: -20 },
     ],
     opacity: 0.4,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   greetingBox: {
     padding: 20,
     backgroundColor: "#000000",
     borderColor: "#639dda",
-    borderWidth: 2
+    borderWidth: 2,
   },
   greeting: {
-    fontSize: 30
+    fontSize: 30,
   },
   position: {
     width: 1000,
@@ -162,23 +142,27 @@ const styles = StyleSheet.create({
       { translateZ: 10 },
       { rotateX: 10 },
       { rotateY: 10 },
-      { rotateZ: 10 }
-    ]
+      { rotateZ: 10 },
+    ],
   },
   gre: {
     fontSize: 30,
-    transform: [{ rotateY: -10 }, { translateZ: -100 }, { translateY: 100 }]
+    transform: [{ rotateY: -10 }, { translateZ: -100 }, { translateY: 100 }],
   },
   position2: {
     width: 1000,
     height: 1000,
     backgroundColor: "#000000",
-    transform: [{ translateX: -500 }, { translateY: 100 }, { translateZ: -800 }]
+    transform: [
+      { translateX: -500 },
+      { translateY: 100 },
+      { translateZ: -800 },
+    ],
   },
   image: {
     padding: 100,
     width: 300,
-    height: 300
+    height: 300,
   },
   container: {
     flex: 1,
@@ -190,13 +174,14 @@ const styles = StyleSheet.create({
       { translateX: -500 },
       { translateY: 400 },
       { translateZ: -500 },
-      { rotateX: -20 }
-    ]
+      { rotateX: -20 },
+    ],
   },
   text_sheet: {
     fontSize: 20,
     color: "#ffffff",
-    textAlign: "right"
+    textAlign: "right",
+    // fontfamily: "�����ӂ����"
   },
   test_box: {
     width: 60,
@@ -207,12 +192,12 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
     transform: [
       { translateX: -40 },
-      { translateY: 400 },
-      { translateZ: -170 },
-      { rotateX: -20 }
+      { translateY: 915 },
+      { translateZ: -20 },
+      { rotateX: -20 },
     ],
-    backgroundColor: "red"
-  }
+    backgroundColor: "red",
+  },
 });
 
 AppRegistry.registerComponent("Hello360", () => Hello360);

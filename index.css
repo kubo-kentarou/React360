@@ -9,6 +9,17 @@
   bottom: 0;
   left: 0;
 }
+
+/* 実験 */
+#Test {
+  position: absolute;
+  padding: 2rem;
+  background: red;
+  border: solid 1px white;
+  top: -20%;
+  left: -20%;
+}
+
 .text {
   color: white;
   font-size: 1rem;
@@ -27,6 +38,8 @@
   padding: 1rem;
   border: solid white 1px;
   box-shadow: 3px 10px 10px black;
+  overflow: hidden;
+  text-align: justify;
 }
 #commentary .clickToClose {
   line-height: 0.7;
@@ -39,13 +52,16 @@
 
 #commentary .dialogCursor {
   position: absolute;
-  z-index: 1000;
-  background: white;
-  width: 10px;
-  height: 10px;
-  bottom: 8px;
-  right: 15px;
-  animation: dialogAnim 1s alternate-reverse infinite linear;
+  width: 150px;
+  height: 150px;
+  right: calc(50% - 75px);
+  top: calc(50% - 75px);
+  z-index: -1;
+  animation: dialogAnim 4s alternate-reverse infinite linear;
+  background-image: url(./static_assets/img/あまじょうロゴ縁取り.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.2;
 }
 
 #commentary h1 {
@@ -57,11 +73,14 @@
 #stalker {
   pointer-events: none;
   z-index: 999;
-  width: 100;
-  height: 100;
+  width: 50;
+  height: 50;
   position: fixed;
   top: -8px;
   left: -8px;
+  background: red;
+  transition: -1s;
+  border-radius: 50%;
 }
 
 /* body {
