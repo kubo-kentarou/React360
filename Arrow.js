@@ -50,10 +50,10 @@ export class Arrow extends React.Component {
       // pageType: imgUrl.Signboard,
       // pageType: imgUrl.Parkingplace,
       // pageType: imgUrl.Entrance,
-      // pageType: imgUrl.Secondfloor,
+      pageType: imgUrl.Secondfloor,
       // pageType: imgUrl.Firstgrade,
       // pageType: imgUrl.Secondgrade,
-      pageType: imgUrl.Multipurpose,
+      // pageType: imgUrl.Multipurpose,
 
       opacityName: new Animated.Value(1000), //1000は透明を示している
       translateName: new Animated.Value(0),
@@ -62,7 +62,7 @@ export class Arrow extends React.Component {
       dropShift: false, //ドロップダウンリストの表示非表示
       time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
     };
-    this.goToMultipurpose();
+    this.goToSecondfloor();
   }
 
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -189,10 +189,7 @@ export class Arrow extends React.Component {
       //ページの種類があまじょう看板前の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          <SelectableAnim name="signboard" />
-          <SelectableAnim name="narrowRoad" />
-          <SelectableAnim name="parkingPath" />
-          <View style={{ transform: [{ translateY: 190 }] }}>
+          <View>
             <VrButton
               style={[styles.signboard1, { width: 100 }]}
               onClick={() => {
@@ -234,7 +231,7 @@ export class Arrow extends React.Component {
               />
             )}
           </View>
-          <View style={{ transform: [{ translateY: 190 }] }}>
+          <View style={{ transform: [{ translateY: 180 }] }}>
             <VrButton
               style={[styles.signboard2, { width: 100 }]}
               onClick={() => {
@@ -277,14 +274,15 @@ export class Arrow extends React.Component {
               />
             )}
           </View>
+          <SelectableAnim name="signboard" />
+          <SelectableAnim name="narrowRoad" />
+          <SelectableAnim name="parkingPath" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Parkingplace) {
       //ページの種類が駐車場の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          <SelectableAnim name="parkingPlace" />
-
           <VrButton
             style={[styles.parkingplace1, { width: 100 }]}
             onClick={() => {
@@ -368,6 +366,7 @@ export class Arrow extends React.Component {
               />
             )}
           </View>
+          <SelectableAnim name="parkingPlace" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Entrance) {
@@ -726,6 +725,8 @@ export class Arrow extends React.Component {
               </View>
             )}
           </View>
+          <SelectableAnim name="bench" />
+          <SelectableAnim name="disinfection" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Firstgrade) {
@@ -774,6 +775,7 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg._2fUrl }}
             />
           )}
+          <SelectableAnim name="stove" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Secondgrade) {
@@ -820,6 +822,9 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg._2fUrl }}
             />
           )}
+          <SelectableAnim name="poster" />
+          <SelectableAnim name="darts" />
+          <SelectableAnim name="monitor" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Multipurpose) {
