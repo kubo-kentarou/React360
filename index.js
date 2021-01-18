@@ -13,6 +13,7 @@ import {
 } from "react-360";
 import { Arrow } from "./Arrow";
 
+
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
@@ -212,8 +213,6 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
 });
-
-
 
 AppRegistry.registerComponent("Hello360", () => Hello360);
 // AppRegistry.registerComponent("App", () => App);
