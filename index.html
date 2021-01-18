@@ -28,7 +28,6 @@
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'DOWN'})">▼</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'RIGHT'})">►</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'ENTER'})">E</button>
-
         <!-- <button onClick="window.postMessage({ type: 'MOUSE_LOCK_CAMERA_CONTROLLER_MESSAGE', lock: true})">M</button> -->
       </div>
       <!-- <div id="stalker"></div> -->
@@ -48,6 +47,8 @@
           assetRoot: "static_assets/"
         }
       );
-    </script>
+    </script>      
+    <script type="text/javascript" src="./stalker.js"></script>
+    <!-- <canvas id="myCanvas"></canvas> -->
   </body>
 </html>
