@@ -111,15 +111,15 @@ export class KeyboardCameraController {
   // }w
 
   _onKeyDown = (event) => {
-    if (event.keyCode === 38 || event.keyCode === 87) {
+    if (event.keyCode === 38 || event.keyCode === 87) {//↑　W　前に進む
       this._moveForward();
-    } else if (event.keyCode === 40 || event.keyCode === 83) {
+    } else if (event.keyCode === 40 || event.keyCode === 83) {//↓　S　後ろに進む
       this._moveBackward();
-    } else if (event.keyCode === 37 || event.keyCode === 65) {
+    } else if (event.keyCode === 37 || event.keyCode === 65) {//←　A　左へ動く
       this._moveLeft();
-    } else if (event.keyCode === 39 || event.keyCode === 68) {
+    } else if (event.keyCode === 39 || event.keyCode === 68) {//→　D　右へ動く
       this._moveRight();
-    } else if (event.keyCode === 32) {
+    } else if (event.keyCode === 32) {//Space
       this._jump();
     } else if (event.keyCode === 13) {
       this.rotate();

@@ -204,4 +204,141 @@ export default class Hovercontents extends Module {
       ReactDOM.unmountComponentAtNode(el);
     });
   }
+
+  //2階　XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+  OnhoverSecondfloor1() {
+    //ベンチについて XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+    //注意点！！ 改行は<p>タグで区切ったほうが楽 XXXXXXXXXXXXXXXXXXXXX
+    let el = document.getElementById("commentary");
+    ReactDOM.render(
+      <div>
+        <h2> 休憩スペース（ベンチ）</h2>
+        <p>階段を上ってすぐのところには、テーブルとベンチがあります。</p>
+        <p>休憩時間におしゃべりをしたり飲食をしたり自由に使用できます。</p>
+
+        <div className="clickToClose">どこかをクリックで閉じる</div>
+        <div className="dialogCursor"></div>
+      </div>,
+      el
+    );
+    document.addEventListener("click", function () {
+      //他所をクリック時に消える処理
+      ReactDOM.unmountComponentAtNode(el);
+    });
+  }
+  OnhoverSecondfloor2() {
+    //ベンチについて XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+    //注意点！！ 改行は<p>タグで区切ったほうが楽 XXXXXXXXXXXXXXXXXXXXX
+    let el = document.getElementById("commentary");
+    ReactDOM.render(
+      <div>
+        <h2>消毒液</h2>
+        <p>本校も感染症対策を行っております。</p>
+        <p>寒いときも換気を忘れず、学生の意識も高めです。</p>
+
+        <div className="clickToClose">どこかをクリックで閉じる</div>
+        <div className="dialogCursor"></div>
+      </div>,
+      el
+    );
+    document.addEventListener("click", function () {
+      //他所をクリック時に消える処理
+      ReactDOM.unmountComponentAtNode(el);
+    });
+  }
+
+  //1年教室　XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+  OnhoverFirstgrade1() {
+    //ストーブについて XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+    //注意点！！ 改行は<p>タグで区切ったほうが楽 XXXXXXXXXXXXXXXXXXXXX
+    let el = document.getElementById("commentary");
+    ReactDOM.render(
+      <div>
+        <h2> ストーブ</h2>
+        <p>各教室にストーブがあります。</p>
+        <p>冬の寒い日はストーブの前にみんなが集まります。</p>
+
+        <div className="clickToClose">どこかをクリックで閉じる</div>
+        <div className="dialogCursor"></div>
+      </div>,
+      el
+    );
+    document.addEventListener("click", function () {
+      //他所をクリック時に消える処理
+      ReactDOM.unmountComponentAtNode(el);
+    });
+  }
+
+  //2年教室　XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+  OnhoverSecondgrade1() {
+    //あまじょうポスターについて XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+    //注意点！！ 改行は<p>タグで区切ったほうが楽 XXXXXXXXXXXXXXXXXXXXX
+    let el = document.getElementById("commentary");
+    ReactDOM.render(
+      <div>
+        <h2> あまじょうポスター</h2>
+        <p>あまじょうのポスターです。</p>
+        <p>
+          校内、校外様々なところに貼られているので見つけてQRを読み込んでみてください！
+        </p>
+
+        <div className="clickToClose">どこかをクリックで閉じる</div>
+        <div className="dialogCursor"></div>
+      </div>,
+      el
+    );
+    document.addEventListener("click", function () {
+      //他所をクリック時に消える処理
+      ReactDOM.unmountComponentAtNode(el);
+    });
+  }
+  OnhoverSecondgrade2() {
+    //ダーツについて XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+    //注意点！！ 改行は<p>タグで区切ったほうが楽 XXXXXXXXXXXXXXXXXXXXX
+    let el = document.getElementById("commentary");
+    ReactDOM.render(
+      <div>
+        <h2> ダーツ</h2>
+        <p>２年教室には、ダーツや麻雀など休み時間にみんなで遊べる</p>
+        <p>道具もそろっています！</p>
+
+        <div className="clickToClose">どこかをクリックで閉じる</div>
+        <div className="dialogCursor"></div>
+      </div>,
+      el
+    );
+    document.addEventListener("click", function () {
+      //他所をクリック時に消える処理
+      ReactDOM.unmountComponentAtNode(el);
+    });
+  }
+  OnhoverSecondgrade3() {
+    //モニターについて XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+    //注意点！！ 改行は<p>タグで区切ったほうが楽 XXXXXXXXXXXXXXXXXXXXX
+    let el = document.getElementById("commentary");
+    ReactDOM.render(
+      <div>
+        <h2> モニター</h2>
+        <p>２年生になると卒業制作などの作業が多くなるので</p>
+        <p>一人一台モニターを使用しています。</p>
+
+        <div className="clickToClose">どこかをクリックで閉じる</div>
+        <div className="dialogCursor"></div>
+      </div>,
+      el
+    );
+    document.addEventListener("click", function () {
+      //他所をクリック時に消える処理
+      ReactDOM.unmountComponentAtNode(el);
+    });
+  }
 }

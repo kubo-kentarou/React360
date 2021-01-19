@@ -13,14 +13,16 @@ import {
 } from "react-360";
 import { Arrow } from "./Arrow";
 
+
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       backgroundColor: new Animated.Value(0),
+      gazed: false
     };
   }
-
+ 
   // componentDidMount() {
   //   this._changeBackgroundColor();
   // }
@@ -44,6 +46,11 @@ export default class Hello360 extends React.Component {
   // state = {
   //   imageUrl: ""
   // };
+
+  // setGazed = () => {
+  //   this.setState({ gazed: true });
+  // };
+
   render() {
     let color = this.state.backgroundColor.interpolate({
       inputRange: [0, 150, 300],
@@ -99,12 +106,27 @@ export default class Hello360 extends React.Component {
 const styles = StyleSheet.create({
   panel: {
     // Fill the entire surface
-    width: 1200,
+    width: 1000,
     height: 600,
-    flexDirection: "row",
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
+    alignItems: "center"
+  },
+  greetingBox: {
+    padding: 20,
+    backgroundColor: "#000000",
+    borderColor: "#639dda",
+    borderWidth: 2,
+    transform: [
+      { translateX: 200 },
+      { translateY: -100 },
+      { translateZ: 300 },
+      { rotateY: 0 },
+      { rotateX: 50 },
+    ],
+  },
+  greeting: {
+    fontSize: 30
   },
   panel2: {
     // Fill the entire surface
@@ -123,15 +145,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  greetingBox: {
-    padding: 20,
-    backgroundColor: "#000000",
-    borderColor: "#639dda",
-    borderWidth: 2,
-  },
-  greeting: {
-    fontSize: 30,
-  },
   position: {
     width: 1000,
     height: 1000,
@@ -159,6 +172,7 @@ const styles = StyleSheet.create({
       { translateZ: -800 },
     ],
   },
+
   image: {
     padding: 100,
     width: 300,
@@ -203,3 +217,5 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent("Hello360", () => Hello360);
 // AppRegistry.registerComponent("App", () => App);
 AppRegistry.registerComponent("Arrow", () => Arrow);
+// AppRegistry.registerComponent("custom360", () => custom360);
+// AppRegistry.registerComponent("Raycaster", () => Raycaster);

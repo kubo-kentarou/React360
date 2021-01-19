@@ -1,6 +1,7 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
 import { ReactInstance, Surface } from "react-360-web";
+// import SimpleRaycaster from "simple-raycaster";
 import SetOverlay from "./Native";
 import Hovercontents from "./Hovercontents";
 import { KeyboardCameraController } from "./KeyboardCameraController";
@@ -70,12 +71,15 @@ function init(bundle, parent, options = {}) {
 
   // Load the initial environment
   r360.compositor.setBackground("./static_assets/img/R0010008.JPG");
+  // r360.controls.clearRaycasters();
+  // r360.controls.addRaycaster(SimpleRaycaster);
 
   //矢印の表示
   r360.renderToLocation(
     r360.createRoot("Arrow", {}),
     r360.getDefaultLocation()
   );
+
 }
 
 window.React360 = { init };
