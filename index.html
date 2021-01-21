@@ -15,13 +15,20 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+
     <!-- Attachment point for your app -->
-    <div class="logo-container">
+
+
+
+    <div id="load"></div><!-- ロード時のアニメーションを反映するdiv -->
+    <div class="logo-container"><!-- あまじょうロゴを降らせるdiv -->
         <span class="logo logo-1"></span>
     </div>
-    <div id="container"></div>
-    <div id="overlay"></div>
-    <div id="commentary"></div>
+    <div id="logoButton">ロゴを降らせる</div>
+    <div id="container"></div><!-- 360の本体を反映しているdiv -->
+    <div id="overlay"></div><!-- 2Dのインターフェースを描写しているdiv -->
+    <div id="commentary"></div><!-- ホバー時の詳細解説を描写するdiv -->
+
       <div id="controller" style="z-index: 999;position: absolute;bottom: 0px;right:0px;">
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'LEFT'})">◄</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'UP'})">▲</button>
@@ -30,12 +37,14 @@
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'ENTER'})">E</button>
         <!-- <button onClick="window.postMessage({ type: 'MOUSE_LOCK_CAMERA_CONTROLLER_MESSAGE', lock: true})">M</button> -->
       </div>
+
       <!-- <div id="stalker"></div> -->
       <!-- <svg id="stalker" width="1000" height="1000">
         <polygon points="100,10 40,198 190,78 10,78 160,198" fill="lime" stroke="purple" stroke-width="3" fill-rule="nonzero" style="transform: scale(.5);" />
       </svg> -->
-      <script type="text/javascript" src="./stalker.js"></script>
-      <script src="./main.js"></script>
+
+      <script type="text/javascript" src="./stalker.js"></script><!-- マウスストーカ―のjs -->
+      <script src="./main.js"></script><!-- ロゴを降らせるjs -->
 
     <script src="./client.bundle?platform=vr"></script>
     <script>
@@ -48,7 +57,7 @@
         }
       );
     </script>      
-    <script type="text/javascript" src="./stalker.js"></script>
-    <!-- <canvas id="myCanvas"></canvas> -->
+    <script type="text/javascript" src="./loading.js"></script><!-- ロード時のjs -->
+    <script type="text/javascript" src="./stalker.js"></script><!-- マウスストーカ―のjs -->
   </body>
 </html>

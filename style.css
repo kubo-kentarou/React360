@@ -20,6 +20,23 @@
   z-index: 100;
 }
 
+/* ロゴのボタン */
+#logoButton {
+  /* display: none; */
+  border: 1px solid white;
+  text-align: center;
+  width: fit-content;
+  padding: 10px;
+  margin: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  position: absolute;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
 /*ロゴが降るアニメーション*/
 @keyframes animate-logo {
   0% {

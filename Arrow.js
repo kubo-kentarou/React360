@@ -13,7 +13,6 @@ import {
 } from "react-360";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
-import {Gradient} from "react-gradient";
 
 // 矢印のコンポーネント
 
@@ -63,7 +62,7 @@ export class Arrow extends React.Component {
       dropShift: false, //ドロップダウンリストの表示非表示
       time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
     };
-    // this.goToSecondfloor();
+    // this.goToParking();
   }
 
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -74,13 +73,6 @@ export class Arrow extends React.Component {
     //駐車場へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Parkingplace));
     this.setState({ pageType: imgUrl.Parkingplace });
-    // const value = [
-    //   -0.04537065406775056,
-    //   -0.12987968791050647,
-    //   -0.005949404531739549,
-    //   0.990473308576988,
-    // ];
-    // KeyboardCameraController.key(value);
   };
   goToEntrance = () => {
     //玄関へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -175,34 +167,32 @@ export class Arrow extends React.Component {
       }, 3000),
     });
   }
-  goToVideoplay = () =>{
+  goToVideoplay = () => {
     //ビデオ再生時に表示される(二年教室)
     this.setState({ pageType: imgUrl.Videoplay });
     this.VideoFunction();
-  }
+  };
   //Video
-  VideoFunction = () =>{
-    this.setState({pageType: imgUrl.Videoplay});
+  VideoFunction = () => {
+    this.setState({ pageType: imgUrl.Videoplay });
     const { VideoModule } = NativeModules;
     VideoModule.createPlayer("Myplayer"); //ビデオプレイヤーを作る
     VideoModule.play("Myplayer", {
       source: { url: "/static_assets/R0010004.mp4" },
-        loop: false,
-        muted: true
-      });
-      Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
-      this.setState({trans:1});
-      setTimeout(() => {
-        VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
-        Environment.setBackgroundImage(asset(imgUrl.Secondgrade)) //背景を任意の画像に戻す
-        this.setState({ pageType: imgUrl.Secondgrade});
-        // this.goToEntrance();
-        this.setState({ Trans: 1 });
-        console.log("プレイヤー破棄");
-      }, 19000);//19000
-  }
-
-  
+      loop: false,
+      muted: true,
+    });
+    Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
+    this.setState({ trans: 1 });
+    setTimeout(() => {
+      VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
+      Environment.setBackgroundImage(asset(imgUrl.Secondgrade)); //背景を任意の画像に戻す
+      this.setState({ pageType: imgUrl.Secondgrade });
+      // this.goToEntrance();
+      this.setState({ Trans: 1 });
+      console.log("プレイヤー破棄");
+    }, 19000); //19000
+  };
 
   render() {
     // const gradients = [
@@ -329,8 +319,6 @@ export class Arrow extends React.Component {
       //ページの種類が駐車場の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          <SelectableAnim name="parkingPlace" />
-
           <VrButton
             style={[styles.parkingplace1, { width: 100 }]}
             onClick={() => {
@@ -415,6 +403,7 @@ export class Arrow extends React.Component {
             )}
           </View>
           <SelectableAnim name="parkingPlace" />
+          <SelectableAnim name="reflected" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Entrance) {
@@ -632,13 +621,13 @@ export class Arrow extends React.Component {
                     ],
                   },
                 ]}
-                source={{ uri: arrowImg.parkingUrl }}
+                source={{ uri: arrowImg.entranceUrl }}
               />
             </View>
           ) : (
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
-              source={{ uri: arrowImg.parkingUrl }}
+              source={{ uri: arrowImg.entranceUrl }}
             />
           )}
 
@@ -830,17 +819,16 @@ export class Arrow extends React.Component {
       // ページの種類が2年教室だったとき XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          
-         <VrButton
-            style={[styles.test_box, {opacity: this.state.Trans}]}
-            onClick={async() => {
-              this.setState({Trans : 0});
+          <VrButton
+            style={[styles.test_box, { opacity: this.state.Trans }]}
+            onClick={async () => {
+              this.setState({ Trans: 0 });
               this.goToVideoplay();
             }}
           >
-              {/* <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}></Image> */}
+            {/* <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}></Image> */}
           </VrButton>
-          
+
           <VrButton
             style={[styles.secondgrade1, { width: 100 }]}
             onClick={() => {
@@ -928,8 +916,7 @@ export class Arrow extends React.Component {
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.entranceUrl }}
-            >
-            </Image>
+            ></Image>
           )}
           <SelectableAnim name="xmas" />
         </View>
@@ -1096,7 +1083,7 @@ const styles = StyleSheet.create({
       { rotateZ: 92 },
     ],
   },
-  play_button :{
+  play_button: {
     width: 300,
     height: 150,
 
@@ -1104,8 +1091,8 @@ const styles = StyleSheet.create({
       { translateX: -250 },
       { translateY: 180 },
       { translateZ: 660 },
-      { rotateY: -180 }
-    ]
+      { rotateY: -180 },
+    ],
   },
   text_sheet: {
     fontSize: 20,
@@ -1114,16 +1101,16 @@ const styles = StyleSheet.create({
     // opacity : Trans,
     // fontfamily : 'メイリオ',
   },
-  buttonContainer:{
+  buttonContainer: {
     width: 200,
-    alignItems: 'center',
+    alignItems: "center",
   },
-  buttonText:{
-    textAlign:'center',
-    color: '#4C64FF',
+  buttonText: {
+    textAlign: "center",
+    color: "#4C64FF",
     padding: 15,
-    marginLeft:1,
-    marginRight:1,
-    width:198
-  }
+    marginLeft: 1,
+    marginRight: 1,
+    width: 198,
+  },
 });
