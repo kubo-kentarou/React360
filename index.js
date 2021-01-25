@@ -13,16 +13,60 @@ import {
 } from "react-360";
 import { Arrow } from "./Arrow";
 
+import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
+import lodash from "lodash";
+
+class BrowserBridge {
+  constructor() {
+    this._subscribers = {};
+  }
+
+  subscribe(handler) {
+    const key = String(Math.random());
+    this._subscribers[key] = handler;
+    return () => {
+      delete this._subscribers[key];
+    };
+  }
+
+  notifyEvent(name, event) {
+    lodash.forEach(this._subscribers, (handler) => {
+      handler(name, event);
+    });
+  }
+}
+
+const browserBridge = new BrowserBridge();
+BatchedBridge.registerCallableModule(BrowserBridge.name, browserBridge);
+console.log(BrowserBridge.name, browserBridge);
 
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      backgroundColor: new Animated.Value(0),
-      gazed: false
-    };
+    (this.onBrowserEvent = this.onBrowserEvent.bind(this)),
+      (this.state = {
+        backgroundColor: new Animated.Value(0),
+        gazed: false,
+      });
   }
- 
+
+  componentWillMount() {
+    this.unsubscribe = browserBridge.subscribe(this.onBrowserEvent);
+  }
+
+  onBrowserEvent(name, event) {
+    // Do action on event here
+    console.log("asdfadsfasdfadsfasdfas");
+    this.goToParking();
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+      delete this.unsubscribe;
+    }
+  }
+
   // componentDidMount() {
   //   this._changeBackgroundColor();
   // }
@@ -110,7 +154,7 @@ const styles = StyleSheet.create({
     height: 600,
     backgroundColor: "rgba(255, 255, 255, 0.4)",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   greetingBox: {
     padding: 20,
@@ -126,7 +170,7 @@ const styles = StyleSheet.create({
     ],
   },
   greeting: {
-    fontSize: 30
+    fontSize: 30,
   },
   panel2: {
     // Fill the entire surface

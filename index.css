@@ -1,3 +1,7 @@
+body {
+  user-select: none;
+}
+
 /* 2Dレイヤー */
 .inner {
   position: absolute;
@@ -40,6 +44,8 @@
   box-shadow: 3px 10px 10px black;
   overflow: hidden;
   text-align: justify;
+  min-width: 500px;
+  /* user-select: none; */
 }
 #commentary .clickToClose {
   line-height: 0.7;
@@ -66,6 +72,207 @@
 
 #commentary h1 {
   font-family: "游ゴシック";
+}
+/* #commentaryのNEWラベル */
+#commentary > div.new:before {
+  content: "NEW";
+  top: 0;
+  right: 28px;
+  position: absolute;
+  background: red;
+  padding: 15px 0.2rem;
+  font-weight: bold;
+  text-shadow: 3px 0px 5px white, -3px 0px 5px white, -3px 4px 10px white;
+  z-index: 2;
+}
+#commentary > div.new:after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  border-width: 20px 23.5px 8px 23.5px;
+  border-style: solid;
+  border-color: red red transparent red;
+}
+
+/* ハンバーガーメニュー */
+#nav-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  left: 0;
+  background: white;
+  z-index: 3;
+}
+#nav {
+  position: absolute;
+  padding: 1rem 1rem 0 1rem;
+  text-align: center;
+  margin: 0;
+  width: 400px;
+  height: calc(100% - 1rem);
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  z-index: -1;
+  transition: 0.5s;
+  /* border-right: solid white 1px; */
+  overflow: hidden;
+  font-family: "游明朝";
+}
+/* 右の線 */
+ul#nav.on:after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 300px;
+  transform: translateY(-300px);
+  border-left: solid #536596 1px;
+  z-index: 200;
+  top: 0;
+  right: -1;
+  animation: FrameAnimVertical 1s infinite linear;
+}
+/* 上の線 */
+ul#nav.on:before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 1px;
+  transform: translateX(-300px);
+  border-bottom: solid #536596 1px;
+  z-index: 200;
+  top: 0;
+  left: -1;
+  animation: FrameAnimHorizon 1s infinite linear;
+}
+/* 左の線 */
+ul#nav.on span:before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 300px;
+  transform: translateY(-300px);
+  border-right: solid #536596 1px;
+  z-index: 200;
+  top: 0;
+  left: -1;
+  animation: FrameAnimVerticalReverse 1s infinite linear;
+}
+/* 下の線 */
+ul#nav.on span:after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 1px;
+  transform: translateX(300px);
+  border-top: solid #536596 1px;
+  z-index: 200;
+  bottom: 0;
+  right: -1;
+  animation: FrameAnimHorizonReverse 1s infinite linear;
+}
+
+#nav li {
+  color: white;
+  font-weight: bold;
+  list-style: none;
+  /* background: rgba(128, 2, 117, 0.3); */
+  background: rgb(24 55 81 / 30%);
+  position: relative;
+  z-index: 2;
+}
+
+.background {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#nav li:first-of-type {
+  margin-top: 3em;
+}
+#nav li + li {
+  margin-top: 2em;
+}
+
+#nav.on {
+  transform: none;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0);
+}
+/* 進捗状況のテーブル関係 */
+h2 {
+  margin: 0;
+}
+th {
+  position: relative;
+  z-index: 202;
+}
+/* コンプリートしたth */
+th.complete:before {
+  content: "COMPLETE!!";
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  z-index: 201;
+  transform: translate(-50%, -20%);
+  color: yellow;
+  filter: blur(1px);
+}
+/* ここまで */
+th,
+td {
+  border: solid white 1px;
+  color: white;
+  padding: 5px;
+  width: 35%;
+}
+td {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+@keyframes FrameAnimVertical {
+  from {
+    top: 0;
+  }
+  to {
+    border-left: solid white 1px;
+    top: calc(100% + 300px);
+  }
+}
+@keyframes FrameAnimHorizon {
+  from {
+    left: 0;
+  }
+  to {
+    border-bottom: solid white 1px;
+    left: calc(100% + 300px);
+  }
+}
+@keyframes FrameAnimVerticalReverse {
+  from {
+    top: 100%;
+  }
+  to {
+    border-right: solid white 1px;
+    top: calc(0 - 300px);
+  }
+}
+@keyframes FrameAnimHorizonReverse {
+  from {
+    right: 0;
+  }
+  to {
+    border-top: solid white 1px;
+    right: calc(100% + 300px);
+  }
 }
 
 /* マウスストーカ― */
@@ -290,6 +497,7 @@
   /* 駐車場の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --parkingPlace: 3em;
   --reflected: 5em;
+  --building: 2em;
   /* 玄関の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --vendingMachine: 3em;
   --shoeBox: 2em;
@@ -297,14 +505,19 @@
   /* 2階の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --bench: 11em;
   --disinfection: 3em;
+  --typhoon: 4em;
   /* 1年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --stove: 4em;
+  --solderingIron: 5em;
+  --screen: 5em;
   /* 2年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --poster: 9em;
   --darts: 3em;
   --monitor: 4em;
   /* 多目的室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --xmas: 6em;
+  --equipment: 4em;
+  --microwave: 11em;
   /* アニメーション */
   /* あまじょう看板前の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --signboardAnim: typing 1s steps(5, end),
@@ -318,6 +531,8 @@
     blink-caret 0.5s step-end infinite alternate;
   --reflectedAnim: typing 1s steps(5, end),
     blink-caret 0.5s step-end infinite alternate;
+  --buildingAnim: typing 1s steps(2, end),
+    blink-caret 0.5s step-end infinite alternate;
   /* 玄関の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --vendingMachineAnim: typing 1s steps(3, end),
     blink-caret 0.5s step-end infinite alternate;
@@ -330,8 +545,14 @@
     blink-caret 0.5s step-end infinite alternate;
   --disinfectionAnim: typing 1s steps(3, end),
     blink-caret 0.5s step-end infinite alternate;
+  --typhoonAnim: typing 1s steps(4, end),
+    blink-caret 0.5s step-end infinite alternate;
   /* 1年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --stoveAnim: typing 1s steps(4, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --solderingIronAnim: typing 1s steps(5, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --screenAnim: typing 1s steps(5, end),
     blink-caret 0.5s step-end infinite alternate;
   /* 2年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --posterAnim: typing 1s steps(9, end),
@@ -342,6 +563,10 @@
     blink-caret 0.5s step-end infinite alternate;
   /* 多目的室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
   --xmasAnim: typing 1s steps(6, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --equipmentAnim: typing 1s steps(4, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --microwaveAnim: typing 1s steps(11, end),
     blink-caret 0.5s step-end infinite alternate;
 }
 
@@ -373,6 +598,10 @@
   width: var(--reflected);
   animation: var(--reflectedAnim);
 }
+.t-building {
+  width: var(--building);
+  animation: var(--buildingAnim);
+}
 /* 玄関 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 .t-vendingMachine {
   width: var(--vendingMachine);
@@ -395,10 +624,22 @@
   width: var(--disinfection);
   animation: var(--disinfectionAnim);
 }
+.t-typhoon {
+  width: var(--typhoon);
+  animation: var(--typhoonAnim);
+}
 /* 1年教室 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 .t-stove {
   width: var(--stove);
   animation: var(--stoveAnim);
+}
+.t-solderingIron {
+  width: var(--solderingIron);
+  animation: var(--solderingIronAnim);
+}
+.t-screen {
+  width: var(--screen);
+  animation: var(--screenAnim);
 }
 /* 2年教室 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 .t-poster {
@@ -417,4 +658,12 @@
 .t-xmas {
   width: var(--xmas);
   animation: var(--xmasAnim);
+}
+.t-equipment {
+  width: var(--equipment);
+  animation: var(--equipmentAnim);
+}
+.t-microwave {
+  width: var(--microwave);
+  animation: var(--microwaveAnim);
 }

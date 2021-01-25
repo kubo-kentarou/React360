@@ -11,11 +11,9 @@ import {
   Environment,
   NativeModules,
 } from "react-360";
-// import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
 
 // 矢印のコンポーネント
-
 const imgUrl = {
   //背景画像を配列に格納
   Entrance: "img/R0010006.JPG", //玄関
@@ -45,7 +43,7 @@ const arrowImg = {
 export class Arrow extends React.Component {
   constructor(props) {
     super(props);
-
+    // window.Arrowexport = this;
     this.state = {
       pageType: imgUrl.Signboard,
       // pageType: imgUrl.Parkingplace,
@@ -404,6 +402,7 @@ export class Arrow extends React.Component {
           </View>
           <SelectableAnim name="parkingPlace" />
           <SelectableAnim name="reflected" />
+          <SelectableAnim name="building" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Entrance) {
@@ -764,6 +763,7 @@ export class Arrow extends React.Component {
           </View>
           <SelectableAnim name="bench" />
           <SelectableAnim name="disinfection" />
+          <SelectableAnim name="typhoon" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Firstgrade) {
@@ -813,6 +813,8 @@ export class Arrow extends React.Component {
             />
           )}
           <SelectableAnim name="stove" />
+          <SelectableAnim name="solderingIron" />
+          <SelectableAnim name="screen" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Secondgrade) {
@@ -919,6 +921,8 @@ export class Arrow extends React.Component {
             ></Image>
           )}
           <SelectableAnim name="xmas" />
+          <SelectableAnim name="equipment" />
+          <SelectableAnim name="microwave" />
         </View>
       );
     }

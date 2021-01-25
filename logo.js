@@ -1,4 +1,4 @@
-// ボタン式のロゴ降らし
+//ロゴを降らせる処理を記述しています
 const button = document.getElementById("logoButton");
 console.log(button);
 let bool = true;
@@ -10,7 +10,6 @@ const container = document.querySelector(".logo-container");
 //logoを生成する関数
 const createLogo = (logoClass, minSizeVal, maxSizeVal) => {
   const logoEl = document.createElement("span");
-  // logoEl.className = 'logo ${logoClass}';
   logoEl.className = `logo ${logoClass}`;
   const minSize = minSizeVal;
   const maxSize = maxSizeVal;
@@ -31,17 +30,6 @@ button.addEventListener("click", function () {
     bool = false;
     button.textContent = "満足したので消す";
     logof = setInterval(createLogo.bind(this, "logo-1", 10, 50), 500);
-    setTimeout(() => {
-      button.textContent = "まだ降らせますか？";
-      setTimeout(() => {
-        button.textContent = "もう止めます。";
-        clearInterval(logof);
-        bool = true;
-        setTimeout(() => {
-          button.textContent = "ロゴを降らせる";
-        }, 1000);
-      }, 5000);
-    }, 60000);
   } else {
     bool = true;
     clearInterval(logof);
