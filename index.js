@@ -13,16 +13,15 @@ import {
 } from "react-360";
 import { Arrow } from "./Arrow";
 
-
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       backgroundColor: new Animated.Value(0),
-      gazed: false
+      gazed: false,
     };
   }
- 
+
   // componentDidMount() {
   //   this._changeBackgroundColor();
   // }
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     height: 600,
     backgroundColor: "rgba(255, 255, 255, 0.4)",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   greetingBox: {
     padding: 20,
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
     ],
   },
   greeting: {
-    fontSize: 30
+    fontSize: 30,
   },
   panel2: {
     // Fill the entire surface

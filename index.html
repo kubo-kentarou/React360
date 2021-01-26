@@ -24,19 +24,95 @@
     <div class="logo-container"><!-- あまじょうロゴを降らせるdiv -->
         <span class="logo logo-1"></span>
     </div>
-    <div id="logoButton">ロゴを降らせる</div>
+    <ul id="l-nav">
+      <span></span>
+      <li><div id="logoButton">ロゴを降らせる</div></li>
+      <li>
+        <h2>現在の進捗状況</h2>
+        <table>
+          <tr>
+            <th>あまじょう看板前</th>
+            <td id="signboardVal">0 / 3</td>
+          </tr>
+          <tr>
+            <th>駐車場</th>
+            <td id="parkingVal">0 / 3</td>
+          </tr>
+          <tr>
+            <th>玄関</th>
+            <td id="entranceVal">0 / 3</td>
+          </tr>
+          <tr>
+            <th>２階</th>
+            <td id="secondFloorVal">0 / 3</td>
+          </tr>
+          <tr>
+            <th>１年教室</th>
+            <td id="firstGradeVal">0 / 3</td>
+          </tr>
+          <tr>
+            <th>２年教室</th>
+            <td id="secondGradeVal">0 / 3</td>
+          </tr>
+          <tr>
+            <th>多目的室</th>
+            <td id="multipurposeVal">0 / 3</td>
+          </tr>      
+        </table>
+      </li>
+      <li>これはダミーテキストです。
+      </li>
+      <li>これはダミーテキストです。</li>
+      <li>これはダミーテキストです。</li>
+      <li>これはダミーテキストです。</li>
+      <canvas class="background"></canvas>
+    </ul>
+    <ul id="r-nav">
+      <li><h2>行先を選べます。</h2></li>
+      <li>
+        <table>
+          <tr>
+            <th id="signboard" class="answer">あまじょう看板前へ行く</th>
+          </tr>
+          <tr>
+            <th id="parkingPlace" class="answer">駐車場へ行く</th>
+          </tr>
+          <tr>
+            <th id="entrance" class="answer">玄関へ行く</th>
+          </tr>
+          <tr>
+            <th id="secondFloor" class="answer">2階へ行く</th>
+          </tr>
+          <tr>
+            <th id="firstGrade" class="answer">1年教室へ行く</th>
+          </tr>
+          <tr>
+            <th id="secondGrade" class="answer">2年教室へ行く</th>
+          </tr>
+          <tr>
+            <th id="multiPurpose" class="answer">多目的室へ行く</th>
+          </tr>
+        </table>
+      </li>
+      <canvas class="r-background"></canvas>
+    </ul>
     <div id="container"></div><!-- 360の本体を反映しているdiv -->
     <div id="overlay"></div><!-- 2Dのインターフェースを描写しているdiv -->
     <div id="commentary"></div><!-- ホバー時の詳細解説を描写するdiv -->
+    <!-- <div id="answer" class="parkingPlace"></div>
+    <div id="asdf" class="parkingPlace">sdfasdfadsfadsf</div> -->
 
-      <div id="controller" style="z-index: 999;position: absolute;bottom: 0px;right:0px;">
+    
+
+
+      <!-- <div id="controller" style="z-index: 999;position: absolute;bottom: 0px;right:0px;">
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'LEFT'})">◄</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'UP'})">▲</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'DOWN'})">▼</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'RIGHT'})">►</button>
-        <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'ENTER'})">E</button>
+        <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'ENTER'})">E</button> -->
         <!-- <button onClick="window.postMessage({ type: 'MOUSE_LOCK_CAMERA_CONTROLLER_MESSAGE', lock: true})">M</button> -->
-      </div>
+      <!-- </div> -->
 
       <!-- <div id="stalker"></div> -->
       <!-- <svg id="stalker" width="1000" height="1000">
@@ -44,7 +120,7 @@
       </svg> -->
 
       <script type="text/javascript" src="./stalker.js"></script><!-- マウスストーカ―のjs -->
-      <script src="./main.js"></script><!-- ロゴを降らせるjs -->
+      <script src="./logo.js"></script><!--ロゴを降らせるjs-->
 
     <script src="./client.bundle?platform=vr"></script>
     <script>
@@ -57,7 +133,11 @@
         }
       );
     </script>      
+    <script type="text/javascript" src="node_modules\particlesjs\src\particles.js"></script><!-- 粒子アニメーション(ハンバーガーメニューに使っている)-->
     <script type="text/javascript" src="./loading.js"></script><!-- ロード時のjs -->
     <script type="text/javascript" src="./stalker.js"></script><!-- マウスストーカ―のjs -->
+    <script type="text/javascript" src="./Nav.js"></script><!-- ハンバーガーメニューのjs -->
+
+
   </body>
 </html>

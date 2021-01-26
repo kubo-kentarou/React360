@@ -4,6 +4,7 @@ import { ReactInstance, Surface } from "react-360-web";
 // import SimpleRaycaster from "simple-raycaster";
 import SetOverlay from "./Native";
 import Hovercontents from "./Hovercontents";
+import Testnative from "./Testnative";
 import { KeyboardCameraController } from "./KeyboardCameraController";
 
 // export const impTest = (value) => { //clientとArrowの橋渡し
@@ -13,6 +14,10 @@ import { KeyboardCameraController } from "./KeyboardCameraController";
 //   console.log("impValue is", impValue);
 // };
 
+const impTest = () => {
+  console.log("test");
+};
+
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
     // Add custom options here
@@ -20,6 +25,7 @@ function init(bundle, parent, options = {}) {
     nativeModules: [
       (ctx) => new SetOverlay(ctx),
       (ctx) => new Hovercontents(ctx),
+      (ctx) => new Testnative(ctx, impTest),
     ],
     ...options,
   });

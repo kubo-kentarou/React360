@@ -15,9 +15,11 @@ import Entity from 'Entity'
 // import LinearGradient from "react-native-linear-gradient";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
+import { SelectableAnim } from "./SelectableAnim";
+import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
+import lodash from "lodash";
 
 // 矢印のコンポーネント
-
 const imgUrl = {
   //背景画像を配列に格納
   Entrance: "img/R0010006.JPG", //玄関
@@ -44,27 +46,83 @@ const arrowImg = {
   multiUrl: "./static_assets/img/tamokuteki.png",
 };
 
+class BrowserBridge {
+  constructor() {
+    this._subscribers = {};
+  }
+
+  subscribe(handler) {
+    const key = String(Math.random());
+    this._subscribers[key] = handler;
+    return () => {
+      delete this._subscribers[key];
+    };
+  }
+
+  notifyEvent(name, event) {
+    lodash.forEach(this._subscribers, (handler) => {
+      handler(name, event);
+    });
+  }
+}
+
+const browserBridge = new BrowserBridge();
+BatchedBridge.registerCallableModule(BrowserBridge.name, browserBridge);
+console.log(BrowserBridge.name, browserBridge);
+
 export class Arrow extends React.Component {
   constructor(props) {
     super(props);
+    (this.onBrowserEvent = this.onBrowserEvent.bind(this)),
+      (this.state = {
+        pageType: imgUrl.Signboard,
+        // pageType: imgUrl.Parkingplace,
+        // pageType: imgUrl.Entrance,
+        // pageType: imgUrl.Secondfloor,
+        // pageType: imgUrl.Firstgrade,
+        // pageType: imgUrl.Secondgrade,
+        // pageType: imgUrl.Multipurpose,
 
-    this.state = {
-      pageType: imgUrl.Signboard,
-      // pageType: imgUrl.Parkingplace,
-      // pageType: imgUrl.Entrance,
-      // pageType: imgUrl.Secondfloor,
-      // pageType: imgUrl.Firstgrade,
-      // pageType: imgUrl.Secondgrade,
-      // pageType: imgUrl.Multipurpose,
+        opacityName: new Animated.Value(1000), //1000は透明を示している
+        translateName: new Animated.Value(0),
+        hoverStatus: true,
+        identifi: 1000, //1000は透明を示している
+        dropShift: false, //ドロップダウンリストの表示非表示
+        time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
+      });
+    // this.goToParking();
+  }
 
-      opacityName: new Animated.Value(1000), //1000は透明を示している
-      translateName: new Animated.Value(0),
-      hoverStatus: true,
-      identifi: 1000, //1000は透明を示している
-      dropShift: false, //ドロップダウンリストの表示非表示
-      time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
-    };
-    // this.goToSecondfloor();
+  componentWillMount() {
+    this.unsubscribe = browserBridge.subscribe(this.onBrowserEvent);
+  }
+
+  onBrowserEvent(name, event) {
+    // Do action on event here
+    console.log("name", name, "event", event);
+
+    if (name === "signboard") {
+      this.goToSignboard();
+    } else if (name === "parkingPlace") {
+      this.goToParking();
+    } else if (name === "entrance") {
+      this.goToEntrance();
+    } else if (name === "secondFloor") {
+      this.goToSecondfloor();
+    } else if (name === "firstGrade") {
+      this.goToFirstgrade();
+    } else if (name === "secondGrade") {
+      this.goToSecondgrade();
+    } else if (name === "multiPurpose") {
+      this.goToMultipurpose();
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+      delete this.unsubscribe;
+    }
   }
 
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -75,13 +133,6 @@ export class Arrow extends React.Component {
     //駐車場へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Parkingplace));
     this.setState({ pageType: imgUrl.Parkingplace });
-    // const value = [
-    //   -0.04537065406775056,
-    //   -0.12987968791050647,
-    //   -0.005949404531739549,
-    //   0.990473308576988,
-    // ];
-    // KeyboardCameraController.key(value);
   };
   goToEntrance = () => {
     //玄関へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -176,34 +227,32 @@ export class Arrow extends React.Component {
       }, 3000),
     });
   }
-  goToVideoplay = () =>{
+  goToVideoplay = () => {
     //ビデオ再生時に表示される(二年教室)
     this.setState({ pageType: imgUrl.Videoplay });
     this.VideoFunction();
-  }
+  };
   //Video
-  VideoFunction = () =>{
-    this.setState({pageType: imgUrl.Videoplay});
+  VideoFunction = () => {
+    this.setState({ pageType: imgUrl.Videoplay });
     const { VideoModule } = NativeModules;
     VideoModule.createPlayer("Myplayer"); //ビデオプレイヤーを作る
     VideoModule.play("Myplayer", {
       source: { url: "/static_assets/R0010004.mp4" },
-        loop: false,
-        muted: true
-      });
-      Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
-      this.setState({trans:1});
-      setTimeout(() => {
-        VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
-        Environment.setBackgroundImage(asset(imgUrl.Secondgrade)) //背景を任意の画像に戻す
-        this.setState({ pageType: imgUrl.Secondgrade});
-        // this.goToEntrance();
-        this.setState({ Trans: 1 });
-        console.log("プレイヤー破棄");
-      }, 19000);//19000
-  }
-
-  
+      loop: false,
+      muted: true,
+    });
+    Environment.setBackgroundVideo("Myplayer"); //背景をビデオに変える
+    this.setState({ trans: 1 });
+    setTimeout(() => {
+      VideoModule.destroyPlayer("Myplayer"); //ビデオプレイヤーを削除する
+      Environment.setBackgroundImage(asset(imgUrl.Secondgrade)); //背景を任意の画像に戻す
+      this.setState({ pageType: imgUrl.Secondgrade });
+      // this.goToEntrance();
+      this.setState({ Trans: 1 });
+      console.log("プレイヤー破棄");
+    }, 19000); //19000
+  };
 
   render() {
     // const gradients = [
@@ -330,8 +379,6 @@ export class Arrow extends React.Component {
       //ページの種類が駐車場の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          <SelectableAnim name="parkingPlace" />
-
           <VrButton
             style={[styles.parkingplace1, { width: 100 }]}
             onClick={() => {
@@ -416,6 +463,8 @@ export class Arrow extends React.Component {
             )}
           </View>
           <SelectableAnim name="parkingPlace" />
+          <SelectableAnim name="reflected" />
+          <SelectableAnim name="building" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Entrance) {
@@ -633,13 +682,13 @@ export class Arrow extends React.Component {
                     ],
                   },
                 ]}
-                source={{ uri: arrowImg.parkingUrl }}
+                source={{ uri: arrowImg.entranceUrl }}
               />
             </View>
           ) : (
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
-              source={{ uri: arrowImg.parkingUrl }}
+              source={{ uri: arrowImg.entranceUrl }}
             />
           )}
 
@@ -776,6 +825,7 @@ export class Arrow extends React.Component {
           </View>
           <SelectableAnim name="bench" />
           <SelectableAnim name="disinfection" />
+          <SelectableAnim name="typhoon" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Firstgrade) {
@@ -825,6 +875,8 @@ export class Arrow extends React.Component {
             />
           )}
           <SelectableAnim name="stove" />
+          <SelectableAnim name="solderingIron" />
+          <SelectableAnim name="screen" />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Secondgrade) {
@@ -847,7 +899,7 @@ export class Arrow extends React.Component {
           >
               <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}></Image>
           </VrButton>
-          
+
           <VrButton
             style={[styles.secondgrade1, { width: 100 }]}
             onClick={() => {
@@ -935,10 +987,11 @@ export class Arrow extends React.Component {
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
               source={{ uri: arrowImg.entranceUrl }}
-            >
-            </Image>
+            ></Image>
           )}
           <SelectableAnim name="xmas" />
+          <SelectableAnim name="equipment" />
+          <SelectableAnim name="microwave" />
         </View>
       );
     }
@@ -1103,7 +1156,7 @@ const styles = StyleSheet.create({
       { rotateZ: 92 },
     ],
   },
-  play_button :{
+  play_button: {
     width: 300,
     height: 150,
 
@@ -1111,8 +1164,8 @@ const styles = StyleSheet.create({
       { translateX: -250 },
       { translateY: 180 },
       { translateZ: 660 },
-      { rotateY: -180 }
-    ]
+      { rotateY: -180 },
+    ],
   },
   text_sheet: {
     fontSize: 20,
@@ -1121,13 +1174,13 @@ const styles = StyleSheet.create({
     // opacity : Trans,
     // fontfamily : 'メイリオ',
   },
-  buttonContainer:{
+  buttonContainer: {
     width: 200,
-    alignItems: 'center',
+    alignItems: "center",
   },
-  buttonText:{
-    textAlign:'center',
-    color: '#4C64FF',
+  buttonText: {
+    textAlign: "center",
+    color: "#4C64FF",
     padding: 15,
     marginLeft:1,
     marginRight:1,

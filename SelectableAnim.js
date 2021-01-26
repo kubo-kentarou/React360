@@ -4,14 +4,14 @@
 //1ページ　３つくらいほしい
 
 // 現在の状況　-------------------------------
-// 駐車場:　　２
+// 駐車場:　　３
 // 玄関:　　　３
 // 看板前:　　３
-// ２階:　　　２
-// １年教室:　１
+// ２階:　　　３
+// １年教室:　３
 // ２年教室:　３
-// 多目的室:　１
-// ------------------------------------------
+// 多目的室:　３
+// ------------------------------------------完了！！
 
 import React from "react";
 import { Animated, NativeModules, View } from "react-360";
@@ -24,7 +24,7 @@ export class SelectableAnim extends React.Component {
       selectAnimY: new Animated.Value(100), //選択可能場所の値Y
       selectAnimXa: new Animated.Value(100), //別の選択可能場所の値X
       selectAnimYa: new Animated.Value(0), //別の選択可能場所の値Y
-      selectedOpacity: new Animated.Value(0), //選択時の範囲のアニメーションの値
+      selectedOpacity: 0,
     };
   }
 
@@ -79,7 +79,7 @@ export class SelectableAnim extends React.Component {
   }
 
   componentDidMount() {
-    this._selectableLocation();
+    // this._selectableLocation();
   }
 
   render() {
@@ -112,6 +112,7 @@ export class SelectableAnim extends React.Component {
                   { translateZ: -200 },
                 ],
               },
+              { opacity: this.state.selectedOpacity },
             ]}
           />
           <View
@@ -129,7 +130,9 @@ export class SelectableAnim extends React.Component {
               },
             ]}
             onEnter={async () => {
-              Hovercontents.OnhoverSignboard1();
+              setTimeout(() => {
+                Hovercontents.OnhoverSignboard1();
+              }, 2000);
             }}
           />
         </View>
@@ -331,6 +334,54 @@ export class SelectableAnim extends React.Component {
           />
         </View>
       );
+    } else if (this.props.name === "building") {
+      //駐車場の「建物」のアニメーションの値
+      let SelectableValueX = this.state.selectAnimX.interpolate({
+        inputRange: [0, 100],
+        outputRange: [-100, 400],
+      });
+      let SelectableValueY = this.state.selectAnimY.interpolate({
+        inputRange: [0, 100],
+        outputRange: [700, 800],
+      });
+
+      return (
+        <View style={{ transform: [{ rotateY: -135 }, { rotateZ: -4 }] }}>
+          <Animated.View
+            style={[
+              { backgroundColor: "white" },
+              { width: 10 },
+              { height: 8 },
+              { borderRadius: 50 },
+              {
+                transform: [
+                  { translateX: SelectableValueX },
+                  { translateY: SelectableValueY },
+                  { translateZ: -400 },
+                ],
+              },
+            ]}
+          />
+          <View
+            style={[
+              { backgroundColor: "blue" },
+              { opacity: 0 },
+              { width: 500 },
+              { height: 100 },
+              {
+                transform: [
+                  { translateX: -100 },
+                  { translateY: 800 },
+                  { translateZ: -400 },
+                ],
+              },
+            ]}
+            onEnter={() => {
+              Hovercontents.OnhoverParkingplace3();
+            }}
+          />
+        </View>
+      );
     } else if (this.props.name === "vendingMachine") {
       //玄関　XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -497,7 +548,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 55 }] }}>
           <Animated.View
             style={[
-              { backgroundColor: "white" },
+              { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
               { borderRadius: 50 },
@@ -526,6 +577,102 @@ export class SelectableAnim extends React.Component {
             ]}
             onEnter={() => {
               Hovercontents.OnhoverMultipurpose1();
+            }}
+          />
+        </View>
+      );
+    } else if (this.props.name === "equipment") {
+      //多目的室の「備品」のアニメーションの値
+      let SelectableValueX = this.state.selectAnimX.interpolate({
+        inputRange: [0, 100],
+        outputRange: [-240, 10],
+      });
+      let SelectableValueY = this.state.selectAnimY.interpolate({
+        inputRange: [0, 100],
+        outputRange: [250, 350],
+      });
+
+      return (
+        <View style={{ transform: [{ rotateY: -40 }] }}>
+          <Animated.View
+            style={[
+              { backgroundColor: "black" },
+              { width: 8 },
+              { height: 8 },
+              { borderRadius: 50 },
+              {
+                transform: [
+                  { translateX: SelectableValueX },
+                  { translateY: SelectableValueY },
+                  { translateZ: -500 },
+                ],
+              },
+            ]}
+          />
+          <View
+            style={[
+              { backgroundColor: "blue" },
+              { opacity: 0 },
+              { width: 250 },
+              { height: 100 },
+              {
+                transform: [
+                  { translateX: -240 },
+                  { translateY: 350 },
+                  { translateZ: -500 },
+                ],
+              },
+            ]}
+            onEnter={() => {
+              Hovercontents.OnhoverMultipurpose2();
+            }}
+          />
+        </View>
+      );
+    } else if (this.props.name === "microwave") {
+      //多目的室の「電子レンジなどについて」のアニメーションの値
+      let SelectableValueX = this.state.selectAnimXa.interpolate({
+        inputRange: [0, 100],
+        outputRange: [15, 90],
+      });
+      let SelectableValueY = this.state.selectAnimYa.interpolate({
+        inputRange: [0, 100],
+        outputRange: [425, 500],
+      });
+
+      return (
+        <View style={{ transform: [{ rotateY: 55 }] }}>
+          <Animated.View
+            style={[
+              { backgroundColor: "black" },
+              { width: 8 },
+              { height: 8 },
+              { borderRadius: 50 },
+              {
+                transform: [
+                  { translateX: SelectableValueX },
+                  { translateY: SelectableValueY },
+                  { translateZ: -700 },
+                ],
+              },
+            ]}
+          />
+          <View
+            style={[
+              { backgroundColor: "red" },
+              { opacity: 0 },
+              { width: 75 },
+              { height: 75 },
+              {
+                transform: [
+                  { translateX: 15 },
+                  { translateY: 500 },
+                  { translateZ: -700 },
+                ],
+              },
+            ]}
+            onEnter={() => {
+              Hovercontents.OnhoverMultipurpose3();
             }}
           />
         </View>
@@ -630,6 +777,55 @@ export class SelectableAnim extends React.Component {
           />
         </View>
       );
+    } else if (this.props.name === "typhoon") {
+      //2階の「台風対策」のアニメーションの値
+      let SelectableValueX = this.state.selectAnimX.interpolate({
+        inputRange: [0, 100],
+        outputRange: [380, 605],
+      });
+      let SelectableValueY = this.state.selectAnimY.interpolate({
+        inputRange: [0, 100],
+        outputRange: [965, 1090],
+      });
+
+      return (
+        <View style={{ transform: [{ rotateY: 60 }, { rotateZ: 2 }] }}>
+          <Animated.View
+            style={[
+              { backgroundColor: "black" },
+              { width: 8 },
+              { height: 8 },
+              { borderRadius: 50 },
+              {
+                transform: [
+                  { translateX: SelectableValueX },
+                  { translateY: SelectableValueY },
+                  { translateZ: -400 },
+                  { rotateY: -60 },
+                ],
+              },
+            ]}
+          />
+          <View
+            style={[
+              { backgroundColor: "red" },
+              { opacity: 0 },
+              { width: 225 },
+              { height: 125 },
+              {
+                transform: [
+                  { translateX: 380 },
+                  { translateY: 1090 },
+                  { translateZ: -400 },
+                ],
+              },
+            ]}
+            onEnter={() => {
+              Hovercontents.OnhoverSecondfloor3();
+            }}
+          />
+        </View>
+      );
     } else if (this.props.name === "stove") {
       // 1年教室　XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       //1年教室の「ストーブ」のアニメーションの値
@@ -646,7 +842,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
-              { backgroundColor: "white" },
+              { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
               { borderRadius: 50 },
@@ -675,6 +871,102 @@ export class SelectableAnim extends React.Component {
             ]}
             onEnter={() => {
               Hovercontents.OnhoverFirstgrade1();
+            }}
+          />
+        </View>
+      );
+    } else if (this.props.name === "solderingIron") {
+      //1年教室の「はんだこて」のアニメーションの値
+      let SelectableValueX = this.state.selectAnimXa.interpolate({
+        inputRange: [0, 100],
+        outputRange: [90, 270],
+      });
+      let SelectableValueY = this.state.selectAnimYa.interpolate({
+        inputRange: [0, 100],
+        outputRange: [175, 250],
+      });
+
+      return (
+        <View style={{ transform: [{ rotateY: -90 }] }}>
+          <Animated.View
+            style={[
+              { backgroundColor: "black" },
+              { width: 8 },
+              { height: 8 },
+              { borderRadius: 50 },
+              {
+                transform: [
+                  { translateX: SelectableValueX },
+                  { translateY: SelectableValueY },
+                  { translateZ: -600 },
+                ],
+              },
+            ]}
+          />
+          <View
+            style={[
+              { backgroundColor: "blue" },
+              { opacity: 0 },
+              { width: 180 },
+              { height: 75 },
+              {
+                transform: [
+                  { translateX: 90 },
+                  { translateY: 250 },
+                  { translateZ: -600 },
+                ],
+              },
+            ]}
+            onEnter={() => {
+              Hovercontents.OnhoverFirstgrade2();
+            }}
+          />
+        </View>
+      );
+    } else if (this.props.name === "screen") {
+      //1年教室の「スクリーン」のアニメーションの値
+      let SelectableValueX = this.state.selectAnimXa.interpolate({
+        inputRange: [0, 100],
+        outputRange: [230, 330],
+      });
+      let SelectableValueY = this.state.selectAnimYa.interpolate({
+        inputRange: [0, 100],
+        outputRange: [500, 600],
+      });
+
+      return (
+        <View style={{ transform: [{ rotateY: 155 }] }}>
+          <Animated.View
+            style={[
+              { backgroundColor: "black" },
+              { width: 8 },
+              { height: 8 },
+              { borderRadius: 50 },
+              {
+                transform: [
+                  { translateX: SelectableValueX },
+                  { translateY: SelectableValueY },
+                  { translateZ: -300 },
+                ],
+              },
+            ]}
+          />
+          <View
+            style={[
+              { backgroundColor: "blue" },
+              { opacity: 0 },
+              { width: 100 },
+              { height: 100 },
+              {
+                transform: [
+                  { translateX: 230 },
+                  { translateY: 600 },
+                  { translateZ: -300 },
+                ],
+              },
+            ]}
+            onEnter={() => {
+              Hovercontents.OnhoverFirstgrade3();
             }}
           />
         </View>
