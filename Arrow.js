@@ -12,6 +12,8 @@ import {
   NativeModules,
 } from "react-360";
 import { SelectableAnim } from "./SelectableAnim";
+import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
+import lodash from "lodash";
 
 // 矢印のコンポーネント
 const imgUrl = {
@@ -40,27 +42,83 @@ const arrowImg = {
   multiUrl: "./static_assets/img/tamokuteki.png",
 };
 
+class BrowserBridge {
+  constructor() {
+    this._subscribers = {};
+  }
+
+  subscribe(handler) {
+    const key = String(Math.random());
+    this._subscribers[key] = handler;
+    return () => {
+      delete this._subscribers[key];
+    };
+  }
+
+  notifyEvent(name, event) {
+    lodash.forEach(this._subscribers, (handler) => {
+      handler(name, event);
+    });
+  }
+}
+
+const browserBridge = new BrowserBridge();
+BatchedBridge.registerCallableModule(BrowserBridge.name, browserBridge);
+console.log(BrowserBridge.name, browserBridge);
+
 export class Arrow extends React.Component {
   constructor(props) {
     super(props);
-    // window.Arrowexport = this;
-    this.state = {
-      pageType: imgUrl.Signboard,
-      // pageType: imgUrl.Parkingplace,
-      // pageType: imgUrl.Entrance,
-      // pageType: imgUrl.Secondfloor,
-      // pageType: imgUrl.Firstgrade,
-      // pageType: imgUrl.Secondgrade,
-      // pageType: imgUrl.Multipurpose,
+    (this.onBrowserEvent = this.onBrowserEvent.bind(this)),
+      (this.state = {
+        pageType: imgUrl.Signboard,
+        // pageType: imgUrl.Parkingplace,
+        // pageType: imgUrl.Entrance,
+        // pageType: imgUrl.Secondfloor,
+        // pageType: imgUrl.Firstgrade,
+        // pageType: imgUrl.Secondgrade,
+        // pageType: imgUrl.Multipurpose,
 
-      opacityName: new Animated.Value(1000), //1000は透明を示している
-      translateName: new Animated.Value(0),
-      hoverStatus: true,
-      identifi: 1000, //1000は透明を示している
-      dropShift: false, //ドロップダウンリストの表示非表示
-      time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
-    };
+        opacityName: new Animated.Value(1000), //1000は透明を示している
+        translateName: new Animated.Value(0),
+        hoverStatus: true,
+        identifi: 1000, //1000は透明を示している
+        dropShift: false, //ドロップダウンリストの表示非表示
+        time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
+      });
     // this.goToParking();
+  }
+
+  componentWillMount() {
+    this.unsubscribe = browserBridge.subscribe(this.onBrowserEvent);
+  }
+
+  onBrowserEvent(name, event) {
+    // Do action on event here
+    console.log("name", name, "event", event);
+
+    if (name === "signboard") {
+      this.goToSignboard();
+    } else if (name === "parkingPlace") {
+      this.goToParking();
+    } else if (name === "entrance") {
+      this.goToEntrance();
+    } else if (name === "secondFloor") {
+      this.goToSecondfloor();
+    } else if (name === "firstGrade") {
+      this.goToFirstgrade();
+    } else if (name === "secondGrade") {
+      this.goToSecondgrade();
+    } else if (name === "multiPurpose") {
+      this.goToMultipurpose();
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+      delete this.unsubscribe;
+    }
   }
 
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

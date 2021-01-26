@@ -1,7 +1,8 @@
 // ハンバーガーメニューを作成しています。
 
 const nButton = document.getElementById("nav-button");
-const nav = document.getElementById("nav");
+const lnav = document.getElementById("l-nav");
+const rnav = document.getElementById("r-nav");
 
 // 進捗状況のためdocumentの取得
 let signboardVal = document.getElementById("signboardVal");
@@ -46,12 +47,20 @@ particles.pauseAnimation();
 
 // マウスが左に来た時にイベントを発火させたい！
 document.addEventListener("mousemove", (e) => {
-  if (e.pageX <= 30) {
-    nav.classList.add("on");
+  if (e.pageX >= 1335) {
+    rnav.classList.add("on");
+    document.addEventListener("mousemove", (e) => {
+      if (e.pageX <= 885) {
+        rnav.classList.remove("on");
+        return;
+      }
+    });
+  } else if (e.pageX <= 30) {
+    lnav.classList.add("on");
     particles.resumeAnimation();
     document.addEventListener("mousemove", (e) => {
       if (e.pageX > 450) {
-        nav.classList.remove("on");
+        lnav.classList.remove("on");
         particles.pauseAnimation();
         return;
       }
@@ -59,7 +68,7 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
-nav.addEventListener("mouseenter", (e) => {
+lnav.addEventListener("mouseenter", (e) => {
   progress(mountTime.SIGNBOARD, signboardVal);
   progress(mountTime.PARKINGPLACE, parkingVal);
   progress(mountTime.ENTRANCE, entranceVal);

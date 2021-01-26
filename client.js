@@ -5,7 +5,6 @@ import { ReactInstance, Surface } from "react-360-web";
 import SetOverlay from "./Native";
 import Hovercontents from "./Hovercontents";
 import Testnative from "./Testnative";
-import { Hello } from "./SelectableAnim";
 import { KeyboardCameraController } from "./KeyboardCameraController";
 
 // export const impTest = (value) => { //clientとArrowの橋渡し
@@ -14,9 +13,10 @@ import { KeyboardCameraController } from "./KeyboardCameraController";
 //   impValue = value;
 //   console.log("impValue is", impValue);
 // };
-// const impTest = () => {
-//   console.log("window", window.Arrowexport.goToParking);
-// };
+
+const impTest = () => {
+  console.log("test");
+};
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
@@ -25,7 +25,7 @@ function init(bundle, parent, options = {}) {
     nativeModules: [
       (ctx) => new SetOverlay(ctx),
       (ctx) => new Hovercontents(ctx),
-      // (ctx) => new Testnative(ctx, impTest),
+      (ctx) => new Testnative(ctx, impTest),
     ],
     ...options,
   });

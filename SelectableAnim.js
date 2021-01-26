@@ -16,10 +16,6 @@
 import React from "react";
 import { Animated, NativeModules, View } from "react-360";
 
-export const Hello = () => {
-  console.log("HELLO");
-};
-
 export class SelectableAnim extends React.Component {
   constructor(props) {
     super(props);
@@ -83,7 +79,7 @@ export class SelectableAnim extends React.Component {
   }
 
   componentDidMount() {
-    this._selectableLocation();
+    // this._selectableLocation();
   }
 
   render() {

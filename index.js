@@ -13,58 +13,13 @@ import {
 } from "react-360";
 import { Arrow } from "./Arrow";
 
-import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
-import lodash from "lodash";
-
-class BrowserBridge {
-  constructor() {
-    this._subscribers = {};
-  }
-
-  subscribe(handler) {
-    const key = String(Math.random());
-    this._subscribers[key] = handler;
-    return () => {
-      delete this._subscribers[key];
-    };
-  }
-
-  notifyEvent(name, event) {
-    lodash.forEach(this._subscribers, (handler) => {
-      handler(name, event);
-    });
-  }
-}
-
-const browserBridge = new BrowserBridge();
-BatchedBridge.registerCallableModule(BrowserBridge.name, browserBridge);
-console.log(BrowserBridge.name, browserBridge);
-
 export default class Hello360 extends React.Component {
   constructor(props) {
     super(props);
-    (this.onBrowserEvent = this.onBrowserEvent.bind(this)),
-      (this.state = {
-        backgroundColor: new Animated.Value(0),
-        gazed: false,
-      });
-  }
-
-  componentWillMount() {
-    this.unsubscribe = browserBridge.subscribe(this.onBrowserEvent);
-  }
-
-  onBrowserEvent(name, event) {
-    // Do action on event here
-    console.log("asdfadsfasdfadsfasdfas");
-    this.goToParking();
-  }
-
-  componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      delete this.unsubscribe;
-    }
+    this.state = {
+      backgroundColor: new Animated.Value(0),
+      gazed: false,
+    };
   }
 
   // componentDidMount() {

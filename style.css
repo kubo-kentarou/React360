@@ -29,7 +29,7 @@
   font-size: 2rem;
 }
 
-#nav.on div#logoButton:before {
+#l-nav.on div#logoButton:before {
   background-image: url(./static_assets/logo/amajo-logo.png);
   background-position: 0%;
   background-size: contain;
@@ -44,7 +44,7 @@
   animation: logoTranslate 20s linear alternate infinite;
 }
 
-#nav.on div#logoButton:after {
+#l-nav.on div#logoButton:after {
   content: "";
   position: absolute;
   width: 100%;

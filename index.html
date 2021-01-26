@@ -24,7 +24,7 @@
     <div class="logo-container"><!-- あまじょうロゴを降らせるdiv -->
         <span class="logo logo-1"></span>
     </div>
-    <ul id="nav">
+    <ul id="l-nav">
       <span></span>
       <li><div id="logoButton">ロゴを降らせる</div></li>
       <li>
@@ -57,30 +57,62 @@
           <tr>
             <th>多目的室</th>
             <td id="multipurposeVal">0 / 3</td>
-          </tr>
-
-      
+          </tr>      
         </table>
       </li>
-      <li>これはダミーテキストです。</li>
+      <li>これはダミーテキストです。
+      </li>
       <li>これはダミーテキストです。</li>
       <li>これはダミーテキストです。</li>
       <li>これはダミーテキストです。</li>
       <canvas class="background"></canvas>
     </ul>
+    <ul id="r-nav">
+      <li><h2>行先を選べます。</h2></li>
+      <li>
+        <table>
+          <tr>
+            <th id="signboard" class="answer">あまじょう看板前へ行く</th>
+          </tr>
+          <tr>
+            <th id="parkingPlace" class="answer">駐車場へ行く</th>
+          </tr>
+          <tr>
+            <th id="entrance" class="answer">玄関へ行く</th>
+          </tr>
+          <tr>
+            <th id="secondFloor" class="answer">2階へ行く</th>
+          </tr>
+          <tr>
+            <th id="firstGrade" class="answer">1年教室へ行く</th>
+          </tr>
+          <tr>
+            <th id="secondGrade" class="answer">2年教室へ行く</th>
+          </tr>
+          <tr>
+            <th id="multiPurpose" class="answer">多目的室へ行く</th>
+          </tr>
+        </table>
+      </li>
+      <canvas class="r-background"></canvas>
+    </ul>
     <div id="container"></div><!-- 360の本体を反映しているdiv -->
     <div id="overlay"></div><!-- 2Dのインターフェースを描写しているdiv -->
     <div id="commentary"></div><!-- ホバー時の詳細解説を描写するdiv -->
-    <div id="answer"></div>
+    <!-- <div id="answer" class="parkingPlace"></div>
+    <div id="asdf" class="parkingPlace">sdfasdfadsfadsf</div> -->
 
-      <div id="controller" style="z-index: 999;position: absolute;bottom: 0px;right:0px;">
+    
+
+
+      <!-- <div id="controller" style="z-index: 999;position: absolute;bottom: 0px;right:0px;">
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'LEFT'})">◄</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'UP'})">▲</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'DOWN'})">▼</button>
         <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'RIGHT'})">►</button>
-        <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'ENTER'})">E</button>
+        <button onClick="window.postMessage({ type: 'KEYBOARD_CAMERA_CONTROLLER_MESSAGE', direction: 'ENTER'})">E</button> -->
         <!-- <button onClick="window.postMessage({ type: 'MOUSE_LOCK_CAMERA_CONTROLLER_MESSAGE', lock: true})">M</button> -->
-      </div>
+      <!-- </div> -->
 
       <!-- <div id="stalker"></div> -->
       <!-- <svg id="stalker" width="1000" height="1000">

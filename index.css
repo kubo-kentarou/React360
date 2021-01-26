@@ -1,5 +1,6 @@
 body {
   user-select: none;
+  overflow: hidden;
 }
 
 /* 2Dレイヤー */
@@ -105,24 +106,32 @@ body {
   background: white;
   z-index: 3;
 }
-#nav {
+#l-nav,
+#r-nav {
   position: absolute;
   padding: 1rem 1rem 0 1rem;
   text-align: center;
   margin: 0;
   width: 400px;
   height: calc(100% - 1rem);
-  top: 0;
-  left: 0;
-  transform: translateX(-100%);
   z-index: -1;
   transition: 0.5s;
-  /* border-right: solid white 1px; */
   overflow: hidden;
   font-family: "游明朝";
 }
+#l-nav {
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+#r-nav {
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+}
 /* 右の線 */
-ul#nav.on:after {
+ul#l-nav.on:after {
   content: "";
   position: absolute;
   width: 1px;
@@ -135,7 +144,7 @@ ul#nav.on:after {
   animation: FrameAnimVertical 1s infinite linear;
 }
 /* 上の線 */
-ul#nav.on:before {
+ul#l-nav.on:before {
   content: "";
   position: absolute;
   width: 300px;
@@ -148,7 +157,7 @@ ul#nav.on:before {
   animation: FrameAnimHorizon 1s infinite linear;
 }
 /* 左の線 */
-ul#nav.on span:before {
+ul#l-nav.on span:before {
   content: "";
   position: absolute;
   width: 1px;
@@ -161,7 +170,7 @@ ul#nav.on span:before {
   animation: FrameAnimVerticalReverse 1s infinite linear;
 }
 /* 下の線 */
-ul#nav.on span:after {
+ul#l-nav.on span:after {
   content: "";
   position: absolute;
   width: 300px;
@@ -174,7 +183,16 @@ ul#nav.on span:after {
   animation: FrameAnimHorizonReverse 1s infinite linear;
 }
 
-#nav li {
+#l-nav li {
+  color: white;
+  font-weight: bold;
+  list-style: none;
+  /* background: rgba(128, 2, 117, 0.3); */
+  background: rgb(24 55 81 / 30%);
+  position: relative;
+  z-index: 2;
+}
+#r-nav li {
   color: white;
   font-weight: bold;
   list-style: none;
@@ -194,14 +212,19 @@ ul#nav.on span:after {
   background: rgba(0, 0, 0, 0.2);
 }
 
-#nav li:first-of-type {
+#l-nav li:first-of-type {
   margin-top: 3em;
 }
-#nav li + li {
+#l-nav li + li {
   margin-top: 2em;
 }
 
-#nav.on {
+#l-nav.on {
+  transform: none;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0);
+}
+#r-nav.on {
   transform: none;
   z-index: 2;
   background: rgba(0, 0, 0, 0);
@@ -666,4 +689,21 @@ td {
 .t-microwave {
   width: var(--microwave);
   animation: var(--microwaveAnim);
+}
+
+div#answer {
+  position: absolute;
+  top: 0;
+  background: red;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+  right: 0;
+}
+div#asdf {
+  position: absolute;
+  top: 0;
+  right: 11%;
+  background: red;
+  height: 100;
 }
