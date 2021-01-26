@@ -11,9 +11,10 @@ import {
   Environment,
   NativeModules,
 } from "react-360";
+import Entity from 'Entity'
+// import LinearGradient from "react-native-linear-gradient";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
-import {Gradient} from "react-gradient";
 
 // 矢印のコンポーネント
 
@@ -830,7 +831,13 @@ export class Arrow extends React.Component {
       // ページの種類が2年教室だったとき XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          
+          <Entity
+            source = {{
+              obj: asset('iPhone 6.obj'),
+              mtl: asset('iPhone 6.mtl')
+            }}
+            style={[styles.iphone]}
+          />
          <VrButton
             style={[styles.test_box, {opacity: this.state.Trans}]}
             onClick={async() => {
@@ -838,7 +845,7 @@ export class Arrow extends React.Component {
               this.goToVideoplay();
             }}
           >
-              {/* <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}></Image> */}
+              <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}></Image>
           </VrButton>
           
           <VrButton
@@ -1125,5 +1132,13 @@ const styles = StyleSheet.create({
     marginLeft:1,
     marginRight:1,
     width:198
+  },
+  iphone:{
+    transform:[
+      {scaleX: 0.5},
+      {scaleY: 0.5},
+      {scaleZ: 0.5},
+      {translateZ: 600}
+    ]
   }
 });

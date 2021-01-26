@@ -61,7 +61,7 @@
   background-image: url(./static_assets/img/あまじょうロゴ縁取り.png);
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.2;
+  opacity: 0.4;
 }
 
 #commentary h1 {
@@ -83,9 +83,109 @@
   border-radius: 50%;
 }
 
-/* body {
-  cursor: none;
-} */
+/* ロード画面のCSS */
+.loader {
+  color: #ffffff;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - 90px);
+  left: calc(50% - 45px);
+}
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 
 /* keyframes */
 @keyframes dialogAnim {
@@ -95,4 +195,226 @@
   100% {
     transform: rotateY(360deg);
   }
+}
+
+/* bluelight(背景のかっこいいアニメーション) */
+.bluelight {
+  z-index: -1;
+  display: table;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.bluelight:before,
+.bluelight:after,
+.bluelight a:before,
+.bluelight a:after {
+  transition: 0.2s ease-in-out;
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  border: 60px dashed transparent;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.bluelight:before,
+.bluelight a:before {
+  animation: rotate 20s linear 0s infinite;
+  width: 360px;
+  height: 360px;
+  border: 3px dotted rgba(10, 175, 230, 0);
+  z-index: -1;
+}
+.bluelight:before {
+  border-color: rgba(10, 175, 230, 0.3);
+}
+.bluelight:after {
+  animation: rotate 10s linear 0s infinite reverse;
+  border: 80px dashed rgba(10, 175, 230, 0);
+  width: 320px;
+  height: 320px;
+  z-index: -2;
+
+  border-color: rgba(10, 175, 230, 0.1);
+}
+
+.bluelight a:before {
+  animation: rotate 5s ease-in-out 0s infinite alternate;
+  width: 240px;
+  height: 240px;
+  border: 50px dashed rgba(10, 175, 230, 0);
+  border-color: rgba(10, 175, 230, 0.3);
+}
+.bluelight a:after {
+  animation: rotate 5s linear 0s infinite;
+  border: 18px dashed rgba(10, 175, 230, 0);
+  width: 240px;
+  height: 240px;
+
+  border-color: rgba(10, 175, 230, 0.3);
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* タイピング風の見出し */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+@keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+:root {
+  /* 変数の宣言 */
+  /* 文字幅 */
+  /* あまじょう看板前の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --signboard: 5em;
+  --narrowRoad: 3em;
+  --parkingPath: 6em;
+  /* 駐車場の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --parkingPlace: 3em;
+  --reflected: 5em;
+  /* 玄関の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --vendingMachine: 3em;
+  --shoeBox: 2em;
+  --handWashFacilities: 4em;
+  /* 2階の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --bench: 11em;
+  --disinfection: 3em;
+  /* 1年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --stove: 4em;
+  /* 2年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --poster: 9em;
+  --darts: 3em;
+  --monitor: 4em;
+  /* 多目的室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --xmas: 6em;
+  /* アニメーション */
+  /* あまじょう看板前の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --signboardAnim: typing 1s steps(5, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --narrowRoadAnim: typing 1s steps(3, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --parkingPathAnim: typing 1s steps(6, end),
+    blink-caret 0.5s step-end infinite alternate;
+  /* 駐車場の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --parkingPlaceAnim: typing 1s steps(3, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --reflectedAnim: typing 1s steps(5, end),
+    blink-caret 0.5s step-end infinite alternate;
+  /* 玄関の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --vendingMachineAnim: typing 1s steps(3, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --shoeBoxAnim: typing 1s steps(2, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --handWashFacilitiesAnim: typing 1s steps(4, end),
+    blink-caret 0.5s step-end infinite alternate;
+  /* 2階の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --benchAnim: typing 1s steps(11, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --disinfectionAnim: typing 1s steps(3, end),
+    blink-caret 0.5s step-end infinite alternate;
+  /* 1年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --stoveAnim: typing 1s steps(4, end),
+    blink-caret 0.5s step-end infinite alternate;
+  /* 2年教室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --posterAnim: typing 1s steps(9, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --dartsAnim: typing 1s steps(3, end),
+    blink-caret 0.5s step-end infinite alternate;
+  --monitorAnim: typing 1s steps(4, end),
+    blink-caret 0.5s step-end infinite alternate;
+  /* 多目的室の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+  --xmasAnim: typing 1s steps(6, end),
+    blink-caret 0.5s step-end infinite alternate;
+}
+
+.type {
+  border-right: 0.1em solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-top: 1px;
+}
+/* あまじょう看板前 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+.t-signboard {
+  width: var(--signboard);
+  animation: var(--signboardAnim);
+}
+.t-narrowRoad {
+  width: var(--narrowRoad);
+  animation: var(--narrowRoadAnim);
+}
+.t-parkingPath {
+  width: var(--parkingPath);
+  animation: var(--parkingPathAnim);
+}
+/* 駐車場 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+.t-parkingPlace {
+  width: var(--parkingPlace);
+  animation: var(--parkingPlaceAnim);
+}
+.t-reflected {
+  width: var(--reflected);
+  animation: var(--reflectedAnim);
+}
+/* 玄関 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+.t-vendingMachine {
+  width: var(--vendingMachine);
+  animation: var(--vendingMachineAnim);
+}
+.t-shoeBox {
+  width: var(--shoeBox);
+  animation: var(--shoeBoxAnim);
+}
+.t-handWashFacilities {
+  width: var(--handWashFacilities);
+  animation: var(--handWashFacilitiesAnim);
+}
+/* 2階 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+.t-bench {
+  width: var(--bench);
+  animation: var(--benchAnim);
+}
+.t-disinfection {
+  width: var(--disinfection);
+  animation: var(--disinfectionAnim);
+}
+/* 1年教室 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+.t-stove {
+  width: var(--stove);
+  animation: var(--stoveAnim);
+}
+/* 2年教室 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+.t-poster {
+  width: var(--poster);
+  animation: var(--posterAnim);
+}
+.t-darts {
+  width: var(--darts);
+  animation: var(--dartsAnim);
+}
+.t-monitor {
+  width: var(--monitor);
+  animation: var(--monitorAnim);
+}
+/* 多目的室 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+.t-xmas {
+  width: var(--xmas);
+  animation: var(--xmasAnim);
 }

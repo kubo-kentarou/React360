@@ -80,6 +80,12 @@ function init(bundle, parent, options = {}) {
     r360.getDefaultLocation()
   );
 
+  //お試し
+  // const location = new Location([0, -1, -2]);
+  // r360.renderToLocation(
+  //   r360.createRoot('iPhone'),
+  //   location,
+  // )
 }
 
 window.React360 = { init };

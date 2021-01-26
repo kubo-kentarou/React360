@@ -4,13 +4,13 @@
 //1ページ　３つくらいほしい
 
 // 現在の状況　-------------------------------
-// 駐車場:　　１
+// 駐車場:　　２
 // 玄関:　　　３
 // 看板前:　　３
-// ２階:　　　０
-// １年教室:　０
-// ２年教室:　０
-// 多目的室:　１　　クリスマス会要修正
+// ２階:　　　２
+// １年教室:　１
+// ２年教室:　３
+// 多目的室:　１
 // ------------------------------------------
 
 import React from "react";
@@ -279,6 +279,54 @@ export class SelectableAnim extends React.Component {
             ]}
             onEnter={() => {
               Hovercontents.OnhoverParkingplace1();
+            }}
+          />
+        </View>
+      );
+    } else if (this.props.name === "reflected") {
+      //駐車場の「チーム防人」のアニメーションの値
+      let SelectableValueX = this.state.selectAnimX.interpolate({
+        inputRange: [0, 100],
+        outputRange: [490, 590],
+      });
+      let SelectableValueY = this.state.selectAnimY.interpolate({
+        inputRange: [0, 100],
+        outputRange: [495, 595],
+      });
+
+      return (
+        <View style={{ transform: [{ rotateY: -120 }] }}>
+          <Animated.View
+            style={[
+              { backgroundColor: "white" },
+              { width: 10 },
+              { height: 8 },
+              { borderRadius: 50 },
+              {
+                transform: [
+                  { translateX: SelectableValueX },
+                  { translateY: SelectableValueY },
+                  { translateZ: 800 },
+                ],
+              },
+            ]}
+          />
+          <View
+            style={[
+              { backgroundColor: "green" },
+              { opacity: 0 },
+              { width: 100 },
+              { height: 100 },
+              {
+                transform: [
+                  { translateX: 490 },
+                  { translateY: 595 },
+                  { translateZ: 800 },
+                ],
+              },
+            ]}
+            onEnter={() => {
+              Hovercontents.OnhoverParkingplace2();
             }}
           />
         </View>
