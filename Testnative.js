@@ -13,10 +13,11 @@ const eventToOb = (event) => {
 };
 
 export default class Testnative extends Module {
-  constructor(ctx, overlayContainer) {
+  constructor(ctx) {
     super("Testnative");
     this._rnctx = ctx;
     this._bridgeName = "BrowserBridge";
+    let commentarySwitch = false;
 
     // emitで名前選別のとき、
     returnEmit = (element, event) => {
@@ -35,6 +36,19 @@ export default class Testnative extends Module {
         false
       );
     }
+
+    // 解説探しゲームを開始
+    document.getElementById("commentaryGame").onclick = (e) => {
+      if (commentarySwitch === false) {
+        alert("ゲーム開始");
+        commentarySwitch = true;
+        e.target.textContent = "解説探しを止める";
+      } else {
+        alert("ゲームを一時停止します。");
+        commentarySwitch = false;
+        e.target.textContent = "解説探しを再開する";
+      }
+    };
   }
 
   _emit(name, event) {

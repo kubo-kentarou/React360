@@ -79,12 +79,13 @@ export class SelectableAnim extends React.Component {
   }
 
   componentDidMount() {
-    // this._selectableLocation();
+    this._selectableLocation();
   }
 
   render() {
     const { Hovercontents } = NativeModules;
 
+    //解説探ししないならreturn null する
     if (this.props.name === "signboard") {
       //あまじょう看板前　XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       //あまじょう看板前の「看板」のアニメーションの値
@@ -112,7 +113,6 @@ export class SelectableAnim extends React.Component {
                   { translateZ: -200 },
                 ],
               },
-              { opacity: this.state.selectedOpacity },
             ]}
           />
           <View
@@ -130,9 +130,7 @@ export class SelectableAnim extends React.Component {
               },
             ]}
             onEnter={async () => {
-              setTimeout(() => {
-                Hovercontents.OnhoverSignboard1();
-              }, 2000);
+              Hovercontents.OnhoverSignboard1();
             }}
           />
         </View>

@@ -12,6 +12,7 @@ import {
   NativeModules,
 } from "react-360";
 import { SelectableAnim } from "./SelectableAnim";
+
 import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
 import lodash from "lodash";
 
@@ -64,7 +65,8 @@ class BrowserBridge {
 
 const browserBridge = new BrowserBridge();
 BatchedBridge.registerCallableModule(BrowserBridge.name, browserBridge);
-console.log(BrowserBridge.name, browserBridge);
+
+const { ArrowRotation } = NativeModules;
 
 export class Arrow extends React.Component {
   constructor(props) {
@@ -85,6 +87,7 @@ export class Arrow extends React.Component {
         identifi: 1000, //1000は透明を示している
         dropShift: false, //ドロップダウンリストの表示非表示
         time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
+        commentaryGame: false, //解説探しゲームをするかどうかのstate
       });
     // this.goToParking();
   }
@@ -96,7 +99,6 @@ export class Arrow extends React.Component {
   onBrowserEvent(name, event) {
     // Do action on event here
     console.log("name", name, "event", event);
-
     if (name === "signboard") {
       this.goToSignboard();
     } else if (name === "parkingPlace") {
@@ -112,6 +114,15 @@ export class Arrow extends React.Component {
     } else if (name === "multiPurpose") {
       this.goToMultipurpose();
     }
+
+    if (name === "commentaryGame") {
+      if (this.state.commentaryGame === false) {
+        this.setState({ commentaryGame: true });
+      } else {
+        this.setState({ commentaryGame: false });
+      }
+      console.log(this.state.commentaryGame);
+    }
   }
 
   componentWillUnmount() {
@@ -123,46 +134,50 @@ export class Arrow extends React.Component {
 
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   goToParking = () => {
-    // impTest(3);//clientとArrowの橋渡し
-    // impTest(true);
-
     //駐車場へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Parkingplace));
     this.setState({ pageType: imgUrl.Parkingplace });
+    ArrowRotation.moveParkingplace();
   };
   goToEntrance = () => {
     //玄関へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Entrance));
     this.setState({ pageType: imgUrl.Entrance });
+    ArrowRotation.moveEntrance();
   };
   goToSignboard = () => {
     //あまじょう看板前へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Signboard));
     this.setState({ pageType: imgUrl.Signboard });
+    ArrowRotation.moveSignboard();
   };
 
   goToMultipurpose = () => {
     //多目的室へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Multipurpose));
     this.setState({ pageType: imgUrl.Multipurpose });
+    ArrowRotation.moveMultipurpose();
   };
 
   goToSecondfloor = () => {
     //2階へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Secondfloor));
     this.setState({ pageType: imgUrl.Secondfloor });
+    ArrowRotation.moveSecondfloor();
   };
 
   goToFirstgrade = () => {
     //1年教室へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Firstgrade));
     this.setState({ pageType: imgUrl.Firstgrade });
+    ArrowRotation.moveFirstgrade();
   };
 
   goToSecondgrade = () => {
     //2年教室へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Secondgrade));
     this.setState({ pageType: imgUrl.Secondgrade });
+    ArrowRotation.moveSecondgrade();
   };
 
   //矢印の名前表示のアニメーション XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -251,22 +266,6 @@ export class Arrow extends React.Component {
   };
 
   render() {
-    // const gradients = [
-    //   ['#bd19d6', '#ea7d10'],
-    //   ['#ff2121', '#25c668'],
-    // ];
-    // function Gradation() {
-    //   return(
-    //     <div className="app">
-    //     <Gradient
-    //         gradints = {gradients}
-    //         property = "background"
-    //         duration = { 3000 }
-    //         angle = "45deg"
-    //     />
-    // </div>
-    //   );
-    // }
     let opacityValue = this.state.opacityName.interpolate({
       inputRange: [0, 50, 100, 1000], //1000は透明を示している
       outputRange: [0.3, 0.6, 1, 0], //透明度.3, .6, 1を示す
@@ -366,9 +365,15 @@ export class Arrow extends React.Component {
               />
             )}
           </View>
-          <SelectableAnim name="signboard" />
-          <SelectableAnim name="narrowRoad" />
-          <SelectableAnim name="parkingPath" />
+          {this.state.commentaryGame == true ? (
+            <View>
+              <SelectableAnim name="signboard" />
+              <SelectableAnim name="narrowRoad" />
+              <SelectableAnim name="parkingPath" />
+            </View>
+          ) : (
+            <View></View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Parkingplace) {
@@ -762,22 +767,6 @@ export class Arrow extends React.Component {
                     ]}
                     source={{ uri: arrowImg.secondUrl }}
                   />
-                  {/* <Text
-                    style={[
-                      { color: "red" },
-                      { fontSize: 30 },
-                      {
-                        transform: [
-                          { translateX: -350 },
-                          { translateY: 250 },
-                          { translateZ: -500 },
-                          { rotateY: 50 },
-                        ],
-                      },
-                    ]}
-                  >
-                    THIS IS TEST TEXT
-                  </Text> */}
                 </VrButton>
               </View>
             ) : (
