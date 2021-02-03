@@ -10,11 +10,6 @@ import {
   Animated,
   Environment,
   NativeModules,
-  // AmbientLight,
-  // PointLight,
-  // DirectionalLight,
-  // SpotLight,
-  Model,
   PointLight,
   // Entity,
 } from "react-360";
@@ -22,8 +17,6 @@ import { Arrow } from "./Arrow";
 import Entity from 'Entity';
 import AmbientLight from 'AmbientLight';
 import SpotLight from 'SpotLight';
-// import { SpotLight } from "react-vr";
-// import Model from "./Model";
 
 export default class Hello360 extends React.Component {
   constructor(props) {
