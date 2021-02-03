@@ -88,6 +88,7 @@ export class Arrow extends React.Component {
         dropShift: false, //ドロップダウンリストの表示非表示
         time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
         commentaryGame: false, //解説探しゲームをするかどうかのstate
+        solution: false, //解説探しゲームの点を透明化するかのboolean
       });
     // this.goToParking();
   }
@@ -121,7 +122,16 @@ export class Arrow extends React.Component {
       } else {
         this.setState({ commentaryGame: false });
       }
-      console.log(this.state.commentaryGame);
+      // console.log(this.state.commentaryGame);
+    }
+    if (name === "solution") {
+      if (this.state.solution === false) {
+        this.setState({ solution: true });
+        console.log(this.state.solution);
+      } else {
+        this.setState({ solution: false });
+        console.log(this.state.solution);
+      }
     }
   }
 
@@ -366,13 +376,25 @@ export class Arrow extends React.Component {
             )}
           </View>
           {this.state.commentaryGame == true ? (
-            <View>
-              <SelectableAnim name="signboard" />
-              <SelectableAnim name="narrowRoad" />
-              <SelectableAnim name="parkingPath" />
-            </View>
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="signboard" condition="transparent" />
+                <SelectableAnim name="narrowRoad" condition="transparent" />
+                <SelectableAnim name="parkingPath" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="signboard" />
+                <SelectableAnim name="narrowRoad" />
+                <SelectableAnim name="parkingPath" />
+              </View>
+            )
           ) : (
-            <View></View>
+            <View>
+              <SelectableAnim name="signboard" noGame="true" />
+              <SelectableAnim name="narrowRoad" noGame="true" />
+              <SelectableAnim name="parkingPath" noGame="true" />
+            </View>
           )}
         </View>
       );
@@ -463,9 +485,27 @@ export class Arrow extends React.Component {
               />
             )}
           </View>
-          <SelectableAnim name="parkingPlace" />
-          <SelectableAnim name="reflected" />
-          <SelectableAnim name="building" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="parkingPlace" condition="transparent" />
+                <SelectableAnim name="reflected" condition="transparent" />
+                <SelectableAnim name="building" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="parkingPlace" />
+                <SelectableAnim name="reflected" />
+                <SelectableAnim name="building" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="parkingPlace" noGame="true" />
+              <SelectableAnim name="reflected" noGame="true" />
+              <SelectableAnim name="building" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Entrance) {
@@ -640,9 +680,34 @@ export class Arrow extends React.Component {
                 source={{ uri: arrowImg._2fUrl }}
               />
             )}
-            <SelectableAnim name="vendingMachine" />
-            <SelectableAnim name="shoeBox" />
-            <SelectableAnim name="handWashFacilities" />
+
+            {this.state.commentaryGame == true ? (
+              this.state.solution == true ? (
+                <View>
+                  <SelectableAnim
+                    name="vendingMachine"
+                    condition="transparent"
+                  />
+                  <SelectableAnim name="shoeBox" condition="transparent" />
+                  <SelectableAnim
+                    name="handWashFacilities"
+                    condition="transparent"
+                  />
+                </View>
+              ) : (
+                <View>
+                  <SelectableAnim name="vendingMachine" />
+                  <SelectableAnim name="shoeBox" />
+                  <SelectableAnim name="handWashFacilities" />
+                </View>
+              )
+            ) : (
+              <View>
+                <SelectableAnim name="vendingMachine" noGame="true" />
+                <SelectableAnim name="shoeBox" noGame="true" />
+                <SelectableAnim name="handWashFacilities" noGame="true" />
+              </View>
+            )}
           </View>
         </View>
       );
@@ -808,9 +873,27 @@ export class Arrow extends React.Component {
               </View>
             )}
           </View>
-          <SelectableAnim name="bench" />
-          <SelectableAnim name="disinfection" />
-          <SelectableAnim name="typhoon" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="bench" condition="transparent" />
+                <SelectableAnim name="disinfection" condition="transparent" />
+                <SelectableAnim name="typhoon" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="bench" />
+                <SelectableAnim name="disinfection" />
+                <SelectableAnim name="typhoon" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="bench" noGame="true" />
+              <SelectableAnim name="disinfection" noGame="true" />
+              <SelectableAnim name="typhoon" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Firstgrade) {
@@ -859,9 +942,27 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg._2fUrl }}
             />
           )}
-          <SelectableAnim name="stove" />
-          <SelectableAnim name="solderingIron" />
-          <SelectableAnim name="screen" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="stove" condition="transparent" />
+                <SelectableAnim name="solderingIron" condition="transparent" />
+                <SelectableAnim name="screen" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="stove" />
+                <SelectableAnim name="solderingIron" />
+                <SelectableAnim name="screen" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="stove" noGame="true" />
+              <SelectableAnim name="solderingIron" noGame="true" />
+              <SelectableAnim name="screen" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Secondgrade) {
@@ -918,9 +1019,27 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg._2fUrl }}
             />
           )}
-          <SelectableAnim name="poster" />
-          <SelectableAnim name="darts" />
-          <SelectableAnim name="monitor" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="poster" condition="transparent" />
+                <SelectableAnim name="darts" condition="transparent" />
+                <SelectableAnim name="monitor" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="poster" />
+                <SelectableAnim name="darts" />
+                <SelectableAnim name="monitor" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="poster" noGame="true" />
+              <SelectableAnim name="darts" noGame="true" />
+              <SelectableAnim name="monitor" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Multipurpose) {
@@ -967,9 +1086,28 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg.entranceUrl }}
             ></Image>
           )}
-          <SelectableAnim name="xmas" />
-          <SelectableAnim name="equipment" />
-          <SelectableAnim name="microwave" />
+
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="xmas" condition="transparent" />
+                <SelectableAnim name="equipment" condition="transparent" />
+                <SelectableAnim name="microwave" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="xmas" />
+                <SelectableAnim name="equipment" />
+                <SelectableAnim name="microwave" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="xmas" noGame="true" />
+              <SelectableAnim name="equipment" noGame="true" />
+              <SelectableAnim name="microwave" noGame="true" />
+            </View>
+          )}
         </View>
       );
     }

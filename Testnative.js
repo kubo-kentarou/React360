@@ -17,7 +17,9 @@ export default class Testnative extends Module {
     super("Testnative");
     this._rnctx = ctx;
     this._bridgeName = "BrowserBridge";
-    let commentarySwitch = false;
+
+    let commentarySwitch = false; //解説探しゲームのボタンテキストの切り替え用変数
+    let solutionSwitch = false; //解説探しゲームの答えのボタンテキストの切り替え用変数
 
     // emitで名前選別のとき、
     returnEmit = (element, event) => {
@@ -47,6 +49,16 @@ export default class Testnative extends Module {
         alert("ゲームを一時停止します。");
         commentarySwitch = false;
         e.target.textContent = "解説探しを再開する";
+      }
+    };
+    // 解説探しゲームの答えのボタンテキストの切り替え
+    document.getElementById("solution").onclick = (e) => {
+      if (solutionSwitch === false) {
+        solutionSwitch = true;
+        e.target.textContent = "解説の答えを隠す";
+      } else {
+        solutionSwitch = false;
+        e.target.textContent = "解説の答えを見る";
       }
     };
   }

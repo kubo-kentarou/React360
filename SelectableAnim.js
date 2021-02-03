@@ -26,6 +26,7 @@ export class SelectableAnim extends React.Component {
       selectAnimYa: new Animated.Value(0), //別の選択可能場所の値Y
       selectedOpacity: 0,
     };
+    let selectTimeout = {};
   }
 
   _selectableLocation() {
@@ -84,6 +85,20 @@ export class SelectableAnim extends React.Component {
 
   render() {
     const { Hovercontents } = NativeModules;
+    let solution = 0;
+    let noGame = 0;
+
+    if (this.props.condition === "transparent") {
+      solution = 1;
+    } else {
+      solution = 0;
+    }
+
+    if (this.props.noGame === "true") {
+      noGame = true;
+    } else {
+      noGame = false;
+    }
 
     //解説探ししないならreturn null する
     if (this.props.name === "signboard") {
@@ -102,6 +117,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 5 },
               { height: 5 },
@@ -115,24 +131,47 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "green" },
-              { opacity: 0 },
-              { width: 230 },
-              { height: 40 },
-              {
-                transform: [
-                  { translateX: -70 },
-                  { translateY: 545 },
-                  { translateZ: -200 },
-                ],
-              },
-            ]}
-            onEnter={async () => {
-              Hovercontents.OnhoverSignboard1();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 230 },
+                { height: 40 },
+                {
+                  transform: [
+                    { translateX: -70 },
+                    { translateY: 545 },
+                    { translateZ: -200 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 230 },
+                { height: 40 },
+                {
+                  transform: [
+                    { translateX: -70 },
+                    { translateY: 545 },
+                    { translateZ: -200 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSignboard1();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "narrowRoad") {
@@ -150,6 +189,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 8 },
               { height: 8 },
@@ -164,25 +204,44 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "green" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: 600 },
-                  { translateY: 400 },
-                  { translateZ: 180 },
-                  { rotateY: 60 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSignboard2();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 600 },
+                    { translateY: 400 },
+                    { translateZ: 180 },
+                    { rotateY: 60 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 600 },
+                    { translateY: 400 },
+                    { translateZ: 180 },
+                    { rotateY: 60 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSignboard2();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "parkingPath") {
@@ -200,6 +259,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 8 },
               { height: 8 },
@@ -214,25 +274,44 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "green" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: -800 },
-                  { translateY: 700 },
-                  { translateZ: -50 },
-                  { rotateY: 90 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSignboard3();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -800 },
+                    { translateY: 700 },
+                    { translateZ: -50 },
+                    { rotateY: 90 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -800 },
+                    { translateY: 700 },
+                    { translateZ: -50 },
+                    { rotateY: 90 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSignboard3();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "parkingPlace") {
@@ -251,6 +330,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 10 },
               { height: 8 },
@@ -264,24 +344,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "green" },
-              { opacity: 0 },
-              { width: 750 },
-              { height: 150 },
-              {
-                transform: [
-                  { translateX: -150 },
-                  { translateY: 500 },
-                  { translateZ: -600 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverParkingplace1();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 750 },
+                { height: 150 },
+                {
+                  transform: [
+                    { translateX: -150 },
+                    { translateY: 500 },
+                    { translateZ: -600 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 750 },
+                { height: 150 },
+                {
+                  transform: [
+                    { translateX: -150 },
+                    { translateY: 500 },
+                    { translateZ: -600 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverParkingplace1();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "reflected") {
@@ -299,6 +397,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: -120 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 10 },
               { height: 8 },
@@ -312,24 +411,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "green" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: 490 },
-                  { translateY: 595 },
-                  { translateZ: 800 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverParkingplace2();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 490 },
+                    { translateY: 595 },
+                    { translateZ: 800 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "green" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 490 },
+                    { translateY: 595 },
+                    { translateZ: 800 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverParkingplace2();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "building") {
@@ -347,6 +464,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: -135 }, { rotateZ: -4 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 10 },
               { height: 8 },
@@ -360,24 +478,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 500 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: -100 },
-                  { translateY: 800 },
-                  { translateZ: -400 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverParkingplace3();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 500 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -100 },
+                    { translateY: 800 },
+                    { translateZ: -400 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 500 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -100 },
+                    { translateY: 800 },
+                    { translateZ: -400 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverParkingplace3();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "vendingMachine") {
@@ -397,6 +533,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 60 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 8 },
               { height: 8 },
@@ -411,25 +548,44 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "white" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: -400 },
-                  { translateY: 400 },
-                  { translateZ: -400 },
-                  { rotateY: 70 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverEntrance1();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "white" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -400 },
+                    { translateY: 400 },
+                    { translateZ: -400 },
+                    { rotateY: 70 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "white" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -400 },
+                    { translateY: 400 },
+                    { translateZ: -400 },
+                    { rotateY: 70 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverEntrance1();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "shoeBox") {
@@ -447,6 +603,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: -80 }, { rotateZ: 2 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 8 },
               { height: 8 },
@@ -461,24 +618,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 250 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: 700 },
-                  { translateY: 290 },
-                  { translateZ: 400 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverEntrance2();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 250 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 700 },
+                    { translateY: 290 },
+                    { translateZ: 400 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 250 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 700 },
+                    { translateY: 290 },
+                    { translateZ: 400 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverEntrance2();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "handWashFacilities") {
@@ -496,6 +671,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 88 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "white" },
               { width: 8 },
               { height: 8 },
@@ -510,24 +686,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 370 },
-              { height: 150 },
-              {
-                transform: [
-                  { translateX: -590 }, //ここがz
-                  { translateY: 480 }, //ここがy
-                  { translateZ: 0 }, //ここがx
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverEntrance3();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 370 },
+                { height: 150 },
+                {
+                  transform: [
+                    { translateX: -590 }, //ここがz
+                    { translateY: 480 }, //ここがy
+                    { translateZ: 0 }, //ここがx
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 370 },
+                { height: 150 },
+                {
+                  transform: [
+                    { translateX: -590 }, //ここがz
+                    { translateY: 480 }, //ここがy
+                    { translateZ: 0 }, //ここがx
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverEntrance3();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "xmas") {
@@ -546,6 +740,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 55 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -559,24 +754,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: -150 },
-                  { translateY: 200 },
-                  { translateZ: -500 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverMultipurpose1();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -150 },
+                    { translateY: 200 },
+                    { translateZ: -500 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -150 },
+                    { translateY: 200 },
+                    { translateZ: -500 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverMultipurpose1();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "equipment") {
@@ -594,6 +807,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: -40 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -607,24 +821,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 250 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: -240 },
-                  { translateY: 350 },
-                  { translateZ: -500 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverMultipurpose2();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 250 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -240 },
+                    { translateY: 350 },
+                    { translateZ: -500 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 250 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -240 },
+                    { translateY: 350 },
+                    { translateZ: -500 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverMultipurpose2();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "microwave") {
@@ -642,6 +874,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 55 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -655,24 +888,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "red" },
-              { opacity: 0 },
-              { width: 75 },
-              { height: 75 },
-              {
-                transform: [
-                  { translateX: 15 },
-                  { translateY: 500 },
-                  { translateZ: -700 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverMultipurpose3();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "red" },
+                { opacity: 0 },
+                { width: 75 },
+                { height: 75 },
+                {
+                  transform: [
+                    { translateX: 15 },
+                    { translateY: 500 },
+                    { translateZ: -700 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "red" },
+                { opacity: 0 },
+                { width: 75 },
+                { height: 75 },
+                {
+                  transform: [
+                    { translateX: 15 },
+                    { translateY: 500 },
+                    { translateZ: -700 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverMultipurpose3();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "bench") {
@@ -691,6 +942,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 60 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -705,25 +957,44 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 200 },
-              { height: 200 },
-              {
-                transform: [
-                  { translateX: -200 },
-                  { translateY: 290 },
-                  { translateZ: -700 },
-                  { rotateX: -80 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSecondfloor1();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 200 },
+                { height: 200 },
+                {
+                  transform: [
+                    { translateX: -200 },
+                    { translateY: 290 },
+                    { translateZ: -700 },
+                    { rotateX: -80 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 200 },
+                { height: 200 },
+                {
+                  transform: [
+                    { translateX: -200 },
+                    { translateY: 290 },
+                    { translateZ: -700 },
+                    { rotateX: -80 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSecondfloor1();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "disinfection") {
@@ -741,6 +1012,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 60 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -750,29 +1022,46 @@ export class SelectableAnim extends React.Component {
                   { translateX: SelectableValueX },
                   { translateY: SelectableValueY },
                   { translateZ: 300 },
-                  // { rotateY: 90 },
                 ],
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 110 },
-              {
-                transform: [
-                  { translateX: 105 },
-                  { translateY: 790 },
-                  { translateZ: 300 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSecondfloor2();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 110 },
+                {
+                  transform: [
+                    { translateX: 105 },
+                    { translateY: 790 },
+                    { translateZ: 300 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 110 },
+                {
+                  transform: [
+                    { translateX: 105 },
+                    { translateY: 790 },
+                    { translateZ: 300 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSecondfloor2();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "typhoon") {
@@ -790,6 +1079,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 60 }, { rotateZ: 2 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -804,24 +1094,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "red" },
-              { opacity: 0 },
-              { width: 225 },
-              { height: 125 },
-              {
-                transform: [
-                  { translateX: 380 },
-                  { translateY: 1090 },
-                  { translateZ: -400 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSecondfloor3();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "red" },
+                { opacity: 0 },
+                { width: 225 },
+                { height: 125 },
+                {
+                  transform: [
+                    { translateX: 380 },
+                    { translateY: 1090 },
+                    { translateZ: -400 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "red" },
+                { opacity: 0 },
+                { width: 225 },
+                { height: 125 },
+                {
+                  transform: [
+                    { translateX: 380 },
+                    { translateY: 1090 },
+                    { translateZ: -400 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSecondfloor3();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "stove") {
@@ -840,6 +1148,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -853,24 +1162,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 75 },
-              { height: 75 },
-              {
-                transform: [
-                  { translateX: -58 },
-                  { translateY: 180 },
-                  { translateZ: -600 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverFirstgrade1();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 75 },
+                { height: 75 },
+                {
+                  transform: [
+                    { translateX: -58 },
+                    { translateY: 180 },
+                    { translateZ: -600 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 75 },
+                { height: 75 },
+                {
+                  transform: [
+                    { translateX: -58 },
+                    { translateY: 180 },
+                    { translateZ: -600 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverFirstgrade1();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "solderingIron") {
@@ -888,6 +1215,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: -90 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -901,24 +1229,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 180 },
-              { height: 75 },
-              {
-                transform: [
-                  { translateX: 90 },
-                  { translateY: 250 },
-                  { translateZ: -600 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverFirstgrade2();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 180 },
+                { height: 75 },
+                {
+                  transform: [
+                    { translateX: 90 },
+                    { translateY: 250 },
+                    { translateZ: -600 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 180 },
+                { height: 75 },
+                {
+                  transform: [
+                    { translateX: 90 },
+                    { translateY: 250 },
+                    { translateZ: -600 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverFirstgrade2();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "screen") {
@@ -936,6 +1282,7 @@ export class SelectableAnim extends React.Component {
         <View style={{ transform: [{ rotateY: 155 }] }}>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -949,24 +1296,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: 230 },
-                  { translateY: 600 },
-                  { translateZ: -300 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverFirstgrade3();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 230 },
+                    { translateY: 600 },
+                    { translateZ: -300 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 230 },
+                    { translateY: 600 },
+                    { translateZ: -300 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverFirstgrade3();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "poster") {
@@ -985,6 +1350,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 5 },
               { height: 5 },
@@ -998,24 +1364,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 118 },
-              { height: 165 },
-              {
-                transform: [
-                  { translateX: -138 },
-                  { translateY: 180 },
-                  { translateZ: 200 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSecondgrade1();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 118 },
+                { height: 165 },
+                {
+                  transform: [
+                    { translateX: -138 },
+                    { translateY: 180 },
+                    { translateZ: 200 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 118 },
+                { height: 165 },
+                {
+                  transform: [
+                    { translateX: -138 },
+                    { translateY: 180 },
+                    { translateZ: 200 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSecondgrade1();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "darts") {
@@ -1033,6 +1417,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -1046,24 +1431,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 100 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: 0 },
-                  { translateY: 510 },
-                  { translateZ: -700 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSecondgrade2();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 0 },
+                    { translateY: 510 },
+                    { translateZ: -700 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 100 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: 0 },
+                    { translateY: 510 },
+                    { translateZ: -700 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSecondgrade2();
+              }}
+            />
+          )}
         </View>
       );
     } else if (this.props.name === "monitor") {
@@ -1081,6 +1484,7 @@ export class SelectableAnim extends React.Component {
         <View>
           <Animated.View
             style={[
+              { opacity: solution },
               { backgroundColor: "black" },
               { width: 8 },
               { height: 8 },
@@ -1094,24 +1498,42 @@ export class SelectableAnim extends React.Component {
               },
             ]}
           />
-          <View
-            style={[
-              { backgroundColor: "blue" },
-              { opacity: 0 },
-              { width: 120 },
-              { height: 100 },
-              {
-                transform: [
-                  { translateX: -420 },
-                  { translateY: 510 },
-                  { translateZ: -700 },
-                ],
-              },
-            ]}
-            onEnter={() => {
-              Hovercontents.OnhoverSecondgrade3();
-            }}
-          />
+          {noGame ? (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 120 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -420 },
+                    { translateY: 510 },
+                    { translateZ: -700 },
+                  ],
+                },
+              ]}
+            />
+          ) : (
+            <View
+              style={[
+                { backgroundColor: "blue" },
+                { opacity: 0 },
+                { width: 120 },
+                { height: 100 },
+                {
+                  transform: [
+                    { translateX: -420 },
+                    { translateY: 510 },
+                    { translateZ: -700 },
+                  ],
+                },
+              ]}
+              onEnter={() => {
+                Hovercontents.OnhoverSecondgrade3();
+              }}
+            />
+          )}
         </View>
       );
     } else {
