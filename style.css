@@ -22,21 +22,6 @@
 
 /* ロゴのボタン */
 #logoButton {
-<<<<<<< HEAD
-  /* display: none; */
-  border: 1px solid white;
-  text-align: center;
-  width: fit-content;
-  padding: 10px;
-  margin: 10px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  position: absolute;
-  z-index: 101;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-=======
   user-select: none;
   border: 1px solid white;
   text-align: center;
@@ -69,7 +54,6 @@
   z-index: -1;
   background: black;
   opacity: 0.7;
->>>>>>> 5ff2f36e32b1c626022f605175c7ccf0abb2af81
 }
 
 /*ロゴが降るアニメーション*/

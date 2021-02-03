@@ -1,6 +1,6 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
-import { ReactInstance, Surface } from "react-360-web";
+import { Location, ReactInstance, Surface } from "react-360-web";
 // import SimpleRaycaster from "simple-raycaster";
 import SetOverlay from "./Native";
 import Hovercontents from "./Hovercontents";
@@ -83,7 +83,8 @@ function init(bundle, parent, options = {}) {
   //矢印の表示
   r360.renderToLocation(
     r360.createRoot("Arrow", {}),
-    r360.getDefaultLocation()
+    r360.getDefaultLocation(),
+    // new Location([0,-30,-200])
   );
 
   //お試し
@@ -92,6 +93,12 @@ function init(bundle, parent, options = {}) {
   //   r360.createRoot('iPhone'),
   //   location,
   // )
+  // r360.renderToLocation(r360.createRoot("Arrow"), new Location([0,-30,-200]));
+  // const location = new Location([0, -3, -8]);
+  // r360.renderToSurface(
+  //   r360.createRoot('Model'),
+  //   r360.getDefaultSurface()
+  // );
 }
 
 window.React360 = { init };

@@ -19,8 +19,10 @@
     "react-gradient": "^1.0.2",
     "react-native": "~0.55.4",
     "react-spring": "^8.0.27",
+    "react-three-fiber": "^5.3.18",
+    "react-vr-cli": "^0.3.6",
     "simple-raycaster": "^1.1.0",
-    "three": "^0.87.0"
+    "three": "^0.87.1"
   },
   "devDependencies": {
     "babel-jest": "^19.0.0",

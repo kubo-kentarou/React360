@@ -10,11 +10,12 @@ import {
   Animated,
   Environment,
   NativeModules,
+  AmbientLight,
+  PointLight,
 } from "react-360";
 import Entity from 'Entity'
 // import LinearGradient from "react-native-linear-gradient";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
-import { SelectableAnim } from "./SelectableAnim";
 import { SelectableAnim } from "./SelectableAnim";
 import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
 import lodash from "lodash";
@@ -255,22 +256,6 @@ export class Arrow extends React.Component {
   };
 
   render() {
-    // const gradients = [
-    //   ['#bd19d6', '#ea7d10'],
-    //   ['#ff2121', '#25c668'],
-    // ];
-    // function Gradation() {
-    //   return(
-    //     <div className="app">
-    //     <Gradient
-    //         gradints = {gradients}
-    //         property = "background"
-    //         duration = { 3000 }
-    //         angle = "45deg"
-    //     />
-    // </div>
-    //   );
-    // }
     let opacityValue = this.state.opacityName.interpolate({
       inputRange: [0, 50, 100, 1000], //1000は透明を示している
       outputRange: [0.3, 0.6, 1, 0], //透明度.3, .6, 1を示す
@@ -883,21 +868,14 @@ export class Arrow extends React.Component {
       // ページの種類が2年教室だったとき XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          <Entity
-            source = {{
-              obj: asset('iPhone 6.obj'),
-              mtl: asset('iPhone 6.mtl')
-            }}
-            style={[styles.iphone]}
-          />
-         <VrButton
-            style={[styles.test_box, {opacity: this.state.Trans}]}
+          <VrButton
+            style={[styles.VrPlay_button, {opacity: this.state.Trans}]}
             onClick={async() => {
               this.setState({Trans : 0});
               this.goToVideoplay();
-            }}
+           }}
           >
-              <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}></Image>
+              <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}/>
           </VrButton>
 
           <VrButton
@@ -934,6 +912,7 @@ export class Arrow extends React.Component {
               ]}
               source={{ uri: arrowImg._2fUrl }}
             />
+            
           ) : (
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
@@ -943,6 +922,22 @@ export class Arrow extends React.Component {
           <SelectableAnim name="poster" />
           <SelectableAnim name="darts" />
           <SelectableAnim name="monitor" />
+
+          <AmbientLight intensity = {1.0} color="#ffffff">
+            <PointLight intensity = {0.4} style ={{transform:[{translate:[0,4,-1]}]}}>
+              <Entity
+                source = {{
+                  // obj: uri('static_assets/iPhone 6.obj'),
+                  // mtl: uri('static_assets/iPhone 6.mtl')
+
+                  obj: asset('iPhone 6.obj'),
+                  mtl: asset('iPhone 6.mtl')
+                }}
+                style={[styles.iphone]}
+              ></Entity>
+            </PointLight>
+          </AmbientLight>
+
         </View>
       );
     } else if (this.state.pageType === imgUrl.Multipurpose) {
@@ -1156,15 +1151,27 @@ const styles = StyleSheet.create({
       { rotateZ: 92 },
     ],
   },
-  play_button: {
-    width: 300,
-    height: 150,
+  VrPlay_button: {
+    // backgroundColor:"blue",
+    width: 45,
+    height: 20,
 
     transform: [
-      { translateX: -250 },
-      { translateY: 180 },
-      { translateZ: 660 },
-      { rotateY: -180 },
+      {translateX: -95},
+      {translateY: 50},
+      {translateZ: 1200},
+    ],
+  },
+  play_button: {
+    // backgroundColor:"red",
+    width: 400,
+    height: 200,
+
+    transform: [
+      { translateX: -400 },
+      { translateY: 70 },
+      { translateZ: -300 },
+      { rotateY: -200 },
     ],
   },
   text_sheet: {
@@ -1188,10 +1195,16 @@ const styles = StyleSheet.create({
   },
   iphone:{
     transform:[
-      {scaleX: 0.5},
-      {scaleY: 0.5},
-      {scaleZ: 0.5},
-      {translateZ: 600}
-    ]
+      { translateX: 0},
+      { translateY: 200},
+      { translateZ: -100},
+      { scaleX: 1},
+      { scaleY: 1},
+      { scaleZ: 1},
+      { rotateX: 90},
+      { rotateY: 90},
+      { rotateZ: 0},
+    ],
+    color:"red",
   }
 });
