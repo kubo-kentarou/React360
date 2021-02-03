@@ -17,6 +17,7 @@ import Entity from 'Entity'
 // import LinearGradient from "react-native-linear-gradient";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
+
 import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
 import lodash from "lodash";
 
@@ -69,7 +70,8 @@ class BrowserBridge {
 
 const browserBridge = new BrowserBridge();
 BatchedBridge.registerCallableModule(BrowserBridge.name, browserBridge);
-console.log(BrowserBridge.name, browserBridge);
+
+const { ArrowRotation } = NativeModules;
 
 export class Arrow extends React.Component {
   constructor(props) {
@@ -90,6 +92,8 @@ export class Arrow extends React.Component {
         identifi: 1000, //1000は透明を示している
         dropShift: false, //ドロップダウンリストの表示非表示
         time: {}, //ドロップダウンリストのタイマー処理を記述する(clearTimeoutのため)
+        commentaryGame: false, //解説探しゲームをするかどうかのstate
+        solution: false, //解説探しゲームの点を透明化するかのboolean
       });
     // this.goToParking();
   }
@@ -101,7 +105,6 @@ export class Arrow extends React.Component {
   onBrowserEvent(name, event) {
     // Do action on event here
     console.log("name", name, "event", event);
-
     if (name === "signboard") {
       this.goToSignboard();
     } else if (name === "parkingPlace") {
@@ -117,6 +120,24 @@ export class Arrow extends React.Component {
     } else if (name === "multiPurpose") {
       this.goToMultipurpose();
     }
+
+    if (name === "commentaryGame") {
+      if (this.state.commentaryGame === false) {
+        this.setState({ commentaryGame: true });
+      } else {
+        this.setState({ commentaryGame: false });
+      }
+      // console.log(this.state.commentaryGame);
+    }
+    if (name === "solution") {
+      if (this.state.solution === false) {
+        this.setState({ solution: true });
+        console.log(this.state.solution);
+      } else {
+        this.setState({ solution: false });
+        console.log(this.state.solution);
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -128,46 +149,50 @@ export class Arrow extends React.Component {
 
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   goToParking = () => {
-    // impTest(3);//clientとArrowの橋渡し
-    // impTest(true);
-
     //駐車場へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Parkingplace));
     this.setState({ pageType: imgUrl.Parkingplace });
+    ArrowRotation.moveParkingplace();
   };
   goToEntrance = () => {
     //玄関へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Entrance));
     this.setState({ pageType: imgUrl.Entrance });
+    ArrowRotation.moveEntrance();
   };
   goToSignboard = () => {
     //あまじょう看板前へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Signboard));
     this.setState({ pageType: imgUrl.Signboard });
+    ArrowRotation.moveSignboard();
   };
 
   goToMultipurpose = () => {
     //多目的室へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Multipurpose));
     this.setState({ pageType: imgUrl.Multipurpose });
+    ArrowRotation.moveMultipurpose();
   };
 
   goToSecondfloor = () => {
     //2階へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Secondfloor));
     this.setState({ pageType: imgUrl.Secondfloor });
+    ArrowRotation.moveSecondfloor();
   };
 
   goToFirstgrade = () => {
     //1年教室へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Firstgrade));
     this.setState({ pageType: imgUrl.Firstgrade });
+    ArrowRotation.moveFirstgrade();
   };
 
   goToSecondgrade = () => {
     //2年教室へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Environment.setBackgroundImage(asset(imgUrl.Secondgrade));
     this.setState({ pageType: imgUrl.Secondgrade });
+    ArrowRotation.moveSecondgrade();
   };
 
   //矢印の名前表示のアニメーション XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -355,9 +380,27 @@ export class Arrow extends React.Component {
               />
             )}
           </View>
-          <SelectableAnim name="signboard" />
-          <SelectableAnim name="narrowRoad" />
-          <SelectableAnim name="parkingPath" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="signboard" condition="transparent" />
+                <SelectableAnim name="narrowRoad" condition="transparent" />
+                <SelectableAnim name="parkingPath" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="signboard" />
+                <SelectableAnim name="narrowRoad" />
+                <SelectableAnim name="parkingPath" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="signboard" noGame="true" />
+              <SelectableAnim name="narrowRoad" noGame="true" />
+              <SelectableAnim name="parkingPath" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Parkingplace) {
@@ -447,9 +490,27 @@ export class Arrow extends React.Component {
               />
             )}
           </View>
-          <SelectableAnim name="parkingPlace" />
-          <SelectableAnim name="reflected" />
-          <SelectableAnim name="building" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="parkingPlace" condition="transparent" />
+                <SelectableAnim name="reflected" condition="transparent" />
+                <SelectableAnim name="building" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="parkingPlace" />
+                <SelectableAnim name="reflected" />
+                <SelectableAnim name="building" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="parkingPlace" noGame="true" />
+              <SelectableAnim name="reflected" noGame="true" />
+              <SelectableAnim name="building" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Entrance) {
@@ -624,9 +685,34 @@ export class Arrow extends React.Component {
                 source={{ uri: arrowImg._2fUrl }}
               />
             )}
-            <SelectableAnim name="vendingMachine" />
-            <SelectableAnim name="shoeBox" />
-            <SelectableAnim name="handWashFacilities" />
+
+            {this.state.commentaryGame == true ? (
+              this.state.solution == true ? (
+                <View>
+                  <SelectableAnim
+                    name="vendingMachine"
+                    condition="transparent"
+                  />
+                  <SelectableAnim name="shoeBox" condition="transparent" />
+                  <SelectableAnim
+                    name="handWashFacilities"
+                    condition="transparent"
+                  />
+                </View>
+              ) : (
+                <View>
+                  <SelectableAnim name="vendingMachine" />
+                  <SelectableAnim name="shoeBox" />
+                  <SelectableAnim name="handWashFacilities" />
+                </View>
+              )
+            ) : (
+              <View>
+                <SelectableAnim name="vendingMachine" noGame="true" />
+                <SelectableAnim name="shoeBox" noGame="true" />
+                <SelectableAnim name="handWashFacilities" noGame="true" />
+              </View>
+            )}
           </View>
         </View>
       );
@@ -751,22 +837,6 @@ export class Arrow extends React.Component {
                     ]}
                     source={{ uri: arrowImg.secondUrl }}
                   />
-                  {/* <Text
-                    style={[
-                      { color: "red" },
-                      { fontSize: 30 },
-                      {
-                        transform: [
-                          { translateX: -350 },
-                          { translateY: 250 },
-                          { translateZ: -500 },
-                          { rotateY: 50 },
-                        ],
-                      },
-                    ]}
-                  >
-                    THIS IS TEST TEXT
-                  </Text> */}
                 </VrButton>
               </View>
             ) : (
@@ -808,9 +878,27 @@ export class Arrow extends React.Component {
               </View>
             )}
           </View>
-          <SelectableAnim name="bench" />
-          <SelectableAnim name="disinfection" />
-          <SelectableAnim name="typhoon" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="bench" condition="transparent" />
+                <SelectableAnim name="disinfection" condition="transparent" />
+                <SelectableAnim name="typhoon" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="bench" />
+                <SelectableAnim name="disinfection" />
+                <SelectableAnim name="typhoon" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="bench" noGame="true" />
+              <SelectableAnim name="disinfection" noGame="true" />
+              <SelectableAnim name="typhoon" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Firstgrade) {
@@ -859,9 +947,27 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg._2fUrl }}
             />
           )}
-          <SelectableAnim name="stove" />
-          <SelectableAnim name="solderingIron" />
-          <SelectableAnim name="screen" />
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="stove" condition="transparent" />
+                <SelectableAnim name="solderingIron" condition="transparent" />
+                <SelectableAnim name="screen" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="stove" />
+                <SelectableAnim name="solderingIron" />
+                <SelectableAnim name="screen" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="stove" noGame="true" />
+              <SelectableAnim name="solderingIron" noGame="true" />
+              <SelectableAnim name="screen" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Secondgrade) {
@@ -919,25 +1025,27 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg._2fUrl }}
             />
           )}
-          <SelectableAnim name="poster" />
-          <SelectableAnim name="darts" />
-          <SelectableAnim name="monitor" />
-
-          <AmbientLight intensity = {1.0} color="#ffffff">
-            <PointLight intensity = {0.4} style ={{transform:[{translate:[0,4,-1]}]}}>
-              <Entity
-                source = {{
-                  // obj: uri('static_assets/iPhone 6.obj'),
-                  // mtl: uri('static_assets/iPhone 6.mtl')
-
-                  obj: asset('iPhone 6.obj'),
-                  mtl: asset('iPhone 6.mtl')
-                }}
-                style={[styles.iphone]}
-              ></Entity>
-            </PointLight>
-          </AmbientLight>
-
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="poster" condition="transparent" />
+                <SelectableAnim name="darts" condition="transparent" />
+                <SelectableAnim name="monitor" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="poster" />
+                <SelectableAnim name="darts" />
+                <SelectableAnim name="monitor" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="poster" noGame="true" />
+              <SelectableAnim name="darts" noGame="true" />
+              <SelectableAnim name="monitor" noGame="true" />
+            </View>
+          )}
         </View>
       );
     } else if (this.state.pageType === imgUrl.Multipurpose) {
@@ -984,9 +1092,28 @@ export class Arrow extends React.Component {
               source={{ uri: arrowImg.entranceUrl }}
             ></Image>
           )}
-          <SelectableAnim name="xmas" />
-          <SelectableAnim name="equipment" />
-          <SelectableAnim name="microwave" />
+
+          {this.state.commentaryGame == true ? (
+            this.state.solution == true ? (
+              <View>
+                <SelectableAnim name="xmas" condition="transparent" />
+                <SelectableAnim name="equipment" condition="transparent" />
+                <SelectableAnim name="microwave" condition="transparent" />
+              </View>
+            ) : (
+              <View>
+                <SelectableAnim name="xmas" />
+                <SelectableAnim name="equipment" />
+                <SelectableAnim name="microwave" />
+              </View>
+            )
+          ) : (
+            <View>
+              <SelectableAnim name="xmas" noGame="true" />
+              <SelectableAnim name="equipment" noGame="true" />
+              <SelectableAnim name="microwave" noGame="true" />
+            </View>
+          )}
         </View>
       );
     }
