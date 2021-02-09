@@ -79,17 +79,17 @@ export default class Hello360 extends React.Component {
           {(this.state.lightType%4)===2 && (<DirectionalLight style = {{color: 'green'}}/>)}
           {(this.state.lightType%4)===3 && (<SpotLight style = {{color: 'blue', transform:[{translate:[0,10,-5]}]}} angle = {60}/>)} */}
           {/* <SpotLight style = {{color: 'white', transform:[{translate:[-53,-70,20]}]}} /> */}
-          <AmbientLight intensity = {1.0} color={"#ffffff"} />
+          {/* <AmbientLight intensity = {1.0} color={"#ffffff"} />
           <PointLight intensity = {1} style={{transform: [{translate:[10,30,3]}]}} />
           <Entity
             style = {{transform:[{scale:[1,1,1]}, {rotateX: 0},{rotateY: 0}, {translate:[0,-50,-1]}]}}
             lit = {true}
-            source = {{gltf2: asset('')}}
-            // source = {{
-            //   obj: asset('battel.obj'),
-            //   mtl: asset('battel.mtl')
-            // }}
-            />
+            source = {{gltf2: asset('tower.glb')}}
+            source = {{
+              obj: asset('battel.obj'),
+              mtl: asset('battel.mtl')
+            }}
+            /> */}
         {/* <AmbientLight />
           <PointLight style={{color: 'green', transform:[{translate:[5, 5.5, 20]}]}}/>
             <Entity

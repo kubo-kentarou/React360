@@ -10,10 +10,11 @@ import {
   Animated,
   Environment,
   NativeModules,
-  AmbientLight,
-  PointLight,
 } from "react-360";
-import Entity from 'Entity'
+import Entity from 'Entity';
+import AmbientLight from 'AmbientLight';
+import SpotLight from 'SpotLight';
+import PointLight from 'PointLight';
 // import LinearGradient from "react-native-linear-gradient";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
@@ -1046,6 +1047,13 @@ export class Arrow extends React.Component {
               <SelectableAnim name="monitor" noGame="true" />
             </View>
           )}
+          <AmbientLight intensity = {1.0} color={"#ffffff"} />
+          <PointLight intensity = {1} style={{transform: [{translate:[10,30,3]}]}} />
+          <Entity 
+            style = {{transform:[{scale:[4,4,4]}, {rotateX: 0},{rotateY: 90}, {translate:[-140,-80,-700]}]}}
+            lit = {true}
+            source = {{gltf2: asset('wraith.glb')}}
+          />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Multipurpose) {
