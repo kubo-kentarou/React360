@@ -10,7 +10,12 @@ import {
   Animated,
   Environment,
   NativeModules,
+  AmbientLight,
+  PointLight,
 } from "react-360";
+import Entity from 'Entity'
+// import LinearGradient from "react-native-linear-gradient";
+// import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
 
 import BatchedBridge from "react-native/Libraries/BatchedBridge/BatchedBridge";
@@ -999,13 +1004,13 @@ export class Arrow extends React.Component {
       return (
         <View>
           <VrButton
-            style={[styles.test_box, { opacity: this.state.Trans }]}
-            onClick={async () => {
-              this.setState({ Trans: 0 });
+            style={[styles.VrPlay_button, {opacity: this.state.Trans}]}
+            onClick={async() => {
+              this.setState({Trans : 0});
               this.goToVideoplay();
-            }}
+           }}
           >
-            {/* <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}></Image> */}
+              <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}/>
           </VrButton>
 
           <VrButton
@@ -1042,6 +1047,7 @@ export class Arrow extends React.Component {
               ]}
               source={{ uri: arrowImg._2fUrl }}
             />
+            
           ) : (
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
@@ -1301,15 +1307,27 @@ const styles = StyleSheet.create({
       { rotateZ: 92 },
     ],
   },
-  play_button: {
-    width: 300,
-    height: 150,
+  VrPlay_button: {
+    // backgroundColor:"blue",
+    width: 45,
+    height: 20,
 
     transform: [
-      { translateX: -250 },
-      { translateY: 180 },
-      { translateZ: 660 },
-      { rotateY: -180 },
+      {translateX: -95},
+      {translateY: 50},
+      {translateZ: 1200},
+    ],
+  },
+  play_button: {
+    // backgroundColor:"red",
+    width: 400,
+    height: 200,
+
+    transform: [
+      { translateX: -400 },
+      { translateY: 70 },
+      { translateZ: -300 },
+      { rotateY: -200 },
     ],
   },
   text_sheet: {
@@ -1327,8 +1345,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#4C64FF",
     padding: 15,
-    marginLeft: 1,
-    marginRight: 1,
-    width: 198,
+    marginLeft:1,
+    marginRight:1,
+    width:198
   },
+  iphone:{
+    transform:[
+      { translateX: 0},
+      { translateY: 200},
+      { translateZ: -100},
+      { scaleX: 1},
+      { scaleY: 1},
+      { scaleZ: 1},
+      { rotateX: 90},
+      { rotateY: 90},
+      { rotateZ: 0},
+    ],
+    color:"red",
+  }
 });

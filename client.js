@@ -56,8 +56,22 @@ function init(bundle, parent, options = {}) {
   //矢印の表示
   r360.renderToLocation(
     r360.createRoot("Arrow", {}),
-    r360.getDefaultLocation()
+    r360.getDefaultLocation(),
+    // new Location([0,-30,-200])
   );
+
+  //お試し
+  // const location = new Location([0, -1, -2]);
+  // r360.renderToLocation(
+  //   r360.createRoot('iPhone'),
+  //   location,
+  // )
+  // r360.renderToLocation(r360.createRoot("Arrow"), new Location([0,-30,-200]));
+  // const location = new Location([0, -3, -8]);
+  // r360.renderToSurface(
+  //   r360.createRoot('Model'),
+  //   r360.getDefaultSurface()
+  // );
 }
 
 window.React360 = { init };
