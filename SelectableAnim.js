@@ -238,7 +238,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSignboard2();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSignboard2();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -308,7 +313,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSignboard3();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSignboard3();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -376,7 +386,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverParkingplace1();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverParkingplace1();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -443,7 +458,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverParkingplace2();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverParkingplace2();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -510,7 +530,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverParkingplace3();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverParkingplace3();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -582,7 +607,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverEntrance1();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverEntrance1();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -650,7 +680,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverEntrance2();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverEntrance2();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -718,7 +753,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverEntrance3();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverEntrance3();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -786,7 +826,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverMultipurpose1();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverMultipurpose1();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -853,7 +898,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverMultipurpose2();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverMultipurpose2();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -920,7 +970,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverMultipurpose3();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverMultipurpose3();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -991,7 +1046,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSecondfloor1();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSecondfloor1();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1058,7 +1118,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSecondfloor2();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSecondfloor2();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1126,7 +1191,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSecondfloor3();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSecondfloor3();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1194,7 +1264,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverFirstgrade1();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverFirstgrade1();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1261,7 +1336,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverFirstgrade2();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverFirstgrade2();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1328,7 +1408,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverFirstgrade3();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverFirstgrade3();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1396,7 +1481,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSecondgrade1();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSecondgrade1();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1463,7 +1553,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSecondgrade2();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSecondgrade2();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
@@ -1530,7 +1625,12 @@ export class SelectableAnim extends React.Component {
                 },
               ]}
               onEnter={() => {
-                Hovercontents.OnhoverSecondgrade3();
+                selectTimeout = setTimeout(() => {
+                  Hovercontents.OnhoverSecondgrade3();
+                }, 1000);
+              }}
+              onExit={() => {
+                clearTimeout(selectTimeout);
               }}
             />
           )}
