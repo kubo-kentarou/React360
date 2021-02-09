@@ -106,19 +106,47 @@ export class Arrow extends React.Component {
   onBrowserEvent(name, event) {
     // Do action on event here
     console.log("name", name, "event", event);
-    if (name === "signboard") {
+    if (
+      name === "signboard" ||
+      name === "o-signboard" ||
+      name === "signboardVal"
+    ) {
       this.goToSignboard();
-    } else if (name === "parkingPlace") {
+    } else if (
+      name === "parkingPlace" ||
+      name === "o-parkingplace" ||
+      name === "parkingVal"
+    ) {
       this.goToParking();
-    } else if (name === "entrance") {
+    } else if (
+      name === "entrance" ||
+      name === "o-entrance" ||
+      name === "entranceVal"
+    ) {
       this.goToEntrance();
-    } else if (name === "secondFloor") {
+    } else if (
+      name === "secondFloor" ||
+      name === "o-secondfloor" ||
+      name === "secondFloorVal"
+    ) {
       this.goToSecondfloor();
-    } else if (name === "firstGrade") {
+    } else if (
+      name === "firstGrade" ||
+      name === "o-firstgrade" ||
+      name === "firstGradeVal"
+    ) {
       this.goToFirstgrade();
-    } else if (name === "secondGrade") {
+    } else if (
+      name === "secondGrade" ||
+      name === "o-secondgrade" ||
+      name === "secondGradeVal"
+    ) {
       this.goToSecondgrade();
-    } else if (name === "multiPurpose") {
+    } else if (
+      name === "multiPurpose" ||
+      name === "o-multipurpose" ||
+      name === "multipurposeVal"
+    ) {
       this.goToMultipurpose();
     }
 
@@ -127,6 +155,7 @@ export class Arrow extends React.Component {
         this.setState({ commentaryGame: true });
       } else {
         this.setState({ commentaryGame: false });
+        this.setState({ solution: false });
       }
       // console.log(this.state.commentaryGame);
     }
@@ -151,9 +180,9 @@ export class Arrow extends React.Component {
   //矢印クリック時の処理 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   goToParking = () => {
     //駐車場へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    Environment.setBackgroundImage(asset(imgUrl.Parkingplace));
-    this.setState({ pageType: imgUrl.Parkingplace });
-    ArrowRotation.moveParkingplace();
+    Environment.setBackgroundImage(asset(imgUrl.Parkingplace)); //背景画像を変えている処理
+    this.setState({ pageType: imgUrl.Parkingplace }); //矢印の配置セットを変更している処理
+    ArrowRotation.moveParkingplace(); //移動後のカメラの向きを指定している処理
   };
   goToEntrance = () => {
     //玄関へ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

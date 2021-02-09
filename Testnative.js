@@ -38,6 +38,7 @@ export default class Testnative extends Module {
         false
       );
     }
+    let solution = document.getElementById("solution");
 
     // 解説探しゲームを開始
     document.getElementById("commentaryGame").onclick = (e) => {
@@ -49,6 +50,7 @@ export default class Testnative extends Module {
         alert("ゲームを一時停止します。");
         commentarySwitch = false;
         e.target.textContent = "解説探しを再開する";
+        solution.textContent = "解説の答えを見る";
       }
     };
     // 解説探しゲームの答えのボタンテキストの切り替え

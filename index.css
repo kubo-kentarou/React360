@@ -129,7 +129,56 @@ body {
   top: 0;
   right: 0;
   transform: translateX(100%);
+  border: solid 1px white;
 }
+#r-nav.on:before {
+  content: url(./static_assets/react_logo.png);
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  filter: brightness(0.5);
+  animation: horizontal 1s linear infinite alternate,
+    vertical 5s linear infinite alternate, rotation 1s linear infinite alternate;
+}
+#r-nav.on:after {
+  content: url(./static_assets/react_logo.png);
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  filter: brightness(0.5);
+  animation: horizontal 1s linear infinite alternate-reverse,
+    vertical 5s linear infinite alternate-reverse,
+    rotation 1s linear infinite alternate;
+}
+#r-nav table {
+  margin: 0 1rem;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes horizontal {
+  from {
+    left: -13%;
+  }
+  to {
+    left: 51%;
+  }
+}
+@keyframes vertical {
+  from {
+    top: -3%;
+  }
+  to {
+    top: 79%;
+  }
+}
+
 /* 右の線 */
 ul#l-nav.on:after {
   content: "";
@@ -197,7 +246,7 @@ ul#l-nav.on span:after {
   font-weight: bold;
   list-style: none;
   /* background: rgba(128, 2, 117, 0.3); */
-  background: rgb(24 55 81 / 30%);
+  /* background: rgb(24 55 81 / 30%); */
   position: relative;
   z-index: 2;
 }
@@ -227,16 +276,28 @@ ul#l-nav.on span:after {
 #r-nav.on {
   transform: none;
   z-index: 2;
-  background: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.4);
 }
 /* 進捗状況のテーブル関係 */
 h2 {
   margin: 0;
 }
+th,
+td {
+  transition: 0.3s;
+}
 th {
   position: relative;
   z-index: 202;
 }
+table tr:hover th,
+table tr:hover td {
+  transform: translateY(-0.5rem);
+  z-index: 2000;
+  background: black;
+  box-shadow: 0px 5px 5px black;
+}
+
 /* コンプリートしたth */
 th.complete:before {
   content: "COMPLETE!!";
@@ -700,10 +761,160 @@ div#answer {
   z-index: 10;
   right: 0;
 }
-div#asdf {
-  position: absolute;
-  top: 0;
-  right: 11%;
-  background: red;
-  height: 100;
+li#solution,
+li#commentaryGame {
+  transition: 0.2s;
+  /* border: #59b1eb solid 1px; */
+  border: solid 1px white;
+  /* color: #59b1eb; */
+  color: white;
+  padding: 0.8rem;
 }
+li#solution {
+  transition: 3s;
+  transition-delay: 1s;
+  transform: translateX(-120%);
+}
+li#solution.add {
+  transform: none;
+}
+li#solution + li {
+  transform: translateY(-33%);
+  transition: 1.5s;
+  transition-delay: 1s;
+}
+
+li#solution.add + li {
+  transform: none;
+}
+
+li#solution::before,
+li#solution::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: black;
+  transition: 0.5s;
+  z-index: -1;
+  opacity: 0.5;
+}
+li#solution::before {
+  top: 0;
+}
+li#solution::after {
+  bottom: 0;
+}
+li#solution:hover::before,
+li#solution:hover::after {
+  height: 100%;
+}
+
+li#commentaryGame {
+  position: relative;
+  overflow: hidden;
+}
+li#commentaryGame:before,
+li#commentaryGame:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+li#commentaryGame:before {
+  /* border: solid 1px white; */
+  top: 60%;
+  left: 35%;
+  z-index: -2;
+  background: grey;
+}
+
+li#commentaryGame:after {
+  /* border: solid 1px skyblue; */
+  top: 30%;
+  left: 67%;
+  z-index: -1;
+  background: black;
+}
+
+li#commentaryGame:hover:before,
+li#commentaryGame:hover:after {
+  width: 1000px;
+  height: 1000px;
+  transition: 2s;
+  border: solid 1px skyblue;
+}
+
+li#commentaryGame:hover:after {
+  border: solid 1px white;
+
+  transition-delay: 0.3s;
+}
+
+div#kakko-l {
+  position: absolute;
+  width: 30px;
+  height: 70px;
+  background-image: url(./static_assets/img/teamSakimori_menu.png);
+  z-index: 1000;
+  top: calc(50% - 35px);
+  /* left: 425px; */
+  left: -5px;
+  transition: 0.5s;
+  border: solid 1px white;
+  padding: 0 0.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+ul#l-nav.on + div#kakko-l {
+  left: 425px;
+  border: none;
+  filter: invert(1);
+}
+
+div#kakko-r {
+  position: absolute;
+  width: 30px;
+  height: 70px;
+  background-image: url(./static_assets/img/teamSakimori_menu.png);
+  z-index: 1000;
+  top: calc(50% - 35px);
+  right: -5px;
+  transition: 0.5s;
+  border: solid 1px white;
+  padding: 0 0.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotateY(180deg);
+}
+ul#r-nav.on + div#kakko-r {
+  right: 425px;
+  border: none;
+  filter: invert(1);
+}
+
+/* 見にくくなるのでSVGを消す */
+#container > div:nth-child(2) > div {
+  display: none;
+}
+
+/* ホバー時の取扱説明のcss */
+#Instructions {
+  z-index: 1;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  width: fit-content;
+}
+/* #kakko-Instructions {
+  width: 100px;
+  height: 200px;
+  z-index: 1;
+  position: absolute;
+  top: calc(50% - 100px);
+} */
