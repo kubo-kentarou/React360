@@ -30,6 +30,7 @@ button.addEventListener("click", function () {
     bool = false;
     button.textContent = "満足したので消す";
     logof = setInterval(createLogo.bind(this, "logo-1", 10, 50), 500);
+    // let music = new Audio();
   } else {
     bool = true;
     clearInterval(logof);

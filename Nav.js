@@ -68,15 +68,13 @@ particles.pauseAnimation();
 
 // 左のメニュー
 kakkol.addEventListener("mouseenter", (e) => {
-  console.log("asfasfas");
-  lnav.classList.add("on");
-  particles.resumeAnimation();
+  lnav.classList.add("on"); //クラス追加(開いた状態にする)
+  particles.resumeAnimation(); //粒子アニメーション開始
 });
 document.addEventListener("mousemove", (e) => {
   if (e.pageX > 450) {
-    lnav.classList.remove("on");
-    particles.pauseAnimation();
-    return;
+    lnav.classList.remove("on"); //クラス削除(menuを閉じる)
+    particles.pauseAnimation(); //粒子アニメーション一時停止
   }
 });
 

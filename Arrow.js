@@ -13,7 +13,7 @@ import {
   AmbientLight,
   PointLight,
 } from "react-360";
-import Entity from 'Entity'
+import Entity from "Entity";
 // import LinearGradient from "react-native-linear-gradient";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
@@ -312,7 +312,7 @@ export class Arrow extends React.Component {
   render() {
     let opacityValue = this.state.opacityName.interpolate({
       inputRange: [0, 50, 100, 1000], //1000は透明を示している
-      outputRange: [0.3, 0.6, 1, 0], //透明度.3, .6, 1を示す
+      outputRange: [0.3, 0.6, 1, 0], //透明度0.3, 0.6, 1, 0を示す
     });
     let translateValue = this.state.translateName.interpolate({
       inputRange: [0, 100],
@@ -323,7 +323,6 @@ export class Arrow extends React.Component {
       //ページの種類があまじょう看板前の時 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       return (
         <View>
-          {/* <View style={{ transform: [{ translateY: 190 }] }}> */}
           <View>
             <VrButton
               style={[styles.signboard1, { width: 100 }]}
@@ -1004,13 +1003,16 @@ export class Arrow extends React.Component {
       return (
         <View>
           <VrButton
-            style={[styles.VrPlay_button, {opacity: this.state.Trans}]}
-            onClick={async() => {
-              this.setState({Trans : 0});
+            style={[styles.VrPlay_button, { opacity: this.state.Trans }]}
+            onClick={async () => {
+              this.setState({ Trans: 0 });
               this.goToVideoplay();
-           }}
+            }}
           >
-              <Image style={styles.play_button} source={{ uri:"./static_assets/img/movie_start.png"}}/>
+            <Image
+              style={styles.play_button}
+              source={{ uri: "./static_assets/img/movie_start.png" }}
+            />
           </VrButton>
 
           <VrButton
@@ -1047,7 +1049,6 @@ export class Arrow extends React.Component {
               ]}
               source={{ uri: arrowImg._2fUrl }}
             />
-            
           ) : (
             <Image
               style={[styles.arrowName, { opacity: 0 }]}
@@ -1312,11 +1313,7 @@ const styles = StyleSheet.create({
     width: 45,
     height: 20,
 
-    transform: [
-      {translateX: -95},
-      {translateY: 50},
-      {translateZ: 1200},
-    ],
+    transform: [{ translateX: -95 }, { translateY: 50 }, { translateZ: 1200 }],
   },
   play_button: {
     // backgroundColor:"red",
@@ -1345,22 +1342,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#4C64FF",
     padding: 15,
-    marginLeft:1,
-    marginRight:1,
-    width:198
+    marginLeft: 1,
+    marginRight: 1,
+    width: 198,
   },
-  iphone:{
-    transform:[
-      { translateX: 0},
-      { translateY: 200},
-      { translateZ: -100},
-      { scaleX: 1},
-      { scaleY: 1},
-      { scaleZ: 1},
-      { rotateX: 90},
-      { rotateY: 90},
-      { rotateZ: 0},
+  iphone: {
+    transform: [
+      { translateX: 0 },
+      { translateY: 200 },
+      { translateZ: -100 },
+      { scaleX: 1 },
+      { scaleY: 1 },
+      { scaleZ: 1 },
+      { rotateX: 90 },
+      { rotateY: 90 },
+      { rotateZ: 0 },
     ],
-    color:"red",
-  }
+    color: "red",
+  },
 });

@@ -43,11 +43,9 @@ export default class Testnative extends Module {
     // 解説探しゲームを開始
     document.getElementById("commentaryGame").onclick = (e) => {
       if (commentarySwitch === false) {
-        alert("ゲーム開始");
         commentarySwitch = true;
         e.target.textContent = "解説探しを止める";
       } else {
-        alert("ゲームを一時停止します。");
         commentarySwitch = false;
         e.target.textContent = "解説探しを再開する";
         solution.textContent = "解説の答えを見る";

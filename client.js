@@ -56,7 +56,7 @@ function init(bundle, parent, options = {}) {
   //矢印の表示
   r360.renderToLocation(
     r360.createRoot("Arrow", {}),
-    r360.getDefaultLocation(),
+    r360.getDefaultLocation()
     // new Location([0,-30,-200])
   );
 

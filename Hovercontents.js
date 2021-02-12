@@ -162,9 +162,10 @@ export default class Hovercontents extends Module {
       <div className="new">
         <h2 className="t-signboard type">学校の看板</h2>
         <p>
-          これが奄美情報処理専門学校の看板です。特別変わったことはありませんが、
+          これが奄美情報処理専門学校の看板です。この写真では汚れてしまっていますが、
         </p>
         <p>最近では愛校作業により、とてもきれいに生まれ変わっています。</p>
+        <p>一度、見に来てみてはいかがでしょうか？</p>
         <div className="clickToClose">どこかをクリックで閉じる</div>
         <div className="dialogCursor"></div>
 
@@ -193,11 +194,9 @@ export default class Hovercontents extends Module {
           狭い道
         </h2>
         <p>ここは奄美情報処理専門学校の通学路です。</p>
-        <p>
-          主に車や原付、自転車で通う学生が多いのですが、
-          <br />
-          通学路は狭いので車で来た時には対向車に注意しましょう。
-        </p>
+        <p>主に車や原付、自転車で通う学生が多いのですが、</p>
+        <p>通学路は狭いので車で来た時には対向車に注意しましょう。</p>
+        <p>(狭い道での運転技術は飛躍的に高まります。)</p>
         <div className="clickToClose">どこかをクリックで閉じる</div>
         <div className="dialogCursor"></div>
 
@@ -279,9 +278,8 @@ export default class Hovercontents extends Module {
     ReactDOM.render(
       <div className="new">
         <h2 className="t-reflected type"> チーム防人</h2>
+        <p>我々、チーム防人です。</p>
         <p>
-          我々、チーム防人です。
-          <br />
           割と車が通る場所だったので遠くへ隠れられず背を向けた状態になっています。
         </p>
         <p>
@@ -403,7 +401,7 @@ export default class Hovercontents extends Module {
         <p>
           この学校は建物自体が保育園だったので、かなり腰の位置の低い手洗い場です。
         </p>
-        <p>足腰の強化に役に立ちそうです。</p>
+        <p>足腰の強化に役立ちそうです。</p>
 
         <div className="clickToClose">どこかをクリックで閉じる</div>
         <div className="dialogCursor"></div>
@@ -570,11 +568,8 @@ export default class Hovercontents extends Module {
       <div className="new">
         <h2 className="t-typhoon type">台風対策</h2>
         <p>こちらの窓の下のほうで見えている四角いものは新聞紙です。</p>
-        <p>
-          台風対策で窓の隙間に詰めて割れないようにしています。
-          <br />
-          もちろん教員、学生全員で行います。
-        </p>
+        <p>台風対策で窓の隙間に詰めて割れないようにしています。</p>
+        <p>もちろん教員、学生全員で行います。</p>
 
         <div className="clickToClose">どこかをクリックで閉じる</div>
         <div className="dialogCursor"></div>
@@ -740,7 +735,7 @@ export default class Hovercontents extends Module {
       <div className="new">
         <h2 className="t-monitor type"> モニター</h2>
         <p>２年生になると卒業制作などの作業が多くなるので</p>
-        <p>一人一台モニターを使用しています。</p>
+        <p>1人1台モニターを使用しています。</p>
 
         <div className="clickToClose">どこかをクリックで閉じる</div>
         <div className="dialogCursor"></div>
