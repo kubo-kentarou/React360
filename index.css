@@ -148,8 +148,8 @@ body {
   top: 0;
   left: 0;
   filter: brightness(0.5);
-  animation: horizontal 1s linear infinite alternate,
-    vertical 5s linear infinite alternate, rotation 1s linear infinite alternate;
+  /* animation: horizontal 1s linear infinite alternate,
+    vertical 5s linear infinite alternate, rotation 1s linear infinite alternate; */
 }
 #r-nav.on:after {
   content: url(./static_assets/react_logo.png);
@@ -158,9 +158,9 @@ body {
   top: 0;
   left: 0;
   filter: brightness(0.5);
-  animation: horizontal 1s linear infinite alternate-reverse,
+  /* animation: horizontal 1s linear infinite alternate-reverse,
     vertical 5s linear infinite alternate-reverse,
-    rotation 1s linear infinite alternate;
+    rotation 1s linear infinite alternate; */
 }
 #r-nav table {
   margin: 0 1rem;

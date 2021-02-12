@@ -10,10 +10,11 @@ import {
   Animated,
   Environment,
   NativeModules,
-  AmbientLight,
-  PointLight,
 } from "react-360";
 import Entity from "Entity";
+import AmbientLight from "AmbientLight";
+import SpotLight from "SpotLight";
+import PointLight from "PointLight";
 // import LinearGradient from "react-native-linear-gradient";
 // import { KeyboardCameraController } from "./KeyboardCameraController";
 import { SelectableAnim } from "./SelectableAnim";
@@ -72,22 +73,24 @@ const browserBridge = new BrowserBridge();
 BatchedBridge.registerCallableModule(BrowserBridge.name, browserBridge);
 
 const { ArrowRotation } = NativeModules;
+const AnimatedEntity = Animated.createAnimatedComponent(Entity);
 
 export class Arrow extends React.Component {
   constructor(props) {
     super(props);
     (this.onBrowserEvent = this.onBrowserEvent.bind(this)),
       (this.state = {
-        pageType: imgUrl.Signboard,
+        // pageType: imgUrl.Signboard,
         // pageType: imgUrl.Parkingplace,
         // pageType: imgUrl.Entrance,
         // pageType: imgUrl.Secondfloor,
         // pageType: imgUrl.Firstgrade,
-        // pageType: imgUrl.Secondgrade,
+        pageType: imgUrl.Secondgrade,
         // pageType: imgUrl.Multipurpose,
 
         opacityName: new Animated.Value(1000), //1000は透明を示している
         translateName: new Animated.Value(0),
+        rotation: new Animated.Value(0),
         hoverStatus: true,
         identifi: 1000, //1000は透明を示している
         dropShift: false, //ドロップダウンリストの表示非表示
@@ -95,7 +98,7 @@ export class Arrow extends React.Component {
         commentaryGame: false, //解説探しゲームをするかどうかのstate
         solution: false, //解説探しゲームの点を透明化するかのboolean
       });
-    // this.goToParking();
+    this.goToSecondgrade();
   }
 
   componentWillMount() {
@@ -307,7 +310,21 @@ export class Arrow extends React.Component {
       this.setState({ Trans: 1 });
       console.log("プレイヤー破棄");
     }, 19000); //19000
+
+    //開店アニメーション
+    // Animated.timing(this.rotation,{toValue:360, duration:6000}).start();
   };
+  _rotation() {
+    this.state.rotation.setValue(0);
+    Animated.timing(this.state.rotation, {
+      toValue: 360,
+      duration: 6000,
+    }).start(this._rotation.bind(this));
+  }
+
+  componentDidMount() {
+    this._rotation();
+  }
 
   render() {
     let opacityValue = this.state.opacityName.interpolate({
@@ -317,6 +334,11 @@ export class Arrow extends React.Component {
     let translateValue = this.state.translateName.interpolate({
       inputRange: [0, 100],
       outputRange: [150, 200], //translateYを150から200まで動かす
+    });
+
+    let rValue = this.state.rotation.interpolate({
+      inputRange: [0, 360],
+      outputRange: [0, 360],
     });
 
     if (this.state.pageType === imgUrl.Signboard) {
@@ -1076,6 +1098,25 @@ export class Arrow extends React.Component {
               <SelectableAnim name="monitor" noGame="true" />
             </View>
           )}
+
+          <AmbientLight intensity={1.0} color={"#ffffff"} />
+          <PointLight
+            intensity={2}
+            style={{ transform: [{ translate: [10, 30, 3] }] }}
+          />
+          <AnimatedEntity
+            style={{
+              transform: [
+                { scale: [10, 10, 10] },
+                { rotateX: 0 },
+                { rotateY: 0 },
+                { rotateZ: rValue },
+                { translate: [70, -32, -50] },
+              ],
+            }}
+            lit={true}
+            source={{ gltf2: asset("Amazon_danbo4.glb") }}
+          />
         </View>
       );
     } else if (this.state.pageType === imgUrl.Multipurpose) {
